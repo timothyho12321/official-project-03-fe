@@ -4,7 +4,14 @@ import Home from "./pages/Home";
 import Product from "./pages/Products";
 
 
-import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import ProductsProvider from "./providers/ProductsProvider";
+
+
+// import './App.css';
 
 
 
@@ -16,6 +23,24 @@ function App() {
     <div className="App">
 
       <Router>
+        <Navbar bg="light" expand="lg">
+          <Container>
+            <Navbar.Brand href="#home">Soap Paradies</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="me-auto">
+                <Nav.Link href="/">Home</Nav.Link>
+                <Nav.Link href="/about">About Us</Nav.Link>
+                <Nav.Link href="/products">Products</Nav.Link>
+                <Nav.Link href="/">Fill in </Nav.Link>
+
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
+
+
+        {/*  WITHOUT USING REACT BOOTSTRAP 
         <nav>
           <ul>
             <li>
@@ -29,7 +54,10 @@ function App() {
             </li>
 
           </ul>
-        </nav>
+        </nav> */}
+
+
+
         <Routes>
           {/* Home route */}
           <Route path="/" element={<Home />
@@ -39,7 +67,17 @@ function App() {
           <Route path="/about" element={<AboutUs />} />
 
           {/* Products page */}
-          <Route path="/products" element={<Product />} />
+          <Route path="/products" element={
+            <ProductsProvider>
+              <Product />
+            </ProductsProvider>
+
+          }
+          />
+
+
+
+
         </Routes>
       </Router>
 
