@@ -1,0 +1,14 @@
+/* #soap-card{
+
+
+    color: black
+} */
+
+
+#soap-card {
+    border: 0px !important;
+    text-decoration: none;
+        color: black;
+    box-shadow: 10px 20px 30px #e1ddd7;
+    cursor: pointer;
+}

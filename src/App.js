@@ -9,6 +9,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import ProductsProvider from "./providers/ProductsProvider";
+import Variant from "./pages/Variant";
 
 
 // import './App.css';
@@ -70,6 +71,15 @@ function App() {
           <Route path="/products" element={
             <ProductsProvider>
               <Product />
+            </ProductsProvider>
+
+          }
+          />
+
+          {/* Variants page */}
+          <Route path="/products/:product_id/variants" element={
+            <ProductsProvider>
+              <Variant/>
             </ProductsProvider>
 
           }

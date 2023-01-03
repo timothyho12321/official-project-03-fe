@@ -1,33 +1,59 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Button, Card, Col, Row } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom';
+import axios from 'axios';
 import ProductContext from '../contexts/ProductContext'
 import '../css/products.css';
 
-export default function Product() {
+export default function Variant() {
 
     const productContext = useContext(ProductContext)
+    const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us80.gitpod.io/api/"
+    const [variants, setVariants] = useState([])
 
-    let allSoaps = productContext.getAllSoaps()
-    let allSoapsUse = allSoaps.message
+    const { product_id } = useParams();
+    const trackRender = useRef(0);
+    // let allVariants = productContext.getAllVariants()
 
-    const printSoap = () => {
-        console.log("entered printsoap route")
 
-        console.log("allSoaps", allSoaps)
-        console.log("allSoapsUse", allSoapsUse)
+    const retrieveVariant = async () => {
+        let response = await axios.get(BASE_API_URL + "products/" +
+            product_id + "/variants")
+
+        console.log(response.data.name)
+
+        // DEBUG SETTING THE VARIANT DOES NOT UPDATE IN STATE
+        setVariants(response.data);
+        trackRender.current = 1
+        return response.data;
     }
+
+    useEffect(
+        () => {
+            const init = async () => {
+                let variantInfo = await retrieveVariant();
+
+                console.log("variantInfo", variantInfo);
+            
+                console.log("variants in state", variants);
+            }
+            init();
+        }, []
+    )
+
+
+
     return (
         <React.Fragment>
-            <h1>Products Page</h1>
-            <Button onClick={printSoap}>Click for soap</Button>
+            <h1>Variant Detail Page</h1>
+            <Button onClick={retrieveVariant}>Click for get variant</Button>
 
-            {/* {allSoapsUse?.length > 0 && allSoapsUse.map(s => (<React.Fragment>
-           <h3>{s.name}</h3> 
+            {variants?.length > 0 && variants.map(v => (<React.Fragment>
+                <h3>{v.name}</h3>
 
-           </React.Fragment>)) */}
+            </React.Fragment>))}
 
-            <Row xs={1} md={2} lg={3} className="g-4">
+            {/* <Row xs={1} md={2} lg={3} className="g-4">
                 {Array.from({ length: allSoapsUse?.length }).map((_, index) => (
                     <Col className="d-flex justify-content-center card-holder ">
                         <Card key={allSoapsUse[index].id} id="soap-card" as={Link} to={`/products/${allSoapsUse[index].id}/variants`}>
@@ -54,7 +80,7 @@ export default function Product() {
                         </Card>
                     </Col>
                 ))}
-            </Row>
+            </Row> */}
         </React.Fragment>
 
     )

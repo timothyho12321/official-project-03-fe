@@ -5,9 +5,11 @@ import ProductContext from '../contexts/ProductContext';
 
 export default function ProductsProvider(props) {
 
-    const BASE_URL_API = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us80.gitpod.io/"
+    const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us80.gitpod.io/"
 
     const [soaps, setSoaps] = useState([]);
+
+    
 
     const [searchCall, setSearchCall] = useState({
         'name': "",
@@ -26,7 +28,7 @@ export default function ProductsProvider(props) {
         () => {
             const getAllSoaps = async () => {
                 console.log("getAllSoaps route")
-                let response = await axios.get(BASE_URL_API + "api/products")
+                let response = await axios.get(BASE_API_URL + "api/products")
 
                 console.log(response.data);
 
