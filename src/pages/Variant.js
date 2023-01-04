@@ -43,7 +43,7 @@ export default function Variant() {
 
         // setVarId(0);
         // console.log("see variant [0]",variants[0].image_url)
-        console.log("variant_id", variantId)
+        // console.log("variant_id", variantId)
         trackRender.current = 1
 
         getDetailsOfChosenVariant();
@@ -77,7 +77,9 @@ export default function Variant() {
                 id="variant-thumbnail"
                 variant="top" src={v.image_url}
                 className="me-2"
-                onClick={() => { setVarId(v.id) }}
+                onClick={() => { setVarId(v.id)
+                    
+                }}
             />)
 
         return pictureMap;
@@ -119,16 +121,27 @@ export default function Variant() {
 
     const addVariantToCart = async () => {
         await makeCart();
+        setCartInfo({
+            ...cartContext.cartInfo,
+           'variantId': variantId
+        })
     }
 
     const makeCart = async () => {
+        console.log("cartInfo", cartContext.cartInfo)
         console.log("variant_id", variantId)
         console.log("entered makeCart route");
-
+        
         const resultResponse = await createCartItem(cartContext.cartInfo)
 
+        console.log(resultResponse);
     }
+
     const updateFormField = (event) => {
+        // console.log("updateFormField ran")
+        // console.log(event.target.name)
+        // console.log(event.target.value)
+        // console.log({...cartContext.cartInfo})
         setCartInfo({
             ...cartContext.cartInfo,
             [event.target.name]: event.target.value
@@ -180,14 +193,26 @@ export default function Variant() {
                         {/* <Card.Title>Test{getDetailsOfChosenVariant()?.name}</Card.Title> */}
 
 
-                        <Form.Group className="p-1 d-flex flex-column justify-content-around">
+                        {/* <Form.Group className="p-1 d-flex flex-column justify-content-around">
 
                             <Form.Label>Select quantity</Form.Label>
                             <Form.Control type="number" placeholder="Number of item" />
-                            <Form.Text aria-label="Default select example" name="quantity" onChange={updateFormField}>
-                                {/* Stop here check that it update the context provider layer */}
-                            </Form.Text>
-                        </Form.Group>
+                            <Form.Text aria-label="Default select example"
+                                name="quantity"
+                                value={cartContext.cartInfo.quantity}
+                                
+                                onChange={updateFormField}>
+                                </Form.Text>
+                        </Form.Group> */}
+
+                        <label>Select quantity</label>
+
+                        {/* <input type="text"
+                            className='form-control mb-3 mt-1'
+                            value={cartContext.cartInfo.quantity}
+                            name="quantity"
+                            onChange={updateFormField}
+                        /> */}
 
                         <Button variant="primary"
                             onClick={addVariantToCart}
@@ -197,38 +222,6 @@ export default function Variant() {
                 </Card>
 
             </div>
-
-
-
-
-            {/* <Row xs={1} md={2} lg={3} className="g-4">
-                {Array.from({ length: allSoapsUse?.length }).map((_, index) => (
-                    <Col className="d-flex justify-content-center card-holder ">
-                        <Card key={allSoapsUse[index].id} id="soap-card" as={Link} to={`/products/${allSoapsUse[index].id}/variants`}>
-                            <Card.Img variant="top"
-                                src={allSoapsUse[index].image_url}
-                                style={{ "height": "50vh", justifyContent: "center" }}
-                            />
-                            <Card.Body>
-                                <Card.Title>Title: {allSoapsUse[index].name}</Card.Title>
-                                <Card.Text>
-                                    <div>Base: {allSoapsUse[index].base.base}</div>
-                                    <div>Oil: {allSoapsUse[index].oil.oil}</div>
-                                    <div>Purposes to put tab: {allSoapsUse[index].purposes?.map(p=>p.purpose)}</div>
-                                    <div>Smells to put tab: {allSoapsUse[index].smells?.map(s=>s.smell)}</div>
-                                    <div>Type: {allSoapsUse[index].type?.type}</div>
-                                    
-                                    <div>Width: {allSoapsUse[index].width}</div>
-                                    <div>Height: {allSoapsUse[index].height}</div>
-                                    <div>Cost: {allSoapsUse[index].cost}</div>
-
-                                
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                ))}
-            </Row> */}
 
 
         </React.Fragment>
