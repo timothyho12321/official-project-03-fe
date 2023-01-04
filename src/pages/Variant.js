@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import { Button, Card, Col, Row } from 'react-bootstrap'
+import { Button, Card, Col, Form, Row } from 'react-bootstrap'
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import ProductContext from '../contexts/ProductContext'
@@ -12,6 +12,8 @@ export default function Variant() {
     const productContext = useContext(ProductContext)
     const cartContext = useContext(CartContext)
     const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us81.gitpod.io/api/"
+    // const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us80.gitpod.io/api/"
+
     const [variants, setVariants] = useState([])
     const [variantId, setVarId] = useState()
 
@@ -20,6 +22,8 @@ export default function Variant() {
     const trackRender = useRef(0);
     // let allVariants = productContext.getAllVariants()
 
+    const createCartItem = cartContext.addVariantToCart
+    const setCartInfo = cartContext.setCartInfo
 
     const retrieveVariant = async () => {
 
@@ -72,6 +76,7 @@ export default function Variant() {
             <Card.Img key={v.id}
                 id="variant-thumbnail"
                 variant="top" src={v.image_url}
+                className="me-2"
                 onClick={() => { setVarId(v.id) }}
             />)
 
@@ -100,11 +105,9 @@ export default function Variant() {
                 <Card.Title>{filterForVariantDetail?.name}</Card.Title>
 
                 <Card.Text>
-                    example
-                    Overall soap: {filterForVariantDetail?.soap.name}
-                    ${filterForVariantDetail?.soap.cost}
-                    {filterForVariantDetail?.name}
-                    {filterForVariantDetail?.name}
+                    <div>Overall soap: {filterForVariantDetail?.soap.name}</div>
+                    <div>${parseFloat(filterForVariantDetail?.soap.cost) / 100}</div>
+
                 </Card.Text>
 
             </React.Fragment>
@@ -114,12 +117,24 @@ export default function Variant() {
 
     }
 
-    const addVariantToCart = async ()=>{
-        await makeCart()
+    const addVariantToCart = async () => {
+        await makeCart();
     }
-    const makeCart = async ()=>{
-        const resultResponse= await cartContext(addVariantToCart.cartInfo)
+
+    const makeCart = async () => {
+        console.log("variant_id", variantId)
+        console.log("entered makeCart route");
+
+        const resultResponse = await createCartItem(cartContext.cartInfo)
+
     }
+    const updateFormField = (event) => {
+        setCartInfo({
+            ...cartContext.cartInfo,
+            [event.target.name]: event.target.value
+        })
+    }
+
 
 
     useEffect(
@@ -165,11 +180,19 @@ export default function Variant() {
                         {/* <Card.Title>Test{getDetailsOfChosenVariant()?.name}</Card.Title> */}
 
 
-                        {/* <Card.Text>
-                            Some quick example text to build on the card title and make up the
-                            bulk of the card's content.
-                        </Card.Text> */}
-                        <Button variant="primary">Add to cart</Button>
+                        <Form.Group className="p-1 d-flex flex-column justify-content-around">
+
+                            <Form.Label>Select quantity</Form.Label>
+                            <Form.Control type="number" placeholder="Number of item" />
+                            <Form.Text aria-label="Default select example" name="quantity" onChange={updateFormField}>
+                                {/* Stop here check that it update the context provider layer */}
+                            </Form.Text>
+                        </Form.Group>
+
+                        <Button variant="primary"
+                            onClick={addVariantToCart}
+                        >
+                            Add to cart</Button>
                     </Card.Body>
                 </Card>
 
