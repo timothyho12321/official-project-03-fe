@@ -17,6 +17,8 @@ export default function Product() {
         console.log("allSoaps", allSoaps)
         console.log("allSoapsUse", allSoapsUse)
     }
+
+    
     return (
         <React.Fragment>
             <h1>Products Page</h1>

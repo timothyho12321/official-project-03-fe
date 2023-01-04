@@ -10,6 +10,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import ProductsProvider from "./providers/ProductsProvider";
 import Variant from "./pages/Variant";
+import CartProvider from "./providers/CartProvider";
 
 
 // import './App.css';
@@ -79,7 +80,11 @@ function App() {
           {/* Variants page */}
           <Route path="/products/:product_id/variants" element={
             <ProductsProvider>
+
+              <CartProvider>
               <Variant/>
+              </CartProvider>
+              
             </ProductsProvider>
 
           }
