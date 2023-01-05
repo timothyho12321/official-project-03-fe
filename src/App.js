@@ -27,7 +27,13 @@ function App() {
   return (
 
     <div className="App">
-      <NavAndOff />
+
+      <UsersProvider>
+        <CartProvider>
+          <NavAndOff />
+        </CartProvider>
+      </UsersProvider>
+
 
       <Router>
         {/* <Navbar bg="light" expand="lg">

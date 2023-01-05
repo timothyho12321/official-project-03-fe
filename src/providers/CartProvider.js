@@ -10,14 +10,12 @@ const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us81.g
 
 export default function CartProvider(props) {
 
-
     // const [quantity, setQuantity] = useState(0)
 
     const [cartInfo, setCartInfo] = useState({
         'quantity': 1,
         'variantId': ""
     })
-
 
 
     const shopCartContext = {
@@ -29,8 +27,6 @@ export default function CartProvider(props) {
 
             const haveToken = JSON.parse(localStorage.getItem("currentUserTokens"))
             console.log("have Token", haveToken);
-
-
 
             try {
 
@@ -56,6 +52,41 @@ export default function CartProvider(props) {
 
                 } else {
                     console.log("Your access token is invalid. Please login.")
+                }
+
+
+            } catch (e) {
+                console.log(e)
+            }
+
+        },
+        getCart: async () => {
+            const haveToken = JSON.parse(localStorage.getItem("currentUserTokens"))
+            console.log("have Token", haveToken);
+
+            try {
+
+                if (haveToken.accessToken) {
+                    console.log("received access token.")
+                    console.log("haveToken.accessToken", haveToken.accessToken)
+
+                    console.log("URL", BASE_API_URL + "cartforshopping/")
+                    const response = await axios.get(BASE_API_URL + "cartforshopping/", {
+                        headers: {
+                            Authorization: `Bearer ${haveToken.accessToken}`
+                        }
+                    })
+
+                    return response.data
+
+
+                } else {
+                    console.log("Your access token is invalid. Please login.")
+
+
+
+
+
                 }
 
 

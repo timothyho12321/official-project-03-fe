@@ -13,10 +13,34 @@ import Product from "../pages/Products";
 import UsersProvider from "../providers/UsersProvider";
 import Login from "../pages/Login";
 import '../css/nav_and_off.css';
+import { Button } from "react-bootstrap";
+import CartContext from "../contexts/CartContext";
+import ProductContext from "../contexts/ProductContext";
 
 export default function NavAndOff() {
 
+    const [show, setShow] = useState(false);
 
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    const productContext = useContext(ProductContext)
+    const cartContext = useContext(CartContext)
+
+    const getCartFromProvider = cartContext.getCart
+
+    const prepareCartOffCanvas = async () => {
+        console.log("prepareCartOffCanvas ran")
+
+        let response = await getCartFromProvider();
+        console.log("response in offcanvas", response)
+
+
+    }
+
+    const getCartItemsOfUser = () => {
+
+    }
 
     return (
         <React.Fragment>
@@ -41,11 +65,38 @@ export default function NavAndOff() {
                                 <Navbar.Text>
                                     <a id="nav-bar-text-login" href="/login">Login</a>
                                 </Navbar.Text>
-                                
-                                {/* 
-                                <Link to="/">
-                                    <Navbar.Text id="nav-bar-text-products">Products</Navbar.Text>
-                                </Link> */}
+
+                                <>
+                                    <Button id="checkout-button"
+                                        variant="info"
+                                        onClick={() => {
+                                            handleShow();
+                                            prepareCartOffCanvas()
+
+                                        }
+
+                                        }
+                                        className="me-2">
+                                        Cart Checkout
+                                    </Button>
+                                    <Offcanvas show={show} onHide={handleClose} placement="end">
+                                        <Offcanvas.Header closeButton>
+                                            <Offcanvas.Title>Your Cart Checkout</Offcanvas.Title>
+                                        </Offcanvas.Header>
+                                        <Offcanvas.Body>
+
+                                            <Button variant="danger"
+                                                onClick=""
+                                            >
+                                                Button to test
+                                            </Button>
+
+                                            test
+
+                                        </Offcanvas.Body>
+                                    </Offcanvas>
+                                </>
+
 
                             </Nav>
                         </Navbar.Collapse>
