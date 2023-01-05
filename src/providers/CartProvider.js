@@ -27,19 +27,37 @@ export default function CartProvider(props) {
 
             // console.log("ran addVariantToCart in cartprovider.js")
 
+            const haveToken = JSON.parse(localStorage.getItem("currentUserTokens"))
+            console.log("have Token", haveToken);
+
+
+
             try {
-                console.log(passIn.variantId)
-                console.log('quantity', passIn.quantity)
-                const response = await axios.post(BASE_API_URL + "cartforshopping/" + `${passIn.variantId}` + "/add", {
-                    // quantity in cartInfo will not be retained if variantId is updated
-                    //Question to debug
-                    // 'quantity': cartInfo.quantity,
-                    'quantity': 1,
-                })
 
-                alert("Your variant item has been added to shopping cart successfully.")
+                if (haveToken.accessToken) {
+                    // console.log("passIn.variantId",passIn.variantId)
+                    console.log('cartInfo.variantId', cartInfo.variantId)
 
-                return response;
+                    console.log('passIn.quantity', passIn.quantity)
+
+                    const response = await axios.post(BASE_API_URL + "cartforshopping/" + `${cartInfo.variantId}` + "/add", {
+
+                        'quantity': 1,
+                    })
+
+                    // const response = await axios.post(BASE_API_URL + "cartforshopping/" + `${passIn.variantId}` + "/add", {
+
+                    //     'quantity': 1,
+                    // })
+
+                    alert("Your variant item has been added to shopping cart successfully.")
+
+                    return response;
+
+                } else {
+                    console.log("Your access token is invalid. Please login.")
+                }
+
 
             } catch (e) {
                 console.log(e)

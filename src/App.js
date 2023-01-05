@@ -2,6 +2,11 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import AboutUs from "./pages/AboutUs";
 import Home from "./pages/Home";
 import Product from "./pages/Products";
+import Variant from "./pages/Variant";
+import CartProvider from "./providers/CartProvider";
+import UsersProvider from "./providers/UsersProvider";
+import NavAndOff from "./components/NavAndOff";
+import Login from "./pages/Login";
 
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -9,8 +14,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import ProductsProvider from "./providers/ProductsProvider";
-import Variant from "./pages/Variant";
-import CartProvider from "./providers/CartProvider";
+
 
 
 // import './App.css';
@@ -23,9 +27,10 @@ function App() {
   return (
 
     <div className="App">
+      <NavAndOff />
 
       <Router>
-        <Navbar bg="light" expand="lg">
+        {/* <Navbar bg="light" expand="lg">
           <Container>
             <Navbar.Brand href="#home">Soap Paradies</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -34,31 +39,12 @@ function App() {
                 <Nav.Link href="/">Home</Nav.Link>
                 <Nav.Link href="/about">About Us</Nav.Link>
                 <Nav.Link href="/products">Products</Nav.Link>
-                <Nav.Link href="/">Fill in </Nav.Link>
+                <Nav.Link href="/login">Login</Nav.Link>
 
               </Nav>
             </Navbar.Collapse>
           </Container>
-        </Navbar>
-
-
-        {/*  WITHOUT USING REACT BOOTSTRAP 
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About Us</Link>
-            </li>
-            <li>
-              <Link to="/products">Soaps</Link>
-            </li>
-
-          </ul>
-        </nav> */}
-
-
+        </Navbar> */}
 
         <Routes>
           {/* Home route */}
@@ -82,15 +68,24 @@ function App() {
             <ProductsProvider>
 
               <CartProvider>
-              <Variant/>
+                <Variant />
               </CartProvider>
-              
+
             </ProductsProvider>
 
           }
           />
 
+          {/* Login page */}
+          <Route path="/login" element={
 
+            <UsersProvider>
+              <Login />
+
+            </UsersProvider>
+
+          }
+          />
 
 
         </Routes>

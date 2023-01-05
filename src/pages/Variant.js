@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Button, Card, Col, Form, Row } from 'react-bootstrap'
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import ProductContext from '../contexts/ProductContext'
 import '../css/products.css';
 import '../css/variants.css';
 import CartContext from '../contexts/CartContext';
+import context from 'react-bootstrap/esm/AccordionContext';
 
 export default function Variant() {
 
@@ -24,6 +25,20 @@ export default function Variant() {
 
     const createCartItem = cartContext.addVariantToCart
     const setCartInfo = cartContext.setCartInfo
+    const navigateTo = useNavigate()
+
+    const changeVarIdInCartProvider = (id) => {
+        // console.log("changeVarIdInCartProvider ran")
+        // console.log("variantId TO UPDATE",id)
+        // setVarId(id)
+        // console.log("variantId AFTER UPDATE",variantId)
+
+        setCartInfo({
+            ...cartContext.cartInfo,
+            'variantId': id
+        })
+
+    }
 
     const retrieveVariant = async () => {
 
@@ -56,7 +71,7 @@ export default function Variant() {
 
         let selection = variantId
         console.log(selection);
-        console.log("variants", variants)
+        // console.log("variants", variants)
 
         let filterForVariantPicture = variants.filter(v => v.id === selection);
         console.log("filterForVariantPicture", filterForVariantPicture)
@@ -77,8 +92,11 @@ export default function Variant() {
                 id="variant-thumbnail"
                 variant="top" src={v.image_url}
                 className="me-2"
-                onClick={() => { setVarId(v.id)
-                    
+                onClick={() => {
+                    // console.log("v.id",v.id);
+                    setVarId(v.id);
+
+                    changeVarIdInCartProvider(v.id);
                 }}
             />)
 
@@ -110,6 +128,11 @@ export default function Variant() {
                     <div>Overall soap: {filterForVariantDetail?.soap.name}</div>
                     <div>${parseFloat(filterForVariantDetail?.soap.cost) / 100}</div>
 
+                    {/* <Button variant="primary"
+                            onClick={addVariantToCart2}
+                        >
+                            Add to cart</Button> */}
+
                 </Card.Text>
 
             </React.Fragment>
@@ -120,18 +143,29 @@ export default function Variant() {
     }
 
     const addVariantToCart = async () => {
-        await makeCart();
-        setCartInfo({
-            ...cartContext.cartInfo,
-           'variantId': variantId
-        })
+
+        let haveAccount = JSON.parse(localStorage.getItem("accountData"))
+        console.log("haveAccount", haveAccount)
+
+        if (!haveAccount) {
+            alert("Please login.")
+            console.log("Ask user to login.")
+            navigateTo('/login')
+        } else {
+
+            await makeCart();
+            
+        }
+
+        
     }
 
     const makeCart = async () => {
-        console.log("cartInfo", cartContext.cartInfo)
-        console.log("variant_id", variantId)
         console.log("entered makeCart route");
-        
+        console.log("cartInfo", cartContext.cartInfo)
+        console.log("variant_id to makeCart", variantId)
+
+
         const resultResponse = await createCartItem(cartContext.cartInfo)
 
         console.log(resultResponse);
@@ -193,21 +227,9 @@ export default function Variant() {
                         {/* <Card.Title>Test{getDetailsOfChosenVariant()?.name}</Card.Title> */}
 
 
-                        {/* <Form.Group className="p-1 d-flex flex-column justify-content-around">
+                        {/* <label>Select quantity</label>
 
-                            <Form.Label>Select quantity</Form.Label>
-                            <Form.Control type="number" placeholder="Number of item" />
-                            <Form.Text aria-label="Default select example"
-                                name="quantity"
-                                value={cartContext.cartInfo.quantity}
-                                
-                                onChange={updateFormField}>
-                                </Form.Text>
-                        </Form.Group> */}
-
-                        <label>Select quantity</label>
-
-                        {/* <input type="text"
+                        <input type="text"
                             className='form-control mb-3 mt-1'
                             value={cartContext.cartInfo.quantity}
                             name="quantity"
