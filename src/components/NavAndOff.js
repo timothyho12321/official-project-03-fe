@@ -13,9 +13,10 @@ import Product from "../pages/Products";
 import UsersProvider from "../providers/UsersProvider";
 import Login from "../pages/Login";
 import '../css/nav_and_off.css';
-import { Button } from "react-bootstrap";
+import { Button, ListGroup } from "react-bootstrap";
 import CartContext from "../contexts/CartContext";
 import ProductContext from "../contexts/ProductContext";
+import EachCartProduct from "./EachCartProduct";
 
 export default function NavAndOff() {
 
@@ -27,18 +28,52 @@ export default function NavAndOff() {
     const productContext = useContext(ProductContext)
     const cartContext = useContext(CartContext)
 
+    const [cart, setCart] = useState([])
+    const [cartFilled, setCartFilled] = useState(false)
+
     const getCartFromProvider = cartContext.getCart
 
     const prepareCartOffCanvas = async () => {
         console.log("prepareCartOffCanvas ran")
 
-        let response = await getCartFromProvider();
-        console.log("response in offcanvas", response)
+        let responseCart = await getCartFromProvider();
+        console.log("response in offcanvas", responseCart)
 
+        setCart(responseCart);
+        setCartFilled(true);
 
     }
 
-    const getCartItemsOfUser = () => {
+    const displayCartItems = () => {
+
+        console.log("enter displayCartItems route.")
+        console.log("cart[0].id", cart[0].id)
+
+        let startMapped =
+            // (cart.map(i =>
+            //     <div>
+            //         {i.variant.name}
+            //     </div>
+            // ))
+
+            <ListGroup className="mt-2">
+                {cart?.map((_, idx) =>
+                    <EachCartProduct
+                        cart={cart[idx]}
+
+                    />
+
+                )}
+
+            </ListGroup>
+
+
+        return (
+            <React.Fragment>
+                {startMapped}
+
+            </React.Fragment>
+        );
 
     }
 
@@ -74,7 +109,6 @@ export default function NavAndOff() {
                                             prepareCartOffCanvas()
 
                                         }
-
                                         }
                                         className="me-2">
                                         Cart Checkout
@@ -91,7 +125,7 @@ export default function NavAndOff() {
                                                 Button to test
                                             </Button>
 
-                                            test
+                                            {cartFilled ? displayCartItems() : ""}
 
                                         </Offcanvas.Body>
                                     </Offcanvas>
