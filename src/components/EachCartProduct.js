@@ -65,7 +65,13 @@ export default function EachCartProduct(props) {
 
         // })
         updateCart(cartQuantity);
-
+        setEdit(false);
+        // console.log("props reload function from navandoff layer", props.reloadProp)
+        
+        //QUESTION HOW to write reload function to reflect new update quantity upon submit
+        // ALSO HOW TO MAKE IT SUCH THAT UPON CLICK EDITED POPULATED WITH NEW UPDATED QUANTITY
+        // props.reloadProp(true);
+    
     }
 
     const startEditForVar = (id) => {
@@ -82,11 +88,8 @@ export default function EachCartProduct(props) {
 
     const deleteCartItem = (id) => {
         console.log("variant id to delete", id)
-        
+
         deleteOneCartItem(id);
-        
-
-
 
     }
     return (
@@ -117,7 +120,7 @@ export default function EachCartProduct(props) {
                             {error ? <div id="error-message">Correct stock amount is inputted.</div> : ""}
 
                             <Button className='btn-sm btn-danger ms-1'
-                                onClick={()=>{deleteCartItem(props.cart.variant.id)}}
+                                onClick={() => { deleteCartItem(props.cart.variant.id) }}
                             >Delete Cart Item</Button>
 
                         </div>

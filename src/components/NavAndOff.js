@@ -31,6 +31,8 @@ export default function NavAndOff() {
     const [cart, setCart] = useState([])
     const [cartFilled, setCartFilled] = useState(false)
 
+    const [reload, setReload] = useState(false);
+
     const getCartFromProvider = cartContext.getCart
 
     const prepareCartOffCanvas = async () => {
@@ -56,7 +58,7 @@ export default function NavAndOff() {
             //     </div>
             // ))
 
-            // WHY DOES TERNARY CHECK HERE NOT WORK? WHITE SCREEN IF CART IS EMPTY.
+            // QUESTION WHY DOES TERNARY CHECK HERE NOT WORK? WHITE SCREEN IF CART IS EMPTY.
 
             <ListGroup className="mt-2">
                 {
@@ -65,6 +67,10 @@ export default function NavAndOff() {
                             <EachCartProduct
                                 key={idx}
                                 cart={cart[idx]}
+                            //QUESTION from eachcartproduct layer
+                            // HOW to write reload function to reflect new update quantity upon submit
+
+                            // reloadProp={() => { setReload(true) }}
 
                             />
                         ) :
@@ -154,6 +160,8 @@ export default function NavAndOff() {
                                         </Button>
 
                                         {cartFilled ? displayCartItems() : <div>Loading cart</div>}
+
+                                        <a href="/checkout" className="btn btn-success btn-lg mt-3">Checkout Cart!</a>
 
                                     </Offcanvas.Body>
                                 </Offcanvas>

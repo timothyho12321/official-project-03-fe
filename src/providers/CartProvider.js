@@ -165,6 +165,41 @@ export default function CartProvider(props) {
                 console.log(e)
             }
 
+        },
+        checkoutCart: async () => {
+            console.log("entered route of check out function")
+
+            // const haveToken = JSON.parse(localStorage.getItem("currentUserTokens"))
+            // console.log("have Token", haveToken);
+
+            try {
+                const haveToken = JSON.parse(localStorage.getItem("currentUserTokens"))
+
+                const checkCartItems = await shopCartContext.getCart();
+                console.log("checkCartItems", checkCartItems)
+
+                if (!checkCartItems || !checkCartItems.length) {
+                    alert("Unable to checkout as cart is empty. Please add some item to cart.")
+
+                } else {
+
+                    const response = await axios.get(BASE_API_URL + "cartcheckoutreact/", {
+                        headers: {
+                            Authorization: `Bearer ${haveToken.accessToken}`
+                        }
+                    })
+                    console.log("response", response)
+
+                    return response.data
+                }
+
+
+
+            } catch (e) {
+                console.log(e)
+            }
+
+
         }
 
     }

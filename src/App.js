@@ -14,6 +14,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import ProductsProvider from "./providers/ProductsProvider";
+import CheckOut from "./pages/Checkout";
 
 
 
@@ -28,6 +29,8 @@ function App() {
 
       <Router>
 
+
+        {/* Navbar and Offcanvas Checkout Cart */}
         <UsersProvider>
           <CartProvider>
             <NavAndOff />
@@ -84,11 +87,20 @@ function App() {
 
             <UsersProvider>
               <Login />
-
             </UsersProvider>
-
           }
           />
+
+          {/* Checkout Cart page */}
+          <Route path="/checkout" element={
+            <UsersProvider>
+              <CartProvider>
+                <CheckOut />
+              </CartProvider>
+            </UsersProvider>
+          }
+          />
+
 
 
         </Routes>
