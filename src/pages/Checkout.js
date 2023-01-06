@@ -2,6 +2,8 @@ import React, { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 import CartContext from '../contexts/CartContext'
+import { loadStripe } from '@stripe/stripe-js'
+
 
 export default function CheckOut() {
 
@@ -13,7 +15,7 @@ export default function CheckOut() {
         () => {
             const checkoutNow = async () => {
 
-                let sessionDetails = {}
+                let sessionSpecifics = {}
                 let publishableKey = null
                 const stripeResponse = await cartContext.checkoutCart()
 
@@ -21,12 +23,17 @@ export default function CheckOut() {
                     navigateTo("/about")
                     return;
                 } else {
-                    // CONTINUE FROM HERE STRIPE PAYMENT
-                    sessionDetails = {
+
+
+                    publishableKey = stripeResponse.publishableKey
+                    sessionSpecifics =
+                    {
                         sessionId: stripeResponse.sessionId,
                     }
-                    publishableKey = stripeResponse.publishableKey
                 }
+
+                const stripe = await loadStripe(publishableKey)
+                stripe.redirectToCheckout(sessionSpecifics)
 
             }
             checkoutNow();

@@ -7,14 +7,16 @@ import CartProvider from "./providers/CartProvider";
 import UsersProvider from "./providers/UsersProvider";
 import NavAndOff from "./components/NavAndOff";
 import Login from "./pages/Login";
+import ProductsProvider from "./providers/ProductsProvider";
+import CheckOut from "./pages/Checkout";
+import Success from "./pages/Success";
+import Cancel from "./pages/Cancel";
 
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import ProductsProvider from "./providers/ProductsProvider";
-import CheckOut from "./pages/Checkout";
 
 
 
@@ -100,6 +102,20 @@ function App() {
             </UsersProvider>
           }
           />
+
+          {/* Success URL route*/}
+          <Route path="/checkout/success" element={
+            <UsersProvider>
+              <Success />
+            </UsersProvider>
+
+          } />
+
+          {/* Cancel URL route */}
+          <Route path="/checkout/cancel" element={
+            <Cancel />}
+          />
+
 
 
 
