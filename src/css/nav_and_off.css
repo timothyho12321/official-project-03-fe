@@ -1,0 +1,40 @@
+#nav-bar-text-home{
+    text-decoration: none;
+}
+
+#nav-bar-text-about{
+    text-decoration: none;
+}
+
+#nav-bar-text-products{
+    text-decoration: none;
+}
+
+#nav-bar-text-login{
+    text-decoration: none;
+}
+
+#checkout-button{
+    margin-left: 8px;
+}
+
+
+@media only screen and (min-width: 990px) {
+    #nav-bar-text-home{
+        margin-left: 20px;
+    }
+    
+    #nav-bar-text-about{
+        margin-left: 20px;
+    }
+
+    #nav-bar-text-products{
+        margin-left: 20px;
+    }
+    
+    #nav-bar-text-login{
+        margin-left: 20px;
+    }
+
+
+  }
