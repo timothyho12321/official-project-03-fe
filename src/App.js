@@ -20,15 +20,11 @@ import ProductsProvider from "./providers/ProductsProvider";
 // import './App.css';
 
 
-
 function App() {
-
 
   return (
 
     <div className="App">
-
-
 
       <Router>
 
@@ -37,8 +33,6 @@ function App() {
             <NavAndOff />
           </CartProvider>
         </UsersProvider>
-
-
 
         {/* <Navbar bg="light" expand="lg">
           <Container>
@@ -69,7 +63,6 @@ function App() {
             <ProductsProvider>
               <Product />
             </ProductsProvider>
-
           }
           />
 

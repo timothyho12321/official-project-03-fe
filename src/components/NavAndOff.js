@@ -56,14 +56,21 @@ export default function NavAndOff() {
             //     </div>
             // ))
 
+            // WHY DOES TERNARY CHECK HERE NOT WORK? WHITE SCREEN IF CART IS EMPTY.
+
             <ListGroup className="mt-2">
-                {cart?.map((_, idx) =>
-                    <EachCartProduct
-                        cart={cart[idx]}
+                {
+                    cart.length > 0 ?
+                        cart?.map((_, idx) =>
+                            <EachCartProduct
+                                key={idx}
+                                cart={cart[idx]}
 
-                    />
+                            />
+                        ) :
+                        <div>No item in cart.</div>
 
-                )}
+                }
 
             </ListGroup>
 
@@ -77,7 +84,7 @@ export default function NavAndOff() {
 
     }
 
-    
+
 
     return (
         <React.Fragment>
@@ -98,13 +105,13 @@ export default function NavAndOff() {
                                 Home New
                             </Nav.Link>
                             <Nav.Link eventKey="link-2" as={Link} to='/about'>
-                               About New
+                                About New
                             </Nav.Link>
                             <Nav.Link eventKey="link-2" as={Link} to='/products'>
-                               Product
+                                Product
                             </Nav.Link>
                             <Nav.Link eventKey="link-2" as={Link} to='/login'>
-                               Login
+                                Login
                             </Nav.Link>
 
 
@@ -146,7 +153,7 @@ export default function NavAndOff() {
                                             Button to test
                                         </Button>
 
-                                        {cartFilled ? displayCartItems() : ""}
+                                        {cartFilled ? displayCartItems() : <div>Loading cart</div>}
 
                                     </Offcanvas.Body>
                                 </Offcanvas>

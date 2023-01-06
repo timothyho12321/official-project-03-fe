@@ -1,14 +1,18 @@
-.cart-thumbnail-image{
+.cart-thumbnail-image {
 
-    width:20vw
+    width: 20vw
 }
 
 
 .quantity-box-style {
-    width:13%
+    width: 13%
 }
 
-#box-update-and-button{
+#box-update-and-button {
     display: flex;
     align-items: center;
+}
+
+#error-message {
+    color: red
 }

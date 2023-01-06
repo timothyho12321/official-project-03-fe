@@ -37,8 +37,11 @@ export default function CartProvider(props) {
                     console.log('passIn.quantity', passIn.quantity)
 
                     const response = await axios.post(BASE_API_URL + "cartforshopping/" + `${cartInfo.variantId}` + "/add", {
-
                         'quantity': 1,
+                    }, {
+                        headers: {
+                            Authorization: `Bearer ${haveToken.accessToken}`
+                        }
                     })
 
                     // const response = await axios.post(BASE_API_URL + "cartforshopping/" + `${passIn.variantId}` + "/add", {
@@ -91,8 +94,12 @@ export default function CartProvider(props) {
             }
 
         },
-        updateCart: async () => {
+        updateCart: async (passedQuantity) => {
             console.log("entered updateCart route in CartProvider.")
+
+            // console.log("cartInfo.quantity",cartInfo.quantity)
+            console.log("passedQuantity", passedQuantity)
+
 
             const haveToken = JSON.parse(localStorage.getItem("currentUserTokens"))
             // console.log("have Token", haveToken);
@@ -106,7 +113,7 @@ export default function CartProvider(props) {
                     const response = await axios.put(BASE_API_URL + "cartforshopping/"
                         + `${cartInfo.variantId}` + "/update"
                         , {
-                            "quantity": cartInfo.quantity
+                            "quantity": passedQuantity
 
                         },
                         {
@@ -115,7 +122,7 @@ export default function CartProvider(props) {
                             }
                         })
 
-
+                    return response;
 
                 } else {
                     console.log("Your access token is invalid. Please login.")
@@ -126,6 +133,37 @@ export default function CartProvider(props) {
             }
 
 
+
+        },
+        deleteCartItem: async (passedVId) => {
+            console.log("entered delete oneCart Item route in CartProvider.")
+
+            // console.log("cartInfo.quantity",cartInfo.quantity)
+            console.log("passedVId", passedVId)
+
+
+            const haveToken = JSON.parse(localStorage.getItem("currentUserTokens"))
+            console.log("have Token", haveToken);
+
+            try {
+
+                if (haveToken.accessToken) {
+
+                    const response = await axios.delete(BASE_API_URL + "cartforshopping/"
+                        + `${passedVId}` + "/delete", {
+                        headers: {
+                            Authorization: `Bearer ${haveToken.accessToken}`
+                        }
+                    })
+                    return response;
+
+                } else {
+                    console.log("Your access token is invalid. Please login.")
+                }
+
+            } catch (e) {
+                console.log(e)
+            }
 
         }
 

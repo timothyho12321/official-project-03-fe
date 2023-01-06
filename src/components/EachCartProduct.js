@@ -14,23 +14,57 @@ export default function EachCartProduct(props) {
     const [cartQuantity, setCartQuantity] = useState(props.cart.quantity)
     const setCartInfo = cartContext.setCartInfo
     const updateCart = cartContext.updateCart
+    const deleteOneCartItem = cartContext.deleteCartItem
+    const [error, setError] = useState(false)
 
-    // WHY CAN ONLY DETECT FOR THE LATEST QUESTION CONTINUE
+
     const updateFormField = (event) => {
-        setCartQuantity(
-            event.target.value
-        )
+
+        console.log("enter updateFormField route")
+
+
+        let currentStock = props.cart.variant.stock
+        let newValue = parseInt(event.target.value)
+        // console.log("currentStock", currentStock)
+        // console.log("newValue", newValue)
+
+        if (newValue > currentStock) {
+            // console.log("quant more than current stock")
+
+            setCartQuantity(
+                currentStock
+            )
+            setError(true);
+        }
+
+        else if (newValue < 1) {
+            // console.log("quant less than 1")
+
+            setCartQuantity(
+                1
+            )
+            setError(true);
+        }
+        else {
+            // console.log("quant is correct amount.")
+
+            setCartQuantity(
+                event.target.value
+            )
+        }
+
     }
 
     const sendUpdate = (event) => {
         // console.log("send update function clicked")
-        
-        setCartInfo({
-            ...cartContext.cartInfo,
-            'quantity': cartQuantity,
-            
-        })
-        updateCart();
+        console.log("cartQuantity", cartQuantity)
+
+        // setCartInfo({
+        //     ...cartContext.cartInfo,
+        //     'quantity': cartQuantity,
+
+        // })
+        updateCart(cartQuantity);
 
     }
 
@@ -46,6 +80,15 @@ export default function EachCartProduct(props) {
         )
     }
 
+    const deleteCartItem = (id) => {
+        console.log("variant id to delete", id)
+        
+        deleteOneCartItem(id);
+        
+
+
+
+    }
     return (
         <React.Fragment>
             <ListGroupItem>
@@ -71,9 +114,10 @@ export default function EachCartProduct(props) {
                                 >Confirm update</Button>
 
                             </div>
+                            {error ? <div id="error-message">Correct stock amount is inputted.</div> : ""}
 
                             <Button className='btn-sm btn-danger ms-1'
-
+                                onClick={()=>{deleteCartItem(props.cart.variant.id)}}
                             >Delete Cart Item</Button>
 
                         </div>
