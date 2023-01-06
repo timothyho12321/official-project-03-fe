@@ -67,10 +67,10 @@ export default function CartProvider(props) {
             try {
 
                 if (haveToken.accessToken) {
-                    console.log("received access token.")
-                    console.log("haveToken.accessToken", haveToken.accessToken)
+                    // console.log("received access token.")
+                    // console.log("haveToken.accessToken", haveToken.accessToken)
 
-                    console.log("URL", BASE_API_URL + "cartforshopping/")
+                    // console.log("URL", BASE_API_URL + "cartforshopping/")
                     const response = await axios.get(BASE_API_URL + "cartforshopping/", {
                         headers: {
                             Authorization: `Bearer ${haveToken.accessToken}`
@@ -83,16 +83,49 @@ export default function CartProvider(props) {
                 } else {
                     console.log("Your access token is invalid. Please login.")
 
-
-
-
-
                 }
 
 
             } catch (e) {
                 console.log(e)
             }
+
+        },
+        updateCart: async () => {
+            console.log("entered updateCart route in CartProvider.")
+
+            const haveToken = JSON.parse(localStorage.getItem("currentUserTokens"))
+            // console.log("have Token", haveToken);
+
+            try {
+
+                if (haveToken.accessToken) {
+
+                    console.log("cartInfo.variantId", cartInfo.variantId);
+
+                    const response = await axios.put(BASE_API_URL + "cartforshopping/"
+                        + `${cartInfo.variantId}` + "/update"
+                        , {
+                            "quantity": cartInfo.quantity
+
+                        },
+                        {
+                            headers: {
+                                Authorization: `Bearer ${haveToken.accessToken}`
+                            }
+                        })
+
+
+
+                } else {
+                    console.log("Your access token is invalid. Please login.")
+                }
+
+            } catch (e) {
+                console.log(e)
+            }
+
+
 
         }
 

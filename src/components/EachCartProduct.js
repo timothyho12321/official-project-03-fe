@@ -9,14 +9,40 @@ import '../css/each_cart_product.css';
 
 export default function EachCartProduct(props) {
 
+    const cartContext = useContext(CartContext);
     const [ableEdit, setEdit] = useState(false)
     const [cartQuantity, setCartQuantity] = useState(props.cart.quantity)
-
+    const setCartInfo = cartContext.setCartInfo
+    const updateCart = cartContext.updateCart
 
     // WHY CAN ONLY DETECT FOR THE LATEST QUESTION CONTINUE
     const updateFormField = (event) => {
         setCartQuantity(
             event.target.value
+        )
+    }
+
+    const sendUpdate = (event) => {
+        // console.log("send update function clicked")
+        
+        setCartInfo({
+            ...cartContext.cartInfo,
+            'quantity': cartQuantity,
+            
+        })
+        updateCart();
+
+    }
+
+    const startEditForVar = (id) => {
+        console.log("startEditForVar function ran.")
+        console.log("variant id to set in cart provider", id)
+
+        setCartInfo(
+            {
+                ...cartContext.cartInfo,
+                'variantId': id
+            }
         )
     }
 
@@ -41,7 +67,7 @@ export default function EachCartProduct(props) {
                                     onChange={updateFormField}
                                 />
                                 <Button className='btn-sm btn-success ms-1'
-
+                                    onClick={sendUpdate}
                                 >Confirm update</Button>
 
                             </div>
@@ -64,7 +90,10 @@ export default function EachCartProduct(props) {
                         <p>Quantity: {props.cart.quantity}</p>
 
                         <Button className='btn-sm btn-success'
-                            onClick={() => { setEdit(true) }}
+                            onClick={() => {
+                                setEdit(true)
+                                startEditForVar(props.cart.variant.id)
+                            }}
 
                         >Edit</Button>
 

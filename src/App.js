@@ -28,14 +28,18 @@ function App() {
 
     <div className="App">
 
-      <UsersProvider>
-        <CartProvider>
-          <NavAndOff />
-        </CartProvider>
-      </UsersProvider>
 
 
       <Router>
+
+        <UsersProvider>
+          <CartProvider>
+            <NavAndOff />
+          </CartProvider>
+        </UsersProvider>
+
+
+
         {/* <Navbar bg="light" expand="lg">
           <Container>
             <Navbar.Brand href="#home">Soap Paradies</Navbar.Brand>

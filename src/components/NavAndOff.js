@@ -77,71 +77,91 @@ export default function NavAndOff() {
 
     }
 
+    
+
     return (
         <React.Fragment>
 
-            <Router>
-                <Navbar bg="light" expand="lg">
-                    <Container>
-                        <Navbar.Brand href="#home">Soap Paradies</Navbar.Brand>
-                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                        <Navbar.Collapse id="basic-navbar-nav">
-                            <Nav className="me-auto">
 
-                                <Navbar.Text>
-                                    <a id="nav-bar-text-home" href="/">Home</a>
-                                </Navbar.Text>
-                                <Navbar.Text>
-                                    <a id="nav-bar-text-about" href="/about">About Us</a>
-                                </Navbar.Text>
-                                <Navbar.Text>
-                                    <a id="nav-bar-text-products" href="/products">Products</a>
-                                </Navbar.Text>
-                                <Navbar.Text>
-                                    <a id="nav-bar-text-login" href="/login">Login</a>
-                                </Navbar.Text>
-
-                                <>
-                                    <Button id="checkout-button"
-                                        variant="info"
-                                        onClick={() => {
-                                            handleShow();
-                                            prepareCartOffCanvas()
-
-                                        }
-                                        }
-                                        className="me-2">
-                                        Cart Checkout
-                                    </Button>
-                                    <Offcanvas show={show} onHide={handleClose} placement="end">
-                                        <Offcanvas.Header closeButton>
-                                            <Offcanvas.Title>Your Cart Checkout</Offcanvas.Title>
-                                        </Offcanvas.Header>
-                                        <Offcanvas.Body>
-
-                                            <Button variant="danger"
-                                                onClick=""
-                                            >
-                                                Button to test
-                                            </Button>
-
-                                            {cartFilled ? displayCartItems() : ""}
-
-                                        </Offcanvas.Body>
-                                    </Offcanvas>
-                                </>
-
-
-                            </Nav>
-                        </Navbar.Collapse>
-                    </Container>
-                </Navbar>
+            <Navbar bg="light" expand="lg">
+                <Container>
+                    <Navbar.Brand href="#home">Soap Paradies</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="me-auto">
 
 
 
+                            {/* <Nav.Link href="/about">About New</Nav.Link> */}
+
+                            <Nav.Link eventKey="link-1" as={Link} to='/'>
+                                Home New
+                            </Nav.Link>
+                            <Nav.Link eventKey="link-2" as={Link} to='/about'>
+                               About New
+                            </Nav.Link>
+                            <Nav.Link eventKey="link-2" as={Link} to='/products'>
+                               Product
+                            </Nav.Link>
+                            <Nav.Link eventKey="link-2" as={Link} to='/login'>
+                               Login
+                            </Nav.Link>
 
 
-            </Router>
+
+                            {/* <Navbar.Text>
+                                <a id="nav-bar-text-home" href="/">Home</a>
+                            </Navbar.Text>
+                            <Navbar.Text>
+                                <a id="nav-bar-text-about" href="/about">About Us</a>
+                            </Navbar.Text>
+                            <Navbar.Text>
+                                <a id="nav-bar-text-products" href="/products">Products</a>
+                            </Navbar.Text>
+                            <Navbar.Text>
+                                <a id="nav-bar-text-login" href="/login">Login</a>
+                            </Navbar.Text> */}
+
+                            <>
+                                <Button id="checkout-button"
+                                    variant="info"
+                                    onClick={() => {
+                                        handleShow();
+                                        prepareCartOffCanvas()
+
+                                    }
+                                    }
+                                    className="me-2">
+                                    Cart Checkout
+                                </Button>
+                                <Offcanvas show={show} onHide={handleClose} placement="end">
+                                    <Offcanvas.Header closeButton>
+                                        <Offcanvas.Title>Your Cart Checkout</Offcanvas.Title>
+                                    </Offcanvas.Header>
+                                    <Offcanvas.Body>
+
+                                        <Button variant="danger"
+                                            onClick=""
+                                        >
+                                            Button to test
+                                        </Button>
+
+                                        {cartFilled ? displayCartItems() : ""}
+
+                                    </Offcanvas.Body>
+                                </Offcanvas>
+                            </>
+
+
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
+
+
+
+
+
         </React.Fragment>
 
 

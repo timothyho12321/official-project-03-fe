@@ -7,6 +7,7 @@ import '../css/products.css';
 import '../css/variants.css';
 import CartContext from '../contexts/CartContext';
 import context from 'react-bootstrap/esm/AccordionContext';
+import Slider from "react-slick";
 
 export default function Variant() {
 
@@ -154,10 +155,10 @@ export default function Variant() {
         } else {
 
             await makeCart();
-            
+
         }
 
-        
+
     }
 
     const makeCart = async () => {
@@ -197,11 +198,10 @@ export default function Variant() {
         }, []
     )
 
-
-
     return (
         <React.Fragment>
             <h1>Variant Detail Page</h1>
+
             <Button onClick={retrieveVariant}>Click for get variant</Button>
 
             {/* {variants?.length > 0 ? variants.map(v => (<React.Fragment>
