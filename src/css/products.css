@@ -12,3 +12,7 @@
     box-shadow: 10px 20px 30px #e1ddd7;
     cursor: pointer;
 }
+
+#div-for-search-buttons{
+    margin-top: 10px;
+}

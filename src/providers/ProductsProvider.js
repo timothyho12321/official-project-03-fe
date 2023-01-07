@@ -11,16 +11,28 @@ export default function ProductsProvider(props) {
     const [soaps, setSoaps] = useState([]);
 
     
+    // const [search, addSearch] = useState(
+    //     {
+    //         name:"",
+    //         cost:"",
+    //         width:"",
+    //         height:"", 
+    //         shape:"", 
+    //         smells:"", 
+    //         oils:""
+    //     }
+    // );
 
+    
     const [searchCall, setSearchCall] = useState({
         'name': "",
         'min_cost': "",
         'max_cost': "",
-        'min_width ': "",
-        'max_width ': "",
-        'min_height ': "",
-        'max_height ': "",
-        'shape ': "",
+        'min_width': "",
+        'max_width': "",
+        'min_height': "",
+        'max_height': "",
+        // 'shape ': "",
         'smells': "",
         'oils': "",
     })
@@ -45,7 +57,9 @@ export default function ProductsProvider(props) {
         soaps,
         getAllSoaps: ()=>{
             return soaps
-        }
+        },
+        searchCall,
+        setSearchCall
 
     }
 

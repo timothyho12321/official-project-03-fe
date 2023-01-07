@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { Button, ListGroupItem } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -55,6 +55,16 @@ export default function EachCartProduct(props) {
 
     }
 
+    useEffect(
+        () => {
+            console.log("testing")
+
+
+
+        }, [cartQuantity]
+
+    )
+
     const sendUpdate = (event) => {
         // console.log("send update function clicked")
         console.log("cartQuantity", cartQuantity)
@@ -67,11 +77,14 @@ export default function EachCartProduct(props) {
         updateCart(cartQuantity);
         setEdit(false);
         // console.log("props reload function from navandoff layer", props.reloadProp)
-        
+
         //QUESTION HOW to write reload function to reflect new update quantity upon submit
         // ALSO HOW TO MAKE IT SUCH THAT UPON CLICK EDITED POPULATED WITH NEW UPDATED QUANTITY
-        // props.reloadProp(true);
-    
+        props.reloadProp();
+        props.reloadCartInProvider();
+
+
+
     }
 
     const startEditForVar = (id) => {
@@ -134,7 +147,8 @@ export default function EachCartProduct(props) {
                         <h5>{props.cart.variant.name}</h5>
                         <p>Color: {props.cart.variant.color.color}</p>
                         <p>Cost: $ {props.cart.variant.soap.cost / 100}</p>
-                        <p>Quantity: {props.cart.quantity}</p>
+                        {/* <p>QuantityProp: {props.cart.quantity}</p> */}
+                        <p>Quantity: {cartQuantity}</p>
 
                         <Button className='btn-sm btn-success'
                             onClick={() => {

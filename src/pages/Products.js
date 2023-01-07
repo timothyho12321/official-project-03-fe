@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Button, Card, Col, Row } from 'react-bootstrap'
+import { Accordion, Button, Card, Col, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import ProductContext from '../contexts/ProductContext'
 import '../css/products.css';
@@ -11,6 +11,18 @@ export default function Product() {
     let allSoaps = productContext.getAllSoaps()
     let allSoapsUse = allSoaps.message
 
+    const currentProductLayerSearch = productContext.searchCall
+    const changeProductLayerSearch = productContext.setSearchCall
+
+    const updateFormField = (event) => {
+        changeProductLayerSearch({
+            ...currentProductLayerSearch,
+            [event.target.name]: event.target.value
+        })
+
+    }
+
+
     const printSoap = () => {
         console.log("entered printsoap route")
 
@@ -18,10 +30,164 @@ export default function Product() {
         console.log("allSoapsUse", allSoapsUse)
     }
 
-    
+
     return (
         <React.Fragment>
             <h1>Products Page</h1>
+
+            <Accordion defaultActiveKey="0">
+                <Accordion.Item eventKey="0">
+                    <Accordion.Header>Filter search</Accordion.Header>
+                    <Accordion.Body>
+
+                        <label>Soap Name </label>
+                        <input type="text"
+                            className='form-control'
+                            name='name'
+                            value={currentProductLayerSearch.name}
+                            onChange={updateFormField}
+                        />
+
+                        <div className='mt-2'>
+                            <label>Min Cost </label>
+                            <input type="text"
+                                className='form-control'
+                                name='min_cost'
+                                value={currentProductLayerSearch.min_cost}
+                                onChange={updateFormField}
+                            />
+                        </div>
+
+                        <div className='mt-2'>
+                            <label>Max Cost </label>
+                            <input type="text"
+                                className='form-control'
+                                name='max_cost'
+                                value={currentProductLayerSearch.max_cost}
+                                onChange={updateFormField}
+                            />
+                        </div>
+                        <div className='mt-2'>
+                            <label>Min width </label>
+                            <input type="text"
+                                className='form-control'
+                                name='min_width'
+                                value={currentProductLayerSearch.min_width}
+                                onChange={updateFormField}
+                            />
+                        </div>
+
+                        <div className='mt-2'>
+                            <label>Max width  </label>
+                            <input type="text"
+                                className='form-control'
+                                name='max_width'
+                                value={currentProductLayerSearch.max_width}
+                                onChange={updateFormField}
+                            />
+                        </div>
+
+                        <div className='mt-2'>
+                            <label>Min height </label>
+                            <input type="text"
+                                className='form-control'
+                                name='min_height'
+                                value={currentProductLayerSearch.min_height}
+                                onChange={updateFormField}
+                            />
+                        </div>
+
+                        <div className='mt-2'>
+                            <label>Max height  </label>
+                            <input type="text"
+                                className='form-control'
+                                name='max_height'
+                                value={currentProductLayerSearch.max_height}
+                                onChange={updateFormField}
+                            />
+                        </div>
+
+
+                        <div className='mt-2'>
+                            <label>Oil </label>
+                            {/* <input type="text" className='form-control' name='title' value="" /> */}
+
+                            <div>
+                                <select name="oils"
+                                    className='form-control'
+                                    value={currentProductLayerSearch.oils}
+                                    onChange={updateFormField}
+                                >
+                                    <option key={0} value="">
+                                        --------- Select one ---------
+                                    </option>
+                                    <option key={1} value="1">
+                                        Aloe Vera Oil
+                                    </option>
+                                    <option key={2} value="2">
+                                        Soy Bean Oil
+                                    </option>
+                                    <option key={3} value={3}>
+                                        Canola Oil
+                                    </option>
+                                    <option key={4} value={4}>
+                                        Animal Fats
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                        </div>
+
+                        <div className='mt-2'>
+                            <label>Smells </label>
+                            {/* <input type="text" className='form-control' name='title' value="" /> */}
+                            <select name="oils"
+                                    className='form-control'
+                                    value={currentProductLayerSearch.oils}
+                                    onChange={updateFormField}
+                                >
+                                    <option key={0} value="">
+                                        --------- Select one ---------
+                                    </option>
+                                    <option key={1} value="1">
+                                        Aloe Vera Oil
+                                    </option>
+                                    <option key={2} value="2">
+                                        Soy Bean Oil
+                                    </option>
+                                    <option key={3} value={3}>
+                                        Canola Oil
+                                    </option>
+                                    <option key={4} value={4}>
+                                        Animal Fats
+                                    </option>
+
+                                </select>
+                       
+                        </div>
+
+
+
+
+
+
+
+                        <div id="div-for-search-buttons">
+                            <button className='btn btn-success btn-sm'>Enter Search</button>
+
+                            <button className='btn btn-warning btn-sm ms-2'>Reset Search</button>
+
+                        </div>
+
+
+
+                    </Accordion.Body>
+                </Accordion.Item>
+            </Accordion >
+
             <Button onClick={printSoap}>Click for soap</Button>
 
             {/* {allSoapsUse?.length > 0 && allSoapsUse.map(s => (<React.Fragment>
@@ -42,15 +208,15 @@ export default function Product() {
                                 <Card.Text>
                                     <div>Base: {allSoapsUse[index].base.base}</div>
                                     <div>Oil: {allSoapsUse[index].oil.oil}</div>
-                                    <div>Purposes to put tab: {allSoapsUse[index].purposes?.map(p=>p.purpose)}</div>
-                                    <div>Smells to put tab: {allSoapsUse[index].smells?.map(s=>s.smell)}</div>
+                                    <div>Purposes to put tab: {allSoapsUse[index].purposes?.map(p => p.purpose)}</div>
+                                    <div>Smells to put tab: {allSoapsUse[index].smells?.map(s => s.smell)}</div>
                                     <div>Type: {allSoapsUse[index].type?.type}</div>
-                                    
+
                                     <div>Width: {allSoapsUse[index].width}</div>
                                     <div>Height: {allSoapsUse[index].height}</div>
                                     <div>Cost: {allSoapsUse[index].cost}</div>
 
-                                
+
                                 </Card.Text>
                             </Card.Body>
                         </Card>

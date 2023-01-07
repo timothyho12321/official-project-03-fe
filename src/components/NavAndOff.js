@@ -36,10 +36,10 @@ export default function NavAndOff() {
     const getCartFromProvider = cartContext.getCart
 
     const prepareCartOffCanvas = async () => {
-        console.log("prepareCartOffCanvas ran")
+        console.log("prepareCartOffCanvas ran DEBUG")
 
         let responseCart = await getCartFromProvider();
-        console.log("response in offcanvas", responseCart)
+        console.log("response in offcanvas DEBUG", responseCart)
 
         setCart(responseCart);
         setCartFilled(true);
@@ -67,10 +67,11 @@ export default function NavAndOff() {
                             <EachCartProduct
                                 key={idx}
                                 cart={cart[idx]}
+                                reloadCartInProvider={prepareCartOffCanvas}
                             //QUESTION from eachcartproduct layer
                             // HOW to write reload function to reflect new update quantity upon submit
 
-                            // reloadProp={() => { setReload(true) }}
+                            reloadProp={() => { setReload(!reload) }}
 
                             />
                         ) :
@@ -89,7 +90,6 @@ export default function NavAndOff() {
         );
 
     }
-
 
 
     return (
@@ -119,7 +119,6 @@ export default function NavAndOff() {
                             <Nav.Link eventKey="link-2" as={Link} to='/login'>
                                 Login
                             </Nav.Link>
-
 
 
                             {/* <Navbar.Text>
