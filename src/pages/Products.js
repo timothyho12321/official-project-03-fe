@@ -22,6 +22,75 @@ export default function Product() {
 
     }
 
+    const updateFormFieldArray = (event) => {
+
+        console.log("event.target.value", event)
+        console.log("called updateFormFieldArray function")
+
+        let findIndex = currentProductLayerSearch.smells.indexOf(parseInt(event.target.value))
+
+        console.log("findIndex", findIndex)
+
+        console.log("currentProductLayerSearch.smells", currentProductLayerSearch.smells)
+        let addToArray = [...currentProductLayerSearch.smells, parseInt(event.target.value)]
+        console.log("addToArray", addToArray)
+        // if (findIndex === -1) {
+        //     changeProductLayerSearch({
+        //         ...currentProductLayerSearch,
+        //         [event.target.name]: addToArray
+
+        //     })
+
+        // } else {
+        //     let removePrint = [...currentProductLayerSearch.smells.slice(0, findIndex),
+        //     ...currentProductLayerSearch.smells.slice(findIndex + 1)]
+        //     console.log("removePrint", removePrint)
+
+        //     let a = [...currentProductLayerSearch.smells.slice(0, findIndex)]
+        //     console.log("a", a)
+
+
+        //     changeProductLayerSearch({
+        //         ...currentProductLayerSearch,
+        //         [event.target.name]: [...currentProductLayerSearch.smells.slice(0, parseInt(findIndex)),
+        //         ...currentProductLayerSearch.smells.slice(parseInt(findIndex) + 1)]
+
+        //     })
+
+        // }
+
+        if (!currentProductLayerSearch.smells.includes(event.target.value)) {
+            changeProductLayerSearch({
+                ...currentProductLayerSearch,
+                [event.target.name]: addToArray
+
+            })
+
+        } else {
+            let removePrint = [...currentProductLayerSearch.smells.slice(0, findIndex),
+            ...currentProductLayerSearch.smells.slice(findIndex + 1)]
+            console.log("removePrint", removePrint)
+
+            let a = [...currentProductLayerSearch.smells.slice(0, findIndex)]
+            console.log("a", a)
+
+
+            changeProductLayerSearch({
+                ...currentProductLayerSearch,
+                [event.target.name]: [...currentProductLayerSearch.smells.slice(0, parseInt(findIndex)),
+                ...currentProductLayerSearch.smells.slice(parseInt(findIndex) + 1)]
+
+            })
+
+        }
+
+        // changeProductLayerSearch({
+        //     ...currentProductLayerSearch,
+        //     [event.target.name]: event.target.value
+        // })
+
+    }
+
 
     const printSoap = () => {
         console.log("entered printsoap route")
@@ -141,33 +210,40 @@ export default function Product() {
 
                         </div>
 
-                        <div className='mt-2'>
-                            <label>Smells </label>
-                            {/* <input type="text" className='form-control' name='title' value="" /> */}
-                            <select name="oils"
-                                    className='form-control'
-                                    value={currentProductLayerSearch.oils}
-                                    onChange={updateFormField}
-                                >
-                                    <option key={0} value="">
-                                        --------- Select one ---------
-                                    </option>
-                                    <option key={1} value="1">
-                                        Aloe Vera Oil
-                                    </option>
-                                    <option key={2} value="2">
-                                        Soy Bean Oil
-                                    </option>
-                                    <option key={3} value={3}>
-                                        Canola Oil
-                                    </option>
-                                    <option key={4} value={4}>
-                                        Animal Fats
-                                    </option>
 
-                                </select>
-                       
-                        </div>
+                        {/* QUESTION Need to debug why cannot unselect selected option. It becomes NAN and cannot read event.target.value */}
+                        {/* <div className='mt-2'>
+                            <label>Smells </label>
+
+
+                            <select name="smells"
+                                className='form-control'
+                                value={currentProductLayerSearch.smells}
+                                onChange={updateFormFieldArray}
+                                multiple
+                            >
+                                <option key={0} value="">
+                                    --------- Select one ---------
+                                </option>
+                                <option key={1} value={1}>
+                                    Floral
+                                </option>
+                                <option key={2} value={2}>
+                                    Fresh
+                                </option>
+                                <option key={3} value={3}>
+                                    Clean
+                                </option>
+                                <option key={4} value={4}>
+                                    Airy
+                                </option>
+                                <option key={5} value={5}>
+                                    Earthy
+                                </option>
+
+                            </select>
+
+                        </div> */}
 
 
 
@@ -176,9 +252,13 @@ export default function Product() {
 
 
                         <div id="div-for-search-buttons">
-                            <button className='btn btn-success btn-sm'>Enter Search</button>
+                            <button className='btn btn-success btn-sm'
+                                onClick={() => { productContext.displaySearchProducts()}}
+                            >Enter Search</button>
 
-                            <button className='btn btn-warning btn-sm ms-2'>Reset Search</button>
+                            <button className='btn btn-warning btn-sm ms-2'
+                                onClick={() => { productContext.showClearSearch()}}
+                            >Reset Search</button>
 
                         </div>
 

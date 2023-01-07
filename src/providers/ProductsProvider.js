@@ -7,10 +7,10 @@ export default function ProductsProvider(props) {
 
     const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us81.gitpod.io/"
     // const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us80.gitpod.io/"
-    
+
     const [soaps, setSoaps] = useState([]);
 
-    
+
     // const [search, addSearch] = useState(
     //     {
     //         name:"",
@@ -23,7 +23,7 @@ export default function ProductsProvider(props) {
     //     }
     // );
 
-    
+
     const [searchCall, setSearchCall] = useState({
         'name': "",
         'min_cost': "",
@@ -33,8 +33,8 @@ export default function ProductsProvider(props) {
         'min_height': "",
         'max_height': "",
         // 'shape ': "",
-        'smells': "",
-        'oils': "",
+        // 'smells': [],
+        'oils': null,
     })
 
     useEffect(
@@ -53,15 +53,72 @@ export default function ProductsProvider(props) {
     )
 
 
+
+    const triggerSearchProducts = async () => {
+        console.log("enter triggerSearchproduct route")
+        const response = await axios.get(BASE_API_URL + "api/products/search",
+            { params: searchCall })
+
+        console.log("response", response.data)
+        setSoaps(response.data)
+    }
+
+
+    const changeSearchCallToDefault = () => {
+        setSearchCall(
+            {
+                'name': "",
+                'min_cost': "",
+                'max_cost': "",
+                'min_width': "",
+                'max_width': "",
+                'min_height': "",
+                'max_height': "",
+                'oils': null
+            }
+        )
+    }
+
+    const clearSearch = async () => {
+        // setSearchCall(
+        //     {
+        //         'name': "",
+        //         'min_cost': "",
+        //         'max_cost': "",
+        //         'min_width': "",
+        //         'max_width': "",
+        //         'min_height': "",
+        //         'max_height': "",
+        //         'oils': null
+        //     }
+        // )
+        const response = await axios.get(BASE_API_URL + "api/products/search",
+            { params: searchCall })
+
+        console.log("response", response.data)
+        setSoaps(response.data)
+
+    }
+
     const shareProductContext = {
         soaps,
-        getAllSoaps: ()=>{
+        getAllSoaps: () => {
             return soaps
         },
         searchCall,
-        setSearchCall
+        setSearchCall,
+        displaySearchProducts: async () => {
+            await triggerSearchProducts();
+            return soaps;
+        },
+        showClearSearch: async () => {
+            changeSearchCallToDefault();
+            await clearSearch();
+            return soaps;
+        }
 
     }
+
 
 
     return (
