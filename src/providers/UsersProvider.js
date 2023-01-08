@@ -69,6 +69,27 @@ export default function UsersProvider(props) {
                 // });
             }
             return true
+        },
+
+        logout: async () => {
+            const haveToken = JSON.parse(localStorage.getItem("currentUserTokens"))
+            console.log("have Token", haveToken);
+
+            try {
+                let logOutResponse = await axios.post(BASE_API_URL + "logout",
+                    { refreshToken: haveToken.refreshToken })
+
+                console.log("logOutResponse", logOutResponse)
+
+                localStorage.removeItem("currentUserTokens");
+                localStorage.removeItem("accountData");
+
+            } catch (e) {
+                console.log(e)
+            }
+
+
+
         }
     }
 

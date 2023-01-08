@@ -17,6 +17,7 @@ import { Button, ListGroup } from "react-bootstrap";
 import CartContext from "../contexts/CartContext";
 import ProductContext from "../contexts/ProductContext";
 import EachCartProduct from "./EachCartProduct";
+import UserContext from "../contexts/UserContext";
 
 export default function NavAndOff() {
 
@@ -27,6 +28,7 @@ export default function NavAndOff() {
 
     const productContext = useContext(ProductContext)
     const cartContext = useContext(CartContext)
+    const usersContext = useContext(UserContext)
 
     const [cart, setCart] = useState([])
     const [cartFilled, setCartFilled] = useState(false)
@@ -34,6 +36,8 @@ export default function NavAndOff() {
     const [reload, setReload] = useState(false);
 
     const getCartFromProvider = cartContext.getCart
+    const logoutInProvider = usersContext.logout
+
 
     const prepareCartOffCanvas = async () => {
         console.log("prepareCartOffCanvas ran DEBUG")
@@ -68,10 +72,10 @@ export default function NavAndOff() {
                                 key={idx}
                                 cart={cart[idx]}
                                 reloadCartInProvider={prepareCartOffCanvas}
-                            //QUESTION from eachcartproduct layer
-                            // HOW to write reload function to reflect new update quantity upon submit
+                                //QUESTION from eachcartproduct layer
+                                // HOW to write reload function to reflect new update quantity upon submit
 
-                            reloadProp={() => { setReload(!reload) }}
+                                reloadProp={() => { setReload(!reload) }}
 
                             />
                         ) :
@@ -165,6 +169,18 @@ export default function NavAndOff() {
                                     </Offcanvas.Body>
                                 </Offcanvas>
                             </>
+
+                            <Button id="logout-button"
+                                variant="info"
+                                onClick={() => {
+                                    handleShow();
+                                    logoutInProvider();
+
+                                }
+                                }
+                                className="me-2">
+                                Logout account
+                            </Button>
 
 
                         </Nav>

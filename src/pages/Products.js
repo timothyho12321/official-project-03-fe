@@ -22,6 +22,14 @@ export default function Product() {
 
     }
 
+    const updateFormNumber = (event) => {
+        changeProductLayerSearch({
+            ...currentProductLayerSearch,
+            [event.target.name]: parseInt(event.target.value)
+        })
+
+    }
+
     const updateFormFieldArray = (event) => {
 
         console.log("event.target.value", event)
@@ -185,15 +193,16 @@ export default function Product() {
                                 <select name="oils"
                                     className='form-control'
                                     value={currentProductLayerSearch.oils}
-                                    onChange={updateFormField}
+                                    // Possible to check if option 0 was selected and set value as empty string
+                                    onChange={updateFormNumber}
                                 >
-                                    <option key={0} value="">
+                                    <option key={0} value={null}>
                                         --------- Select one ---------
                                     </option>
-                                    <option key={1} value="1">
+                                    <option key={1} value={1}>
                                         Aloe Vera Oil
                                     </option>
-                                    <option key={2} value="2">
+                                    <option key={2} value={2}>
                                         Soy Bean Oil
                                     </option>
                                     <option key={3} value={3}>
@@ -253,11 +262,11 @@ export default function Product() {
 
                         <div id="div-for-search-buttons">
                             <button className='btn btn-success btn-sm'
-                                onClick={() => { productContext.displaySearchProducts()}}
+                                onClick={() => { productContext.displaySearchProducts() }}
                             >Enter Search</button>
 
                             <button className='btn btn-warning btn-sm ms-2'
-                                onClick={() => { productContext.showClearSearch()}}
+                                onClick={() => { productContext.showClearSearch() }}
                             >Reset Search</button>
 
                         </div>
