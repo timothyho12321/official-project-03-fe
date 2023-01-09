@@ -32,7 +32,7 @@ export default function ProductsProvider(props) {
         'max_width': "",
         'min_height': "",
         'max_height': "",
-        // 'shape ': "",
+        // 'shape': "",
         'smells': [],
         'oils': null,
     })
@@ -66,6 +66,7 @@ export default function ProductsProvider(props) {
 
 
     const changeSearchCallToDefault = () => {
+        console.log("changeSearchCallToDefault route entered")
         setSearchCall(
             {
                 'name': "",
@@ -75,7 +76,8 @@ export default function ProductsProvider(props) {
                 'max_width': "",
                 'min_height': "",
                 'max_height': "",
-                'oils': null
+                'oils': null,
+                'smells': []
             }
         )
     }
@@ -90,12 +92,16 @@ export default function ProductsProvider(props) {
         //         'max_width': "",
         //         'min_height': "",
         //         'max_height': "",
-        //         'oils': null
+        //         'oils': null,
+        //         'smells':[]
         //     }
         // )
+
+        console.log("clearSearch route entered")
         const response = await axios.get(BASE_API_URL + "api/products/search",
             { params: searchCall })
 
+        console.log("searchCall", searchCall)
         console.log("response", response.data)
         setSoaps(response.data)
 

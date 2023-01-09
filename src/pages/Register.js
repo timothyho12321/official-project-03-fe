@@ -10,7 +10,10 @@ export default function Register() {
 
     const userContext = useContext(UserContext)
     const updateUserLayerLogin = userContext.setLoginInfo
+    const updateUserLayerRegister = userContext.setRegisterInfo
+    
     const sendLogin = userContext.login;
+    const sendRegister = userContext.register;
     const navigateTo = useNavigate();
 
     const updateFormField = (event) => {
@@ -23,8 +26,32 @@ export default function Register() {
 
     }
 
+    const updateFormField2 = (event) => {
+        updateUserLayerRegister(
+            {
+                ...userContext.registerInfo,
+                [event.target.name]: event.target.value
+            }
+        )
+        console.log(userContext.registerInfo)
+
+    }
+
     const loginUser = async () => {
         const response = await sendLogin(userContext.loginInfo)
+
+
+
+        // if(res){
+        //     navigate("/products")
+        // }
+        // else{
+        //     navigate("/register")
+        // }
+    }
+
+    const createUser = async () => {
+        const response = await sendRegister(userContext.registerInfo)
 
 
 
@@ -45,34 +72,71 @@ export default function Register() {
     return (
 
         <React.Fragment>
-
+            <h2>Register as a New User</h2>
             <div className='mt-3 ms-3 me-3'>
+                <label>First Name</label>
+
+                <input type="text"
+                    className='form-control mb-3 mt-1'
+                    value={userContext.registerInfo.first_name}
+                    name="first_name"
+                    onChange={updateFormField2}
+                />
+
+                <label>Last Name</label>
+
+                <input type="text"
+                    className='form-control mb-3 mt-1'
+                    value={userContext.registerInfo.last_name}
+                    name="last_name"
+                    onChange={updateFormField2}
+                />
+
                 <label>Email</label>
 
                 <input type="text"
                     className='form-control mb-3 mt-1'
-                    value={userContext.loginInfo.email}
+                    value={userContext.registerInfo.email}
                     name="email"
-                    onChange={updateFormField}
+                    onChange={updateFormField2}
                 />
+
                 <label>Password</label>
+
                 <input type="text"
                     className='form-control mb-3 mt-1'
-                    value={userContext.loginInfo.password}
+                    value={userContext.registerInfo.password}
                     name="password"
-                    onChange={updateFormField}
+                    onChange={updateFormField2}
                 />
+
+                <label>Confirm Password</label>
+
+                <input type="text"
+                    className='form-control mb-3 mt-1'
+                    value={userContext.registerInfo.password_confirm}
+                    name="password_confirm"
+                    onChange={updateFormField2}
+                />
+
+                <label>Contact Number</label>
+
+                <input type="text"
+                    className='form-control mb-3 mt-1'
+                    value={userContext.registerInfo.contact_number}
+                    name="contact_number"
+                    onChange={updateFormField2}
+                />
+
+
+
                 <Button variant="primary"
-                    onClick={loginUser}
+                    onClick={createUser}
                 >
-                    Login</Button>
+                    Create Account</Button>
 
 
-                <Button variant="warning"
-                    className='ms-2'
-                    onClick={registerUser}
-                >
-                    New? Register</Button>
+
 
             </div>
 

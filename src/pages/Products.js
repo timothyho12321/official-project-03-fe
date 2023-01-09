@@ -138,6 +138,7 @@ export default function Product() {
             [event.target.name]: clonedArray
         })
 
+        console.log("after update smell", currentProductLayerSearch)
     }
 
 

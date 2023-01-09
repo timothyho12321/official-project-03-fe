@@ -14,8 +14,13 @@ export default function UsersProvider(props) {
     })
 
     const [registerInfo, setRegisterInfo] = useState({
-        "first_name":""
-       
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "password": "",
+        "password_confirm": "",
+        "contact_number": ""
+
     })
 
 
@@ -24,6 +29,8 @@ export default function UsersProvider(props) {
     const userContext = {
         loginInfo,
         setLoginInfo,
+        registerInfo,
+        setRegisterInfo,
 
         login: async (loginInfo) => {
 
@@ -96,7 +103,19 @@ export default function UsersProvider(props) {
 
 
 
+        },
+
+        register: async () => {
+            // console.log("entered register route in UsersProvider layer");
+
+            // console.log(registerInfo);
+
+
+
+
         }
+
+
     }
 
 

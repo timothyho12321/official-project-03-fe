@@ -170,15 +170,15 @@ export default function NavAndOff() {
                                 </Offcanvas>
                             </>
 
+
                             <Button id="logout-button"
                                 variant="info"
+                                className="mt-2"
                                 onClick={() => {
                                     handleShow();
                                     logoutInProvider();
-
-                                }
-                                }
-                                className="me-2">
+                                }}
+                            >
                                 Logout account
                             </Button>
 
@@ -192,7 +192,7 @@ export default function NavAndOff() {
 
 
 
-        </React.Fragment>
+        </React.Fragment >
 
 
     )
