@@ -18,13 +18,10 @@ export default function CheckOut() {
                 let sessionSpecifics = {}
                 let publishableKey = null
                 const stripeResponse = await cartContext.checkoutCart()
-
                 if (!stripeResponse) {
                     navigateTo("/about")
                     return;
                 } else {
-
-
                     publishableKey = stripeResponse.publishableKey
                     sessionSpecifics =
                     {

@@ -13,6 +13,12 @@ export default function UsersProvider(props) {
         "password": ""
     })
 
+    const [registerInfo, setRegisterInfo] = useState({
+        "first_name":""
+       
+    })
+
+
     const [tokens, saveTokens] = useState(null)
 
     const userContext = {

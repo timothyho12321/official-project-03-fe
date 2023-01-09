@@ -40,20 +40,22 @@ export default function NavAndOff() {
 
 
     const prepareCartOffCanvas = async () => {
-        console.log("prepareCartOffCanvas ran DEBUG")
-
         let responseCart = await getCartFromProvider();
-        console.log("response in offcanvas DEBUG", responseCart)
+        console.log("response in offcanvas DEBUG", responseCart);
 
         setCart(responseCart);
-        setCartFilled(true);
+
+        if (responseCart) {
+            setCartFilled(true);
+        }
+
 
     }
 
     const displayCartItems = () => {
 
         console.log("enter displayCartItems route.")
-        console.log("cart[0].id", cart[0].id)
+        // console.log("cart[0].id", cart[0].id)
 
         let startMapped =
             // (cart.map(i =>
@@ -63,17 +65,14 @@ export default function NavAndOff() {
             // ))
 
             // QUESTION WHY DOES TERNARY CHECK HERE NOT WORK? WHITE SCREEN IF CART IS EMPTY.
-
             <ListGroup className="mt-2">
                 {
-                    cart.length > 0 ?
+                    cart?.length > 0 ?
                         cart?.map((_, idx) =>
                             <EachCartProduct
                                 key={idx}
                                 cart={cart[idx]}
                                 reloadCartInProvider={prepareCartOffCanvas}
-                                //QUESTION from eachcartproduct layer
-                                // HOW to write reload function to reflect new update quantity upon submit
 
                                 reloadProp={() => { setReload(!reload) }}
 
@@ -164,7 +163,8 @@ export default function NavAndOff() {
 
                                         {cartFilled ? displayCartItems() : <div>Loading cart</div>}
 
-                                        <a href="/checkout" className="btn btn-success btn-lg mt-3">Checkout Cart!</a>
+                                        {cartFilled ? <a href="/checkout" className="btn btn-success btn-lg mt-3">Checkout Cart!</a>
+                                            : <a href="/login" className="btn btn-warning mt-3">Login to allow 'checkout'.</a>}
 
                                     </Offcanvas.Body>
                                 </Offcanvas>

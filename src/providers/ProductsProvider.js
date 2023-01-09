@@ -33,7 +33,7 @@ export default function ProductsProvider(props) {
         'min_height': "",
         'max_height': "",
         // 'shape ': "",
-        // 'smells': [],
+        'smells': [],
         'oils': null,
     })
 
@@ -56,6 +56,7 @@ export default function ProductsProvider(props) {
 
     const triggerSearchProducts = async () => {
         console.log("enter triggerSearchproduct route")
+        console.log(searchCall)
         const response = await axios.get(BASE_API_URL + "api/products/search",
             { params: searchCall })
 

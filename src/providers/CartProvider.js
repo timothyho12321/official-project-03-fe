@@ -180,7 +180,6 @@ export default function CartProvider(props) {
 
                 if (!checkCartItems || !checkCartItems.length) {
                     alert("Unable to checkout as cart is empty. Please add some item to cart.")
-
                 } else {
 
                     const response = await axios.get(BASE_API_URL + "cartcheckoutreact/", {

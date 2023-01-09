@@ -78,8 +78,6 @@ export default function EachCartProduct(props) {
         setEdit(false);
         // console.log("props reload function from navandoff layer", props.reloadProp)
 
-        //QUESTION HOW to write reload function to reflect new update quantity upon submit
-        // ALSO HOW TO MAKE IT SUCH THAT UPON CLICK EDITED POPULATED WITH NEW UPDATED QUANTITY
         props.reloadProp();
         props.reloadCartInProvider();
 

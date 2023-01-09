@@ -42,32 +42,7 @@ export default function Product() {
         console.log("currentProductLayerSearch.smells", currentProductLayerSearch.smells)
         let addToArray = [...currentProductLayerSearch.smells, parseInt(event.target.value)]
         console.log("addToArray", addToArray)
-        // if (findIndex === -1) {
-        //     changeProductLayerSearch({
-        //         ...currentProductLayerSearch,
-        //         [event.target.name]: addToArray
-
-        //     })
-
-        // } else {
-        //     let removePrint = [...currentProductLayerSearch.smells.slice(0, findIndex),
-        //     ...currentProductLayerSearch.smells.slice(findIndex + 1)]
-        //     console.log("removePrint", removePrint)
-
-        //     let a = [...currentProductLayerSearch.smells.slice(0, findIndex)]
-        //     console.log("a", a)
-
-
-        //     changeProductLayerSearch({
-        //         ...currentProductLayerSearch,
-        //         [event.target.name]: [...currentProductLayerSearch.smells.slice(0, parseInt(findIndex)),
-        //         ...currentProductLayerSearch.smells.slice(parseInt(findIndex) + 1)]
-
-        //     })
-
-        // }
-
-        if (!currentProductLayerSearch.smells.includes(event.target.value)) {
+        if (findIndex === -1) {
             changeProductLayerSearch({
                 ...currentProductLayerSearch,
                 [event.target.name]: addToArray
@@ -92,10 +67,76 @@ export default function Product() {
 
         }
 
+        // if (!currentProductLayerSearch.smells.includes(event.target.value)) {
+        //     changeProductLayerSearch({
+        //         ...currentProductLayerSearch,
+        //         [event.target.name]: addToArray
+
+        //     })
+
+        // } else {
+        //     let removePrint = [...currentProductLayerSearch.smells.slice(0, findIndex),
+        //     ...currentProductLayerSearch.smells.slice(findIndex + 1)]
+        //     console.log("removePrint", removePrint)
+
+        //     let a = [...currentProductLayerSearch.smells.slice(0, findIndex)]
+        //     console.log("a", a)
+
+
+        //     changeProductLayerSearch({
+        //         ...currentProductLayerSearch,
+        //         [event.target.name]: [...currentProductLayerSearch.smells.slice(0, parseInt(findIndex)),
+        //         ...currentProductLayerSearch.smells.slice(parseInt(findIndex) + 1)]
+
+        //     })
+
+        // }
+
         // changeProductLayerSearch({
         //     ...currentProductLayerSearch,
         //     [event.target.name]: event.target.value
         // })
+
+    }
+
+    const updateFormFieldArray2 = (event) => {
+        console.log(event.target.value)
+        console.log(event.target.name)
+        // Step 1: get current array
+        let clonedArray = [...currentProductLayerSearch.smells]
+
+        // Step 2: Modify array
+        // Case 1: if user's checked smell is in array -> remove checked smell from array
+        // ['1', '2', '3']
+
+        if (clonedArray.includes(event.target.value)) {
+            // console.log("entered remove route debug")
+            let indexToReplace = clonedArray.indexOf(event.target.value)
+            // console.log("indexToReplace", indexToReplace)
+            let firstHalf = [...clonedArray.slice(0, indexToReplace)]
+            // console.log("firstHalf", firstHalf)
+            clonedArray = [...clonedArray.slice(0, indexToReplace),
+            ...clonedArray.slice(indexToReplace + 1)]
+
+            console.log("clonedArrayRemove", clonedArray)
+        }
+
+        // Case 2: if user's checked smell is new and not in array -> add to array
+        // add to clonedArray
+        else {
+            clonedArray = [...clonedArray, event.target.value]
+            console.log("clonedArray", clonedArray)
+
+        }
+
+
+
+        console.log("clonedArray", clonedArray)
+        // Step 3: Set to state the current array
+        changeProductLayerSearch({
+            ...currentProductLayerSearch,
+            [event.target.name]: clonedArray
+        })
 
     }
 
@@ -196,7 +237,7 @@ export default function Product() {
                                     // Possible to check if option 0 was selected and set value as empty string
                                     onChange={updateFormNumber}
                                 >
-                                    <option key={0} value={null}>
+                                    <option key={0} value={999}>
                                         --------- Select one ---------
                                     </option>
                                     <option key={1} value={1}>
@@ -221,14 +262,14 @@ export default function Product() {
 
 
                         {/* QUESTION Need to debug why cannot unselect selected option. It becomes NAN and cannot read event.target.value */}
-                        {/* <div className='mt-2'>
+                        <div className='mt-2'>
                             <label>Smells </label>
 
 
                             <select name="smells"
                                 className='form-control'
                                 value={currentProductLayerSearch.smells}
-                                onChange={updateFormFieldArray}
+                                onChange={updateFormFieldArray2}
                                 multiple
                             >
                                 <option key={0} value="">
@@ -252,7 +293,7 @@ export default function Product() {
 
                             </select>
 
-                        </div> */}
+                        </div>
 
 
 

@@ -17,6 +17,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import Register from "./pages/Register";
 
 
 
@@ -92,6 +93,16 @@ function App() {
             </UsersProvider>
           }
           />
+
+          {/* Register page */}
+          <Route path="/register" element={
+
+            <UsersProvider>
+              <Register/>
+            </UsersProvider>
+          }
+          />
+
 
           {/* Checkout Cart page */}
           <Route path="/checkout" element={

@@ -6,7 +6,7 @@ import UserContext from '../contexts/UserContext'
 import { Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 
-export default function Login() {
+export default function Register() {
 
     const userContext = useContext(UserContext)
     const updateUserLayerLogin = userContext.setLoginInfo
