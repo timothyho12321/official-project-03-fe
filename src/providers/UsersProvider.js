@@ -24,6 +24,8 @@ export default function UsersProvider(props) {
     })
 
 
+
+
     const [tokens, saveTokens] = useState(null)
 
     const userContext = {
@@ -71,6 +73,8 @@ export default function UsersProvider(props) {
 
                 alert("You are logged in. Good to see you!")
 
+
+
                 // toast.success('Welcome back!', {
                 //     position: "top-right",
                 //     autoClose: 5000,
@@ -81,8 +85,85 @@ export default function UsersProvider(props) {
                 //     progress: undefined,
                 // });
             }
+
+            const startCountTime = Date.now()
+            const testTimeHome = 1000 * 3
+            // const fiveHourToMilli = 60 * 60 * 1000 * 5
+            console.log("fiveHourToMilli", threeHourToMilli)
+
+            let endTimeToRefresh = startCountTime + threeHourToMilli
+
+            const refreshTokenGetNew = async () => {
+                const getCurrentTime = Date.now()
+
+                const hasTimeReached = getCurrentTime >= endTimeToRefresh;
+                if (hasTimeReached) {
+                    alert("Your refresh token is expired. Please login again.")
+
+                    clearInterval(timerIntervalForRefresh);
+
+                } else {
+
+                    // call refresh token route
+                    // refresh token must still exist in local storage
+
+
+                    await userContext.refreshToken();
+
+                }
+
+               
+
+            }
+
+            const threeHourToMilli = 60 * 60 * 1000 * 3
+            const timerIntervalForRefresh = setInterval(refreshTokenGetNew, threeHourToMilli)
+
+
+            if(localStorage.getItem("refreshToken")){
+                return null
+            }
+    
+            timerIntervalForRefresh()
+
             return true
         },
+
+        refreshToken: async () => {
+
+            try {
+
+                const haveToken = JSON.parse(localStorage.getItem("currentUserTokens"))
+                console.log("have Token", haveToken);
+
+
+                const response = await axios.post(BASE_API_URL + "refresh",
+                    { refreshToken: haveToken.refreshToken }, {
+                    headers: {
+                        Authorization: `Bearer ${haveToken.accessToken}`
+                    }
+                });
+
+                console.log("called refreshToken on backend", response.data)
+                return true
+
+            }
+
+            catch (e) {
+                console.log(e);
+
+                return false;
+
+
+            }
+
+
+
+
+
+        },
+
+
 
         logout: async () => {
             const haveToken = JSON.parse(localStorage.getItem("currentUserTokens"))
@@ -125,7 +206,7 @@ export default function UsersProvider(props) {
             alert("You have completed signing up for the account. Please login.")
 
 
-            
+
         }
 
 
