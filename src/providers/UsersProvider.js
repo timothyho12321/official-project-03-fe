@@ -87,11 +87,13 @@ export default function UsersProvider(props) {
             }
 
             const startCountTime = Date.now()
-            const testTimeHome = 1000 * 3
-            // const fiveHourToMilli = 60 * 60 * 1000 * 5
-            console.log("fiveHourToMilli", threeHourToMilli)
+            const testTimeFive= 12* 60 * 60 * 1000 * 5
 
-            let endTimeToRefresh = startCountTime + threeHourToMilli
+            // const fiveHourToMilli = 60 * 60 * 1000 * 5
+            // console.log("fiveHourToMilli", fiveHourToMilli)
+
+            // let endTimeToRefresh = startCountTime + fiveHourToMilli
+            let endTimeToRefresh = startCountTime + testTimeFive
 
             const refreshTokenGetNew = async () => {
                 const getCurrentTime = Date.now()
@@ -108,25 +110,34 @@ export default function UsersProvider(props) {
                     // refresh token must still exist in local storage
 
 
-                    await userContext.refreshToken();
+                    let returnNewAccessToken = await userContext.refreshToken();
+
+                    console.log("refresh ran with return", returnNewAccessToken)
+                    console.log("no dot data",JSON.stringify(returnNewAccessToken))
+                    console.log("no stringify",returnNewAccessToken)
+                    
+                    localStorage.removeItem('currentUserTokens');
+
+                    localStorage.setItem('currentUserTokens', JSON.stringify(returnNewAccessToken))
+                   
 
                 }
 
-               
+
 
             }
 
             const threeHourToMilli = 60 * 60 * 1000 * 3
-            const timerIntervalForRefresh = setInterval(refreshTokenGetNew, threeHourToMilli)
+            const threeSecondToMilli = 1000 * 10
+            const timerIntervalForRefresh = setInterval(refreshTokenGetNew, threeSecondToMilli)
 
 
-            if(localStorage.getItem("refreshToken")){
+            if (!localStorage.getItem("refreshToken")) {
                 return null
             }
-    
+
             timerIntervalForRefresh()
 
-            return true
         },
 
         refreshToken: async () => {
@@ -145,7 +156,7 @@ export default function UsersProvider(props) {
                 });
 
                 console.log("called refreshToken on backend", response.data)
-                return true
+                return response.data
 
             }
 
@@ -154,12 +165,7 @@ export default function UsersProvider(props) {
 
                 return false;
 
-
             }
-
-
-
-
 
         },
 

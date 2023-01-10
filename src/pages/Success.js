@@ -7,7 +7,7 @@ export default function Success() {
                 Thank you for shopping with us.
                 See you again!
             </h1>
-            <a href='/login' className='btn btn-success btn-sm'>Back to profile</a>
+            <a href='/about' className='btn btn-success btn-sm'>See 'About Us'</a>
             
         </React.Fragment>
 

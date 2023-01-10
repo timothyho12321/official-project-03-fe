@@ -94,6 +94,24 @@ export default function NavAndOff() {
 
     }
 
+    const userNavWelcome = () => {
+
+        const accountData = (localStorage.getItem("accountData"))
+
+        
+        //DEBUG WHY CANNOT READ INTO ARRAY 
+        // const firstName =accountData.loggedInAccount
+        // const firstName =accountData["loggedInAccount"]
+        
+        // const lastName =accountData.loggedInAccount.last_name
+        
+        console.log("accountData", accountData)
+        // console.log("firstName", firstName)
+        // console.log("lastName", lastName)
+
+        return accountData
+    }
+
 
     return (
         <React.Fragment>
@@ -102,7 +120,14 @@ export default function NavAndOff() {
             <Navbar bg="light" expand="lg">
                 <Container>
                     <Navbar.Brand href="#home">Soap Paradies</Navbar.Brand>
+
+                    <Navbar.Brand >Hi, User
+                        {userNavWelcome()}
+                        
+                    </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
+
+
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
 
