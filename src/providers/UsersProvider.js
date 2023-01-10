@@ -106,13 +106,26 @@ export default function UsersProvider(props) {
         },
 
         register: async () => {
-            // console.log("entered register route in UsersProvider layer");
+            console.log("entered register route in UsersProvider layer");
 
             // console.log(registerInfo);
 
+            const response = await axios.post(BASE_API_URL + "signup", registerInfo)
+            console.log(response);
+
+            setRegisterInfo({
+                "first_name": "",
+                "last_name": "",
+                "email": "",
+                "password": "",
+                "password_confirm": "",
+                "contact_number": ""
+            })
+
+            alert("You have completed signing up for the account. Please login.")
 
 
-
+            
         }
 
 

@@ -4,17 +4,22 @@ import React, { useState, useEffect, useRef, useContext } from 'react'
 import axios from 'axios'
 import UserContext from '../contexts/UserContext'
 import { Button } from 'react-bootstrap'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import SimpleReactValidator from 'simple-react-validator';
+
+import '../css/register.css'
 
 export default function Register() {
 
     const userContext = useContext(UserContext)
     const updateUserLayerLogin = userContext.setLoginInfo
     const updateUserLayerRegister = userContext.setRegisterInfo
-    
+
     const sendLogin = userContext.login;
     const sendRegister = userContext.register;
     const navigateTo = useNavigate();
+
+    const [showLoginButton, setLoginButton] = useState(false);
 
     const updateFormField = (event) => {
         updateUserLayerLogin(
@@ -36,23 +41,46 @@ export default function Register() {
         console.log(userContext.registerInfo)
 
     }
+    const [value, setValue] = useState(0);
 
-    const loginUser = async () => {
-        const response = await sendLogin(userContext.loginInfo)
+    function makeForceUpdate() {
 
-
-
-        // if(res){
-        //     navigate("/products")
-        // }
-        // else{
-        //     navigate("/register")
-        // }
+        return () => setValue(value => value + 1);
     }
 
-    const createUser = async () => {
-        const response = await sendRegister(userContext.registerInfo)
+    const [render, setRender] = useState(false);
 
+    function makeForceUpdate2() {
+
+        setRender(!render)
+    }
+
+
+    const createUser = async () => {
+
+
+        // if (validator.allValid()) {
+        //     const response = await sendRegister(userContext.registerInfo)
+
+        //     setLoginButton(true);
+        // } else {
+        //     console.log("entered validator show message route")
+        //     validator.showMessages();
+        //     makeForceUpdate();
+        //     makeForceUpdate2();
+        // }
+
+
+        if (simpleValidator.current.allValid()) {
+            const response = await sendRegister(userContext.registerInfo)
+
+            setLoginButton(true);
+        } else {
+            console.log("entered validator show message route")
+            simpleValidator.current.showMessages();
+            makeForceUpdate();
+            makeForceUpdate2();
+        }
 
 
         // if(res){
@@ -67,7 +95,26 @@ export default function Register() {
         navigateTo("/register")
     }
 
+    const navigateToLogin = () => {
+        navigateTo("/login")
+    }
 
+    // const constructor = () => {
+    //     let validator = new SimpleReactValidator();
+    // }
+
+    // constructor() {
+    //     this.validator = new SimpleReactValidator();
+    //   }
+
+    // const validator = new SimpleReactValidator({
+    //     className: 'text-danger',
+    //     messages: {
+    //         email: 'That is not an email.',
+    //     }
+    // });
+
+    const simpleValidator = useRef(new SimpleReactValidator());
 
     return (
 
@@ -83,6 +130,15 @@ export default function Register() {
                     onChange={updateFormField2}
                 />
 
+                {/* {validator.message('firstname', userContext.registerInfo.first_name,
+                    'required|alpha')} */}
+                <div className='register-error-message-style'>
+                    {simpleValidator.current.message('First Name', userContext.registerInfo.first_name,
+                        'required|alpha')}
+
+                </div>
+
+
                 <label>Last Name</label>
 
                 <input type="text"
@@ -91,6 +147,11 @@ export default function Register() {
                     name="last_name"
                     onChange={updateFormField2}
                 />
+                <div className='register-error-message-style'>
+                    {simpleValidator.current.message('Last Name', userContext.registerInfo.first_name,
+                        'required|alpha')}
+
+                </div>
 
                 <label>Email</label>
 
@@ -100,7 +161,11 @@ export default function Register() {
                     name="email"
                     onChange={updateFormField2}
                 />
+                <div className='register-error-message-style'>
+                    {simpleValidator.current.message('Email', userContext.registerInfo.email,
+                        'required|email')}
 
+                </div>
                 <label>Password</label>
 
                 <input type="text"
@@ -108,7 +173,43 @@ export default function Register() {
                     value={userContext.registerInfo.password}
                     name="password"
                     onChange={updateFormField2}
+                    placeholder="8 character, one special character and number"
                 />
+                <div className='register-error-message-style'>
+                    {/* {simpleValidator.current.message('Password', userContext.registerInfo.password,
+                        'required|min:8|in:1,2,3,4,5,6,7,8,9,0,!,#,$,%,&,(,)')} */}
+
+                    {/* {simpleValidator.current.message('Password', userContext.registerInfo.password,
+                        'required|in:foo,bar')} */}
+
+
+                    {/* {simpleValidator.current.message('Password', userContext.registerInfo.password,
+                        `regex:${'1', '2', '3'}`)} */}
+
+
+
+                    {simpleValidator.current.message('Password', userContext.registerInfo.password,
+                        ['required',
+                            'min:8',
+                            { regex: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', `!`, `"`, '#', '$', '%', '&', `'`, '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', ']', '^', '_', '`', '{', '}', '|', '~'] }
+                        ])}
+
+
+                    {/* {simpleValidator.current.message('Password', userContext.registerInfo.password,
+                        ['required', 
+                        'min:8',
+                        {in: ['1', '2','3','4','5','6','7','8','9','0',`!`,`"`,'#','$','%','&',`'`,'(',')','*','+',',','-','.','/',':',';','<','=','>','?','@','[',']','^','_','`','{','}','|','~']}
+                        ])
+                        } */}
+
+                    {/* {simpleValidator.current.message('Password', userContext.registerInfo.password,
+                        ['required', 
+                        'min:8',
+                        {in: ['1', '2','3']}
+                        ])
+                        } */}
+
+                </div>
 
                 <label>Confirm Password</label>
 
@@ -119,6 +220,13 @@ export default function Register() {
                     onChange={updateFormField2}
                 />
 
+                {/* {simpleValidator.current.message('confirmPassword', userContext.registerInfo.password_confirm,
+                    `regex:apple`)} */}
+                <div className='register-error-message-style'>
+                    {simpleValidator.current.message('confirmPassword', userContext.registerInfo.password_confirm,
+                        `regex:${userContext.registerInfo.password}`)}
+                </div>
+
                 <label>Contact Number</label>
 
                 <input type="text"
@@ -127,13 +235,27 @@ export default function Register() {
                     name="contact_number"
                     onChange={updateFormField2}
                 />
+                <div className='register-error-message-style'>
+                    {simpleValidator.current.message('Contact Number', userContext.registerInfo.contact_number,
+                        'numeric|min:8')}
+                </div>
+
+                {showLoginButton ?
+
+                    <Button variant="success"
+                        onClick={navigateToLogin}
+                    >
+                        Go to 'Login' page</Button>
+                    :
+                    <Button variant="primary"
+                        onClick={createUser}
+                    >
+                        Create Account</Button>
+                }
 
 
 
-                <Button variant="primary"
-                    onClick={createUser}
-                >
-                    Create Account</Button>
+
 
 
 
@@ -143,6 +265,6 @@ export default function Register() {
 
 
 
-        </React.Fragment>
+        </React.Fragment >
     )
 }
