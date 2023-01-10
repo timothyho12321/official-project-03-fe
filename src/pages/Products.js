@@ -1,7 +1,9 @@
-import React, { useContext } from 'react'
+import React, { useContext, useRef } from 'react'
 import { Accordion, Button, Card, Col, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import ProductContext from '../contexts/ProductContext'
+import SimpleReactValidator from 'simple-react-validator';
+
 import '../css/products.css';
 
 export default function Product() {
@@ -30,74 +32,74 @@ export default function Product() {
 
     }
 
-    const updateFormFieldArray = (event) => {
+    // const updateFormFieldArray = (event) => {
 
-        console.log("event.target.value", event)
-        console.log("called updateFormFieldArray function")
+    //     console.log("event.target.value", event)
+    //     console.log("called updateFormFieldArray function")
 
-        let findIndex = currentProductLayerSearch.smells.indexOf(parseInt(event.target.value))
+    //     let findIndex = currentProductLayerSearch.smells.indexOf(parseInt(event.target.value))
 
-        console.log("findIndex", findIndex)
+    //     console.log("findIndex", findIndex)
 
-        console.log("currentProductLayerSearch.smells", currentProductLayerSearch.smells)
-        let addToArray = [...currentProductLayerSearch.smells, parseInt(event.target.value)]
-        console.log("addToArray", addToArray)
-        if (findIndex === -1) {
-            changeProductLayerSearch({
-                ...currentProductLayerSearch,
-                [event.target.name]: addToArray
+    //     console.log("currentProductLayerSearch.smells", currentProductLayerSearch.smells)
+    //     let addToArray = [...currentProductLayerSearch.smells, parseInt(event.target.value)]
+    //     console.log("addToArray", addToArray)
+    //     if (findIndex === -1) {
+    //         changeProductLayerSearch({
+    //             ...currentProductLayerSearch,
+    //             [event.target.name]: addToArray
 
-            })
+    //         })
 
-        } else {
-            let removePrint = [...currentProductLayerSearch.smells.slice(0, findIndex),
-            ...currentProductLayerSearch.smells.slice(findIndex + 1)]
-            console.log("removePrint", removePrint)
+    //     } else {
+    //         let removePrint = [...currentProductLayerSearch.smells.slice(0, findIndex),
+    //         ...currentProductLayerSearch.smells.slice(findIndex + 1)]
+    //         console.log("removePrint", removePrint)
 
-            let a = [...currentProductLayerSearch.smells.slice(0, findIndex)]
-            console.log("a", a)
-
-
-            changeProductLayerSearch({
-                ...currentProductLayerSearch,
-                [event.target.name]: [...currentProductLayerSearch.smells.slice(0, parseInt(findIndex)),
-                ...currentProductLayerSearch.smells.slice(parseInt(findIndex) + 1)]
-
-            })
-
-        }
-
-        // if (!currentProductLayerSearch.smells.includes(event.target.value)) {
-        //     changeProductLayerSearch({
-        //         ...currentProductLayerSearch,
-        //         [event.target.name]: addToArray
-
-        //     })
-
-        // } else {
-        //     let removePrint = [...currentProductLayerSearch.smells.slice(0, findIndex),
-        //     ...currentProductLayerSearch.smells.slice(findIndex + 1)]
-        //     console.log("removePrint", removePrint)
-
-        //     let a = [...currentProductLayerSearch.smells.slice(0, findIndex)]
-        //     console.log("a", a)
+    //         let a = [...currentProductLayerSearch.smells.slice(0, findIndex)]
+    //         console.log("a", a)
 
 
-        //     changeProductLayerSearch({
-        //         ...currentProductLayerSearch,
-        //         [event.target.name]: [...currentProductLayerSearch.smells.slice(0, parseInt(findIndex)),
-        //         ...currentProductLayerSearch.smells.slice(parseInt(findIndex) + 1)]
+    //         changeProductLayerSearch({
+    //             ...currentProductLayerSearch,
+    //             [event.target.name]: [...currentProductLayerSearch.smells.slice(0, parseInt(findIndex)),
+    //             ...currentProductLayerSearch.smells.slice(parseInt(findIndex) + 1)]
 
-        //     })
+    //         })
 
-        // }
+    //     }
 
-        // changeProductLayerSearch({
-        //     ...currentProductLayerSearch,
-        //     [event.target.name]: event.target.value
-        // })
+    //     // if (!currentProductLayerSearch.smells.includes(event.target.value)) {
+    //     //     changeProductLayerSearch({
+    //     //         ...currentProductLayerSearch,
+    //     //         [event.target.name]: addToArray
 
-    }
+    //     //     })
+
+    //     // } else {
+    //     //     let removePrint = [...currentProductLayerSearch.smells.slice(0, findIndex),
+    //     //     ...currentProductLayerSearch.smells.slice(findIndex + 1)]
+    //     //     console.log("removePrint", removePrint)
+
+    //     //     let a = [...currentProductLayerSearch.smells.slice(0, findIndex)]
+    //     //     console.log("a", a)
+
+
+    //     //     changeProductLayerSearch({
+    //     //         ...currentProductLayerSearch,
+    //     //         [event.target.name]: [...currentProductLayerSearch.smells.slice(0, parseInt(findIndex)),
+    //     //         ...currentProductLayerSearch.smells.slice(parseInt(findIndex) + 1)]
+
+    //     //     })
+
+    //     // }
+
+    //     // changeProductLayerSearch({
+    //     //     ...currentProductLayerSearch,
+    //     //     [event.target.name]: event.target.value
+    //     // })
+
+    // }
 
     const updateFormFieldArray2 = (event) => {
         console.log(event.target.value)
@@ -149,6 +151,24 @@ export default function Product() {
         console.log("allSoapsUse", allSoapsUse)
     }
 
+    const allowValidator = useRef(new SimpleReactValidator());
+
+    const validateAndSendSearch = () => {
+
+        if (allowValidator.current.allValid()) {
+            alert("Search success.")
+            productContext.displaySearchProducts()
+        } else {
+            alert("Failed to search as wrong input entered")
+            console.log("entered failed search route")
+            allowValidator.current.showMessages();
+
+        }
+
+
+
+    }
+
 
     return (
         <React.Fragment>
@@ -166,6 +186,11 @@ export default function Product() {
                             value={currentProductLayerSearch.name}
                             onChange={updateFormField}
                         />
+                        <div className='products-error-message-style'>
+                            {allowValidator.current.message('Name', currentProductLayerSearch.name,
+                                'alpha')}
+
+                        </div>
 
                         <div className='mt-2'>
                             <label>Min Cost </label>
@@ -175,6 +200,11 @@ export default function Product() {
                                 value={currentProductLayerSearch.min_cost}
                                 onChange={updateFormField}
                             />
+                        </div>
+                        <div className='products-error-message-style'>
+                            {allowValidator.current.message('Min Cost', currentProductLayerSearch.min_cost,
+                                'numeric|min:0')}
+
                         </div>
 
                         <div className='mt-2'>
@@ -186,6 +216,12 @@ export default function Product() {
                                 onChange={updateFormField}
                             />
                         </div>
+
+                        <div className='products-error-message-style'>
+                            {allowValidator.current.message('Max Cost', currentProductLayerSearch.max_cost,
+                                'numeric|min:0')}
+
+                        </div>
                         <div className='mt-2'>
                             <label>Min width </label>
                             <input type="text"
@@ -194,6 +230,11 @@ export default function Product() {
                                 value={currentProductLayerSearch.min_width}
                                 onChange={updateFormField}
                             />
+                        </div>
+                        <div className='products-error-message-style'>
+                            {allowValidator.current.message('Min Width', currentProductLayerSearch.min_width,
+                                'numeric|min:0')}
+
                         </div>
 
                         <div className='mt-2'>
@@ -205,6 +246,11 @@ export default function Product() {
                                 onChange={updateFormField}
                             />
                         </div>
+                        <div className='products-error-message-style'>
+                            {allowValidator.current.message('Max Width', currentProductLayerSearch.max_width,
+                                'numeric|min:0')}
+
+                        </div>
 
                         <div className='mt-2'>
                             <label>Min height </label>
@@ -215,6 +261,11 @@ export default function Product() {
                                 onChange={updateFormField}
                             />
                         </div>
+                        <div className='products-error-message-style'>
+                            {allowValidator.current.message('Min Height', currentProductLayerSearch.min_height,
+                                'numeric|min:0')}
+
+                        </div>
 
                         <div className='mt-2'>
                             <label>Max height  </label>
@@ -224,6 +275,11 @@ export default function Product() {
                                 value={currentProductLayerSearch.max_height}
                                 onChange={updateFormField}
                             />
+                        </div>
+                        <div className='products-error-message-style'>
+                            {allowValidator.current.message('Max Height', currentProductLayerSearch.max_height,
+                                'numeric|min:0')}
+
                         </div>
 
 
@@ -262,7 +318,6 @@ export default function Product() {
                         </div>
 
 
-                        {/* QUESTION Need to debug why cannot unselect selected option. It becomes NAN and cannot read event.target.value */}
                         <div className='mt-2'>
                             <label>Smells </label>
 
@@ -304,7 +359,9 @@ export default function Product() {
 
                         <div id="div-for-search-buttons">
                             <button className='btn btn-success btn-sm'
-                                onClick={() => { productContext.displaySearchProducts() }}
+                                onClick={() => {
+                                    validateAndSendSearch()
+                                }}
                             >Enter Search</button>
 
                             <button className='btn btn-warning btn-sm ms-2'

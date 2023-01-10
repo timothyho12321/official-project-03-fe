@@ -43,17 +43,7 @@ export default function Register() {
     }
     const [value, setValue] = useState(0);
 
-    function makeForceUpdate() {
-
-        return () => setValue(value => value + 1);
-    }
-
-    const [render, setRender] = useState(false);
-
-    function makeForceUpdate2() {
-
-        setRender(!render)
-    }
+   
 
 
     const createUser = async () => {
@@ -71,15 +61,15 @@ export default function Register() {
         // }
 
 
-        if (simpleValidator.current.allValid()) {
+        if (allowValidator.current.allValid()) {
             const response = await sendRegister(userContext.registerInfo)
 
             setLoginButton(true);
         } else {
+            alert("Failed to create account as correct details are needed.")
             console.log("entered validator show message route")
-            simpleValidator.current.showMessages();
-            makeForceUpdate();
-            makeForceUpdate2();
+            allowValidator.current.showMessages();
+           
         }
 
 
@@ -114,7 +104,7 @@ export default function Register() {
     //     }
     // });
 
-    const simpleValidator = useRef(new SimpleReactValidator());
+    const allowValidator = useRef(new SimpleReactValidator());
 
     return (
 
@@ -133,7 +123,7 @@ export default function Register() {
                 {/* {validator.message('firstname', userContext.registerInfo.first_name,
                     'required|alpha')} */}
                 <div className='register-error-message-style'>
-                    {simpleValidator.current.message('First Name', userContext.registerInfo.first_name,
+                    {allowValidator.current.message('First Name', userContext.registerInfo.first_name,
                         'required|alpha')}
 
                 </div>
@@ -148,7 +138,7 @@ export default function Register() {
                     onChange={updateFormField2}
                 />
                 <div className='register-error-message-style'>
-                    {simpleValidator.current.message('Last Name', userContext.registerInfo.first_name,
+                    {allowValidator.current.message('Last Name', userContext.registerInfo.last_name,
                         'required|alpha')}
 
                 </div>
@@ -162,7 +152,7 @@ export default function Register() {
                     onChange={updateFormField2}
                 />
                 <div className='register-error-message-style'>
-                    {simpleValidator.current.message('Email', userContext.registerInfo.email,
+                    {allowValidator.current.message('Email', userContext.registerInfo.email,
                         'required|email')}
 
                 </div>
@@ -173,7 +163,7 @@ export default function Register() {
                     value={userContext.registerInfo.password}
                     name="password"
                     onChange={updateFormField2}
-                    placeholder="8 character, one special character and number"
+                    placeholder="Need one special character, one upper and number"
                 />
                 <div className='register-error-message-style'>
                     {/* {simpleValidator.current.message('Password', userContext.registerInfo.password,
@@ -188,7 +178,7 @@ export default function Register() {
 
 
 
-                    {simpleValidator.current.message('Password', userContext.registerInfo.password,
+                    {allowValidator.current.message('Password', userContext.registerInfo.password,
                         ['required',
                             'min:8',
                             { regex: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', `!`, `"`, '#', '$', '%', '&', `'`, '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', ']', '^', '_', '`', '{', '}', '|', '~'] }
@@ -222,10 +212,20 @@ export default function Register() {
 
                 {/* {simpleValidator.current.message('confirmPassword', userContext.registerInfo.password_confirm,
                     `regex:apple`)} */}
-                <div className='register-error-message-style'>
+                {/* <div className='register-error-message-style'>
                     {simpleValidator.current.message('confirmPassword', userContext.registerInfo.password_confirm,
                         `regex:${userContext.registerInfo.password}`)}
+                </div> */}
+                <div className='register-error-message-style'>
+                    {allowValidator.current.message('confirmPassword', userContext.registerInfo.password_confirm,
+                        ['required',
+                        
+                        { regex: `${userContext.registerInfo.password}`}
+                    ])}
                 </div>
+
+                
+
 
                 <label>Contact Number</label>
 
@@ -236,8 +236,8 @@ export default function Register() {
                     onChange={updateFormField2}
                 />
                 <div className='register-error-message-style'>
-                    {simpleValidator.current.message('Contact Number', userContext.registerInfo.contact_number,
-                        'numeric|min:8')}
+                    {allowValidator.current.message('Contact Number', userContext.registerInfo.contact_number,
+                        'required|numeric|min:8')}
                 </div>
 
                 {showLoginButton ?
