@@ -5,8 +5,8 @@ import UserContext from '../contexts/UserContext'
 
 export default function UsersProvider(props) {
 
-    const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us81.gitpod.io/api/accounts/"
-    // const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us80.gitpod.io/api/accounts/"
+    // const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us81.gitpod.io/api/accounts/"
+    const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us82.gitpod.io/api/accounts/"
 
     const [loginInfo, setLoginInfo] = useState({
         "email": "",
@@ -24,9 +24,21 @@ export default function UsersProvider(props) {
     })
 
 
-
+    const [interval, setStateInterval] = useState(false)
 
     const [tokens, saveTokens] = useState(null)
+
+    useEffect(() => {
+        console.log("useEffect happen")
+        if (!interval) {
+
+            console.log("no interval in state")
+            setStateInterval(true);
+        }
+
+
+    }, []
+    )
 
     const userContext = {
         loginInfo,
@@ -87,7 +99,7 @@ export default function UsersProvider(props) {
             }
 
             const startCountTime = Date.now()
-            const testTimeFive= 12* 60 * 60 * 1000 * 5
+            const testTimeFive = 12 * 60 * 60 * 1000 * 5
 
             // const fiveHourToMilli = 60 * 60 * 1000 * 5
             // console.log("fiveHourToMilli", fiveHourToMilli)
@@ -98,8 +110,11 @@ export default function UsersProvider(props) {
             const refreshTokenGetNew = async () => {
                 const getCurrentTime = Date.now()
 
+                const haveToken = JSON.parse(localStorage.getItem("currentUserTokens"))
+                console.log("refresh interval route", haveToken);
+
                 const hasTimeReached = getCurrentTime >= endTimeToRefresh;
-                if (hasTimeReached) {
+                if (hasTimeReached | !haveToken) {
                     alert("Your refresh token is expired. Please login again.")
 
                     clearInterval(timerIntervalForRefresh);
@@ -113,13 +128,13 @@ export default function UsersProvider(props) {
                     let returnNewAccessToken = await userContext.refreshToken();
 
                     console.log("refresh ran with return", returnNewAccessToken)
-                    console.log("no dot data",JSON.stringify(returnNewAccessToken))
-                    console.log("no stringify",returnNewAccessToken)
-                    
+                    console.log("no dot data", JSON.stringify(returnNewAccessToken))
+                    console.log("no stringify", returnNewAccessToken)
+
                     localStorage.removeItem('currentUserTokens');
 
                     localStorage.setItem('currentUserTokens', JSON.stringify(returnNewAccessToken))
-                   
+
 
                 }
 
@@ -128,11 +143,14 @@ export default function UsersProvider(props) {
             }
 
             const threeHourToMilli = 60 * 60 * 1000 * 3
-            const threeSecondToMilli = 1000 * 10
+            const threeSecondToMilli = 1000 * 5
             const timerIntervalForRefresh = setInterval(refreshTokenGetNew, threeSecondToMilli)
+            setStateInterval(true);
 
+            // if (!localStorage.getItem("refreshToken")) {
+            if (!localStorage.getItem("currentUserTokens")) {
 
-            if (!localStorage.getItem("refreshToken")) {
+                console.log("entered check localStorage route")
                 return null
             }
 
@@ -145,7 +163,7 @@ export default function UsersProvider(props) {
             try {
 
                 const haveToken = JSON.parse(localStorage.getItem("currentUserTokens"))
-                console.log("have Token", haveToken);
+                // console.log("have Token", haveToken);
 
 
                 const response = await axios.post(BASE_API_URL + "refresh",

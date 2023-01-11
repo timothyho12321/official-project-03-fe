@@ -13,8 +13,10 @@ export default function Variant() {
 
     const productContext = useContext(ProductContext)
     const cartContext = useContext(CartContext)
-    const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us81.gitpod.io/api/"
-    // const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us80.gitpod.io/api/"
+    // const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us81.gitpod.io/api/"
+    const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us82.gitpod.io/api/"
+    
+
 
     const [variants, setVariants] = useState([])
     const [variantId, setVarId] = useState()
@@ -55,7 +57,7 @@ export default function Variant() {
 
         //setVariants(emptyArray);
         setVariants(response.data);
-        setVarId(variants[0].id);
+        setVarId(variants[0]?.id);
 
         // setVarId(0);
         // console.log("see variant [0]",variants[0].image_url)

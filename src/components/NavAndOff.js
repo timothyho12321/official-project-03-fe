@@ -38,6 +38,13 @@ export default function NavAndOff() {
     const getCartFromProvider = cartContext.getCart
     const logoutInProvider = usersContext.logout
 
+    const getCartItemNumber = async () => {
+        console.log("entered route of getcartitemnumber")
+        let responseCartNum = await getCartFromProvider();
+        console.log("response in offcanvas DEBUG", responseCartNum);
+
+        // setCart(responseCart);
+    }
 
     const prepareCartOffCanvas = async () => {
         let responseCart = await getCartFromProvider();
@@ -96,20 +103,24 @@ export default function NavAndOff() {
 
     const userNavWelcome = () => {
 
-        const accountData = (localStorage.getItem("accountData"))
+        let accountData = (localStorage.getItem("accountData"))
 
-        
+        accountData = JSON.parse(accountData)
+
         //DEBUG WHY CANNOT READ INTO ARRAY 
-        // const firstName =accountData.loggedInAccount
+
+        const firstName = accountData?.loggedInAccount?.first_name
         // const firstName =accountData["loggedInAccount"]
-        
-        // const lastName =accountData.loggedInAccount.last_name
-        
+
+        const lastName = accountData?.loggedInAccount?.last_name
+
         console.log("accountData", accountData)
-        // console.log("firstName", firstName)
+        console.log("firstName", firstName)
         // console.log("lastName", lastName)
 
-        return accountData
+        const combinedFirstLast = firstName + " " + lastName
+
+        return combinedFirstLast
     }
 
 
@@ -121,9 +132,34 @@ export default function NavAndOff() {
                 <Container>
                     <Navbar.Brand href="#home">Soap Paradies</Navbar.Brand>
 
-                    <Navbar.Brand >Hi, User
-                        {userNavWelcome()}
-                        
+                    <Navbar.Brand >Hi, {userNavWelcome()}
+                        <div>
+                            <Button id="checkout-button"
+                                variant="info"
+                                onClick={() => {
+                                    handleShow();
+                                    prepareCartOffCanvas()
+
+                                }
+                                }
+                                className="me-2 btn-sm">
+                                Cart Checkout (
+                                    {getCartItemNumber}
+                                    )
+                            </Button>
+
+                            <Button id="logout-button"
+                                variant="info"
+                                className="btn-sm"
+                                onClick={() => {
+                                    handleShow();
+                                    logoutInProvider();
+                                }}
+                            >
+                                Logout account
+                            </Button>
+                        </div>
+
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
@@ -163,17 +199,7 @@ export default function NavAndOff() {
                             </Navbar.Text> */}
 
                             <>
-                                <Button id="checkout-button"
-                                    variant="info"
-                                    onClick={() => {
-                                        handleShow();
-                                        prepareCartOffCanvas()
 
-                                    }
-                                    }
-                                    className="me-2">
-                                    Cart Checkout
-                                </Button>
                                 <Offcanvas show={show} onHide={handleClose} placement="end">
                                     <Offcanvas.Header closeButton>
                                         <Offcanvas.Title>Your Cart Checkout</Offcanvas.Title>
@@ -196,16 +222,7 @@ export default function NavAndOff() {
                             </>
 
 
-                            <Button id="logout-button"
-                                variant="info"
-                                className="mt-2"
-                                onClick={() => {
-                                    handleShow();
-                                    logoutInProvider();
-                                }}
-                            >
-                                Logout account
-                            </Button>
+
 
 
                         </Nav>
