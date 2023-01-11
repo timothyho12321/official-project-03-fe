@@ -34,9 +34,38 @@ export default function NavAndOff() {
     const [cartFilled, setCartFilled] = useState(false)
 
     const [reload, setReload] = useState(false);
-
+    const [cartButtonNum, setCartButtonNum] = useState(0);
     const getCartFromProvider = cartContext.getCart
     const logoutInProvider = usersContext.logout
+
+
+    useEffect(
+        () => {
+            console.log("useEffect happen")
+
+            let numberForCartBox = 0;
+
+            async function fillInCartBox() {
+                console.log("entered the fillInCartBox route.")
+
+                console.log("numberForCartBox1", numberForCartBox)
+                let responseCartNum = await getCartFromProvider();
+                console.log("get cart for cartBox", responseCartNum);
+
+
+
+                // responseCartNum = JSON.parse(responseCartNum)
+                numberForCartBox = responseCartNum.length
+                console.log("numberForCartBox2", numberForCartBox)
+                setCartButtonNum(numberForCartBox);
+
+            }
+            fillInCartBox();
+        }, []
+
+
+    )
+
 
     const getCartItemNumber = async () => {
         console.log("entered route of getcartitemnumber")
@@ -132,35 +161,39 @@ export default function NavAndOff() {
                 <Container>
                     <Navbar.Brand href="#home">Soap Paradies</Navbar.Brand>
 
-                    <Navbar.Brand >Hi, {userNavWelcome()}
-                        <div>
-                            <Button id="checkout-button"
-                                variant="info"
-                                onClick={() => {
-                                    handleShow();
-                                    prepareCartOffCanvas()
+                    <span className="d-lg-none">
+                        <Navbar.Brand >Hi, {userNavWelcome()}
+                            <div>
+                                <Button id="checkout-button"
+                                    variant="info"
+                                    onClick={() => {
+                                        handleShow();
+                                        prepareCartOffCanvas()
 
-                                }
-                                }
-                                className="me-2 btn-sm">
-                                Cart Checkout (
-                                    {getCartItemNumber}
+                                    }
+                                    }
+                                    className="me-2 btn-sms">
+                                    Cart Checkout (
+                                    {cartButtonNum}
                                     )
-                            </Button>
+                                </Button>
 
-                            <Button id="logout-button"
-                                variant="info"
-                                className="btn-sm"
-                                onClick={() => {
-                                    handleShow();
-                                    logoutInProvider();
-                                }}
-                            >
-                                Logout account
-                            </Button>
-                        </div>
+                                <Button id="logout-button"
+                                    variant="info"
+                                    className="btn-sm"
+                                    onClick={() => {
+                                        handleShow();
+                                        logoutInProvider();
+                                    }}
+                                >
+                                    Logout account
+                                </Button>
+                            </div>
 
-                    </Navbar.Brand>
+                        </Navbar.Brand>
+
+                    </span>
+
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
 
