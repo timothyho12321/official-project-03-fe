@@ -18,6 +18,29 @@
     margin-left: 8px;
 }
 
+#nav-brand-at-back {
+    display: none;
+}
+
+#overall-position-nav{
+    position: relative;
+   
+}
+
+@media only screen and (min-width: 795px) {
+    
+    #nav-brand-at-front {
+        position:absolute;
+        /* display: inline; */
+        right: 21%;
+        height:100%;
+        top: 12%
+    }
+
+
+  }
+
+
 
 @media only screen and (min-width: 990px) {
     #nav-bar-text-home{
@@ -34,6 +57,14 @@
     
     #nav-bar-text-login{
         margin-left: 20px;
+    }
+
+    #nav-brand-at-back {
+        display: inline;
+        position:absolute;
+        /* display: inline; */
+        right: 5%;
+        top:0%
     }
 
 

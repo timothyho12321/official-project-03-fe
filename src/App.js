@@ -18,6 +18,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Register from "./pages/Register";
+import Orders from "./pages/Orders";
 
 
 
@@ -98,7 +99,7 @@ function App() {
           <Route path="/register" element={
 
             <UsersProvider>
-              <Register/>
+              <Register />
             </UsersProvider>
           }
           />
@@ -125,6 +126,15 @@ function App() {
           {/* Cancel URL route */}
           <Route path="/checkout/cancel" element={
             <Cancel />}
+          />
+
+          {/* Orders page */}
+          <Route path="/orders" element={
+
+            <UsersProvider>
+              <Orders/>
+            </UsersProvider>
+          }
           />
 
 

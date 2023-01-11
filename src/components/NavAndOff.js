@@ -35,6 +35,8 @@ export default function NavAndOff() {
 
     const [reload, setReload] = useState(false);
     const [cartButtonNum, setCartButtonNum] = useState(0);
+    const [firstName, setFirstName] = useState("Guest");
+    const [lastName, setLastName] = useState("New");
     const getCartFromProvider = cartContext.getCart
     const logoutInProvider = usersContext.logout
 
@@ -61,19 +63,41 @@ export default function NavAndOff() {
 
             }
             fillInCartBox();
-        }, []
 
+
+            // Setting firstname and lastname in state
+
+            let accountData = (localStorage.getItem("accountData"))
+
+            accountData = JSON.parse(accountData)
+
+            //DEBUG WHY CANNOT READ INTO ARRAY 
+
+            const takeFirstName = accountData?.loggedInAccount?.first_name
+            // const firstName =accountData["loggedInAccount"]
+
+            const takeLastName = accountData?.loggedInAccount?.last_name
+            if (takeFirstName) {
+                setFirstName(takeFirstName);
+            }
+            if (takeLastName) {
+                setLastName(takeLastName);
+            }
+
+
+
+        }, []
 
     )
 
 
-    const getCartItemNumber = async () => {
-        console.log("entered route of getcartitemnumber")
-        let responseCartNum = await getCartFromProvider();
-        console.log("response in offcanvas DEBUG", responseCartNum);
+    // const getCartItemNumber = async () => {
+    //     console.log("entered route of getcartitemnumber")
+    //     let responseCartNum = await getCartFromProvider();
+    //     console.log("response in offcanvas DEBUG", responseCartNum);
 
-        // setCart(responseCart);
-    }
+    //     setCart(responseCart);
+    // }
 
     const prepareCartOffCanvas = async () => {
         let responseCart = await getCartFromProvider();
@@ -156,112 +180,147 @@ export default function NavAndOff() {
     return (
         <React.Fragment>
 
+            <div id="overall-position-nav">
 
-            <Navbar bg="light" expand="lg">
-                <Container>
-                    <Navbar.Brand href="#home">Soap Paradies</Navbar.Brand>
+                <Navbar bg="light" expand="lg">
+                    <Container>
+                        <Navbar.Brand href="#home">Soap Paradies</Navbar.Brand>
 
-                    <span className="d-lg-none">
-                        <Navbar.Brand >Hi, {userNavWelcome()}
+                        <span id="nav-brand-at-front" className="d-lg-none">
                             <div>
-                                <Button id="checkout-button"
-                                    variant="info"
-                                    onClick={() => {
-                                        handleShow();
-                                        prepareCartOffCanvas()
+                                <Navbar.Text>
+                                    Hi, {firstName} {lastName}!
 
-                                    }
-                                    }
-                                    className="me-2 btn-sms">
-                                    Cart Checkout (
-                                    {cartButtonNum}
-                                    )
-                                </Button>
+                                    <div className="mt-2">
+                                        <Button id="checkout-button"
+                                            variant="info"
+                                            onClick={() => {
+                                                handleShow();
+                                                prepareCartOffCanvas()
 
-                                <Button id="logout-button"
-                                    variant="info"
-                                    className="btn-sm"
-                                    onClick={() => {
-                                        handleShow();
-                                        logoutInProvider();
-                                    }}
-                                >
-                                    Logout account
-                                </Button>
-                            </div>
-
-                        </Navbar.Brand>
-
-                    </span>
-
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-
-
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="me-auto">
-
-
-
-                            {/* <Nav.Link href="/about">About New</Nav.Link> */}
-
-                            <Nav.Link eventKey="link-1" as={Link} to='/'>
-                                Home New
-                            </Nav.Link>
-                            <Nav.Link eventKey="link-2" as={Link} to='/about'>
-                                About New
-                            </Nav.Link>
-                            <Nav.Link eventKey="link-2" as={Link} to='/products'>
-                                Product
-                            </Nav.Link>
-                            <Nav.Link eventKey="link-2" as={Link} to='/login'>
-                                Login
-                            </Nav.Link>
-
-
-                            {/* <Navbar.Text>
-                                <a id="nav-bar-text-home" href="/">Home</a>
-                            </Navbar.Text>
-                            <Navbar.Text>
-                                <a id="nav-bar-text-about" href="/about">About Us</a>
-                            </Navbar.Text>
-                            <Navbar.Text>
-                                <a id="nav-bar-text-products" href="/products">Products</a>
-                            </Navbar.Text>
-                            <Navbar.Text>
-                                <a id="nav-bar-text-login" href="/login">Login</a>
-                            </Navbar.Text> */}
-
-                            <>
-
-                                <Offcanvas show={show} onHide={handleClose} placement="end">
-                                    <Offcanvas.Header closeButton>
-                                        <Offcanvas.Title>Your Cart Checkout</Offcanvas.Title>
-                                    </Offcanvas.Header>
-                                    <Offcanvas.Body>
-
-                                        <Button variant="danger"
-                                            onClick=""
-                                        >
-                                            Button to test
+                                            }
+                                            }
+                                            className="me-2 btn-sm">
+                                            Cart Checkout (
+                                            {cartButtonNum}
+                                            )
                                         </Button>
 
-                                        {cartFilled ? displayCartItems() : <div>Loading cart</div>}
+                                        <Button id="logout-button"
+                                            variant="info"
+                                            className="btn-sm"
+                                            onClick={() => {
+                                                handleShow();
+                                                logoutInProvider();
+                                            }}
+                                        >
+                                            Logout account
+                                        </Button>
 
-                                        {cartFilled ? <a href="/checkout" className="btn btn-success btn-lg mt-3">Checkout Cart!</a>
-                                            : <a href="/login" className="btn btn-warning mt-3">Login to allow 'checkout'.</a>}
-
-                                    </Offcanvas.Body>
-                                </Offcanvas>
-                            </>
+                                    </div>
 
 
 
+                                </Navbar.Text>
+                            </div>
+                        </span>
+
+                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
 
-                        </Nav>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
+                        <Navbar.Collapse id="basic-navbar-nav">
+                            <Nav className="me-auto">
+
+
+
+                                {/* <Nav.Link href="/about">About New</Nav.Link> */}
+
+                                <Nav.Link eventKey="link-1" as={Link} to='/'>
+                                    Home New
+                                </Nav.Link>
+                                <Nav.Link eventKey="link-2" as={Link} to='/about'>
+                                    About New
+                                </Nav.Link>
+                                <Nav.Link eventKey="link-2" as={Link} to='/products'>
+                                    Product
+                                </Nav.Link>
+                                <Nav.Link eventKey="link-2" as={Link} to='/login'>
+                                    Login
+                                </Nav.Link>
+                                <Nav.Link eventKey="link-2" as={Link} to='/orders'>
+                                    Orders
+                                </Nav.Link>
+
+
+                                <span id="nav-brand-at-back">
+                                    <Navbar.Text >Hi, {firstName} {lastName}!
+
+                                        <div>
+                                            <Button id="checkout-button"
+                                                variant="info"
+                                                onClick={() => {
+                                                    handleShow();
+                                                    prepareCartOffCanvas()
+
+                                                }
+                                                }
+                                                className="me-2 btn-sm">
+                                                Cart Checkout (
+                                                {cartButtonNum}
+                                                )
+                                            </Button>
+
+                                            <Button id="logout-button"
+                                                variant="info"
+                                                className="btn-sm"
+                                                onClick={() => {
+                                                    handleShow();
+                                                    logoutInProvider();
+                                                }}
+                                            >
+                                                Logout account
+                                            </Button>
+                                        </div>
+
+                                    </Navbar.Text>
+
+                                </span>
+
+                                <>
+
+                                    <Offcanvas show={show} onHide={handleClose} placement="end">
+                                        <Offcanvas.Header closeButton>
+                                            <Offcanvas.Title>Your Cart Checkout</Offcanvas.Title>
+                                        </Offcanvas.Header>
+                                        <Offcanvas.Body>
+
+                                            <Button variant="danger"
+                                                onClick=""
+                                            >
+                                                Button to test
+                                            </Button>
+
+                                            {cartFilled ? displayCartItems() : <div>Loading cart</div>}
+
+                                            {cartFilled ? <a href="/checkout" className="btn btn-success btn-lg mt-3">Checkout Cart!</a>
+                                                : <a href="/login" className="btn btn-warning mt-3">Login to allow 'checkout'.</a>}
+
+                                        </Offcanvas.Body>
+                                    </Offcanvas>
+                                </>
+
+
+
+
+
+                            </Nav>
+                        </Navbar.Collapse>
+                    </Container>
+                </Navbar>
+
+            </div>
+
+
 
 
 
