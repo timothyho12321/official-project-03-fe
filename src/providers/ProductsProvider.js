@@ -5,8 +5,8 @@ import ProductContext from '../contexts/ProductContext';
 
 export default function ProductsProvider(props) {
 
-    const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us81.gitpod.io/"
-    // const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us82.gitpod.io/"
+    // const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us81.gitpod.io/"
+    const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us82.gitpod.io/"
     
     const [soaps, setSoaps] = useState([]);
 

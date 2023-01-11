@@ -20,6 +20,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import Register from "./pages/Register";
 import Orders from "./pages/Orders";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 // import './App.css';
@@ -30,6 +32,8 @@ function App() {
   return (
 
     <div className="App">
+
+
 
       <Router>
 
@@ -58,6 +62,8 @@ function App() {
         </Navbar> */}
 
         <Routes>
+
+
           {/* Home route */}
           <Route path="/" element={<Home />
           } />
@@ -132,7 +138,7 @@ function App() {
           <Route path="/orders" element={
 
             <UsersProvider>
-              <Orders/>
+              <Orders />
             </UsersProvider>
           }
           />
@@ -144,10 +150,7 @@ function App() {
         </Routes>
       </Router>
 
-
-
-
-
+      <ToastContainer />
 
     </div>
   );

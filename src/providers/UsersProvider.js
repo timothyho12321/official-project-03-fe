@@ -5,8 +5,8 @@ import UserContext from '../contexts/UserContext'
 
 export default function UsersProvider(props) {
 
-    const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us81.gitpod.io/api/accounts/"
-    // const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us82.gitpod.io/api/accounts/"
+    // const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us81.gitpod.io/api/accounts/"
+    const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us82.gitpod.io/api/accounts/"
 
     const [loginInfo, setLoginInfo] = useState({
         "email": "",
@@ -27,17 +27,25 @@ export default function UsersProvider(props) {
 
     const [tokens, saveTokens] = useState(null)
 
-    // useEffect(() => {
-    //     console.log("useEffect happen")
-    //     if (!interval) {
+    useEffect(() => {
+        console.log("useEffect happen")
+        if (!interval) {
 
-    //         console.log("no interval in state")
-    //         setStateInterval(true);
-    //     }
+            console.log("no interval in state")
+            
 
 
-    // }, []
-    // )
+            // when user is logged in. check local storage
+            // setStateInterval(true);
+
+
+            // make API Call
+
+        }
+
+
+    }, []
+    )
 
     const userContext = {
         loginInfo,
@@ -144,7 +152,8 @@ export default function UsersProvider(props) {
             const threeHourToMilli = 60 * 60 * 1000 * 3
             const threeSecondToMilli = 1000 * 5
             // const timerIntervalForRefresh = setInterval(refreshTokenGetNew, threeSecondToMilli)
-            const timerIntervalForRefresh = setInterval(refreshTokenGetNew, threeHourToMilli)
+            
+            const timerIntervalForRefresh = setInterval(refreshTokenGetNew, threeSecondToMilli)
             
             setStateInterval(true);
 
@@ -155,7 +164,7 @@ export default function UsersProvider(props) {
                 return null
             }
 
-            timerIntervalForRefresh()
+            // timerIntervalForRefresh()
 
         },
 

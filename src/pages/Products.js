@@ -5,6 +5,8 @@ import ProductContext from '../contexts/ProductContext'
 import SimpleReactValidator from 'simple-react-validator';
 
 import '../css/products.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Product() {
 
@@ -153,10 +155,25 @@ export default function Product() {
 
     const allowValidator = useRef(new SimpleReactValidator());
 
+
+    // const notifySearch = () => toast("Search sent!");
+
+    const notifySearch = () => toast.success(' Searching...', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        });
     const validateAndSendSearch = () => {
 
         if (allowValidator.current.allValid()) {
-            alert("Search success.")
+            
+            notifySearch()
+
             productContext.displaySearchProducts()
         } else {
             alert("Failed to search as wrong input entered")
@@ -356,7 +373,19 @@ export default function Product() {
 
 
 
-
+                        {/* <ToastContainer /> */}
+                        {/* <ToastContainer
+                            position="top-right"
+                            autoClose={5000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                            theme="colored"
+                        /> */}
                         <div id="div-for-search-buttons">
                             <button className='btn btn-success btn-sm'
                                 onClick={() => {
