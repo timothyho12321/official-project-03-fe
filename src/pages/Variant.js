@@ -9,6 +9,10 @@ import CartContext from '../contexts/CartContext';
 import context from 'react-bootstrap/esm/AccordionContext';
 import Slider from "react-slick";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 export default function Variant() {
 
     const productContext = useContext(ProductContext)
@@ -69,6 +73,16 @@ export default function Variant() {
         return response.data;
     }
 
+    const failLoginMsg = () => toast.warning('Please login to add to cart.', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+    });
 
     const returnUrlWithVariantId = () => {
 
@@ -151,7 +165,8 @@ export default function Variant() {
         console.log("haveAccount", haveAccount)
 
         if (!haveAccount) {
-            alert("Please login.")
+            // alert("Please login.")
+            failLoginMsg();
             console.log("Ask user to login.")
             navigateTo('/login')
         } else {

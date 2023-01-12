@@ -46,20 +46,29 @@ export default function NavAndOff() {
             console.log("useEffect happen")
 
             let numberForCartBox = 0;
+            setCartButtonNum(numberForCartBox);
 
             async function fillInCartBox() {
-                console.log("entered the fillInCartBox route.")
 
-                console.log("numberForCartBox1", numberForCartBox)
-                let responseCartNum = await getCartFromProvider();
-                console.log("get cart for cartBox", responseCartNum);
+                const haveToken = JSON.parse(localStorage.getItem("currentUserTokens"))
+
+                if (haveToken) {
+                    console.log("entered the fillInCartBox route.")
+
+                    console.log("numberForCartBox1", numberForCartBox)
+                    let responseCartNum = await getCartFromProvider();
+                    console.log("get cart for cartBox", responseCartNum);
 
 
 
-                // responseCartNum = JSON.parse(responseCartNum)
-                numberForCartBox = responseCartNum.length
-                console.log("numberForCartBox2", numberForCartBox)
-                setCartButtonNum(numberForCartBox);
+                    // responseCartNum = JSON.parse(responseCartNum)
+                    numberForCartBox = responseCartNum?.length
+                    console.log("numberForCartBox2", numberForCartBox)
+                    setCartButtonNum(numberForCartBox);
+
+                }
+
+
 
             }
             fillInCartBox();

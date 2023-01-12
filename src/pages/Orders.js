@@ -26,7 +26,7 @@ export default function Orders() {
                     Authorization: `Bearer ${haveToken.accessToken}`
                 }
             })
-            // console.log("response", response.data)
+            console.log("response", response.data)
             setOrders(response.data)
         }
 
@@ -44,20 +44,38 @@ export default function Orders() {
     return (
 
         <React.Fragment>
-            <h2>Orders page</h2>
+            <h2 className='ms-2 mt-2'>Orders page</h2>
 
-            <Table bordered>
+            <Table bordered responsive variant='danger' striped>
                 <thead>
                     <tr>
-                        <td>
-                            id
-                        </td>
-                        <td>
-                            Account Id
-                        </td>
-                        <td>
+                        <th>
+                            Order Id
+                        </th>
+                        <th>
+                            First Name
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                        <th>
+                            Payment Type
+                        </th>
+                        <th>
                             Total Cost
-                        </td>
+                        </th>
+                        <th>
+                            Order Status
+                        </th>
+                        <th>
+                            Receipt Info.
+                        </th>
+                        <th>
+                            Order Date
+                        </th>
+                        <th>
+                            Delivery Date
+                        </th>
                     </tr>
                 </thead>
 
@@ -69,10 +87,28 @@ export default function Orders() {
                                 {o.id}
                             </td>
                             <td>
-                                {o.account_id}
+                                {o.account.first_name}
+                            </td>
+                            <td>
+                                {o.account.email}
+                            </td>
+                            <td>
+                                {o.payment_type}
                             </td>
                             <td>
                                 {o.total_cost}
+                            </td>
+                            <td>
+                                {o.order_status.status}
+                            </td>
+                            <td>
+                                <a href={o.receipt_url}>Link</a>
+                            </td>
+                            <td>
+                                {o.order_date.slice(0,10)}
+                            </td>
+                            <td>
+                                {o.delivery_date.slice(0,10)}
                             </td>
                         </tr>
                     )

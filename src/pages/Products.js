@@ -167,17 +167,32 @@ export default function Product() {
         draggable: true,
         progress: undefined,
         theme: "colored",
-        });
+    });
+
+    const notifyWrongSearch = () => toast.error('Wrong input types entered for search.', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+    });
+
     const validateAndSendSearch = () => {
 
         if (allowValidator.current.allValid()) {
-            
+
             notifySearch()
 
             productContext.displaySearchProducts()
         } else {
-            alert("Failed to search as wrong input entered")
-            console.log("entered failed search route")
+
+
+            // alert("Failed to search as wrong input entered")
+            notifyWrongSearch()
+            // console.log("entered failed search route")
             allowValidator.current.showMessages();
 
         }

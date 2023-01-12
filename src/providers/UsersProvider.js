@@ -3,6 +3,11 @@ import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import UserContext from '../contexts/UserContext'
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
+
 export default function UsersProvider(props) {
 
     // const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us81.gitpod.io/api/accounts/"
@@ -27,21 +32,101 @@ export default function UsersProvider(props) {
 
     const [tokens, saveTokens] = useState(null)
 
+
+    const successLoginMsg = () => toast.success('Login success. Welcome!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+    });
+
     useEffect(() => {
         console.log("useEffect happen")
-        if (!interval) {
+        // if (!interval) {
+
+        //  console.log("no interval in state")
+
+        //     // when user is logged in. check local storage
+        //     // setStateInterval(true);
+
+        //     // make API Call
+
+        // }
+
+        const haveToken = JSON.parse(localStorage.getItem("currentUserTokens"))
+        if (haveToken) {
 
             console.log("no interval in state")
-            
 
-
-            // when user is logged in. check local storage
             // setStateInterval(true);
 
+            // make API Call to resend new accesstoken 
 
-            // make API Call
+            const startCountTime = Date.now()
+            const testTimeFive = 12 * 60 * 60 * 1000 * 5
+
+            // const fiveHourToMilli = 60 * 60 * 1000 * 5
+            // console.log("fiveHourToMilli", fiveHourToMilli)
+
+            // let endTimeToRefresh = startCountTime + fiveHourToMilli
+            let endTimeToRefresh = startCountTime + testTimeFive
+
+            const refreshTokenGetNew = async () => {
+                const getCurrentTime = Date.now()
+
+                const haveToken = JSON.parse(localStorage.getItem("currentUserTokens"))
+                console.log("refresh interval route", haveToken);
+
+                const hasTimeReached = getCurrentTime >= endTimeToRefresh;
+                if (hasTimeReached | !haveToken) {
+                    alert("Your refresh token is expired. Please login again.")
+
+                    clearInterval(timerIntervalForRefresh);
+
+                } else {
+
+                    // call refresh token route
+                    // refresh token must still exist in local storage
+
+
+                    let returnNewAccessToken = await userContext.refreshToken();
+
+                    console.log("refresh ran with return", returnNewAccessToken)
+                    console.log("no dot data", JSON.stringify(returnNewAccessToken))
+                    console.log("no stringify", returnNewAccessToken)
+
+                    localStorage.removeItem('currentUserTokens');
+
+                    localStorage.setItem('currentUserTokens', JSON.stringify(returnNewAccessToken))
+
+
+                }
+
+
+
+            }
+
+            const threeHourToMilli = 60 * 60 * 1000 * 3
+            const threeSecondToMilli = 1000 * 5
+            const timerIntervalForRefresh = setInterval(refreshTokenGetNew, threeHourToMilli)
+
+            // const timerIntervalForRefresh = setInterval(refreshTokenGetNew, threeSecondToMilli)
+
+            setStateInterval(true);
+
+            // if (!localStorage.getItem("refreshToken")) {
+            if (!localStorage.getItem("currentUserTokens")) {
+
+                console.log("entered check localStorage route")
+                return null
+            }
 
         }
+
 
 
     }, []
@@ -90,8 +175,8 @@ export default function UsersProvider(props) {
                     'password': ''
                 })
 
-                alert("You are logged in. Good to see you!")
-
+                // alert("You are logged in. Good to see you!")
+                successLoginMsg();
 
 
                 // toast.success('Welcome back!', {
@@ -151,10 +236,10 @@ export default function UsersProvider(props) {
 
             const threeHourToMilli = 60 * 60 * 1000 * 3
             const threeSecondToMilli = 1000 * 5
+            const timerIntervalForRefresh = setInterval(refreshTokenGetNew, threeHourToMilli)
+
             // const timerIntervalForRefresh = setInterval(refreshTokenGetNew, threeSecondToMilli)
-            
-            const timerIntervalForRefresh = setInterval(refreshTokenGetNew, threeSecondToMilli)
-            
+
             setStateInterval(true);
 
             // if (!localStorage.getItem("refreshToken")) {
@@ -237,7 +322,7 @@ export default function UsersProvider(props) {
                 "contact_number": ""
             })
 
-            alert("You have completed signing up for the account. Please login.")
+            // alert("You have completed signing up for the account. Please login.")
 
 
 

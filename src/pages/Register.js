@@ -7,6 +7,9 @@ import { Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
 import SimpleReactValidator from 'simple-react-validator';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import '../css/register.css'
 
 export default function Register() {
@@ -20,6 +23,7 @@ export default function Register() {
     const navigateTo = useNavigate();
 
     const [showLoginButton, setLoginButton] = useState(false);
+    const [registerInProcess, setRegisterInProcess] = useState(false);
 
     const updateFormField = (event) => {
         updateUserLayerLogin(
@@ -38,13 +42,38 @@ export default function Register() {
                 [event.target.name]: event.target.value
             }
         )
-        console.log(userContext.registerInfo)
-
+        // console.log(userContext.registerInfo)
+        setRegisterInProcess(true)
     }
+
     const [value, setValue] = useState(0);
 
-   
+    // const useForceUpdate = ()=> {
 
+    //    setValue(value => value + 1); 
+    // }
+
+    const failCreateMsg = () => toast.error('Wrong input details entered. Failed to create account.', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+    });
+
+    const successCreateMsg = () => toast.success('Your account is created. Go to login page and enter.', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+    });
 
     const createUser = async () => {
 
@@ -60,17 +89,27 @@ export default function Register() {
         //     makeForceUpdate2();
         // }
 
+        if (registerInProcess) {
+            if (allowValidator.current.allValid()) {
+                const response = await sendRegister(userContext.registerInfo)
+                successCreateMsg();
+                setLoginButton(true);
+                setRegisterInProcess(false)
+            } else {
+                // alert("Failed to create account as correct details are needed.")
+                console.log("entered validator show message route")
+                failCreateMsg();
+                allowValidator.current.showMessages();
+                setRegisterInProcess(false)
+                // setValue(value => value + 1); 
+            }
 
-        if (allowValidator.current.allValid()) {
-            const response = await sendRegister(userContext.registerInfo)
-
-            setLoginButton(true);
         } else {
-            alert("Failed to create account as correct details are needed.")
-            console.log("entered validator show message route")
-            allowValidator.current.showMessages();
-           
+            console.log("registerinprocess is false. should not show error message")
+            setRegisterInProcess(false)
         }
+
+
 
 
         // if(res){
@@ -219,12 +258,12 @@ export default function Register() {
                 <div className='register-error-message-style'>
                     {allowValidator.current.message('confirmPassword', userContext.registerInfo.password_confirm,
                         ['required',
-                        
-                        { regex: `${userContext.registerInfo.password}`}
-                    ])}
+
+                            { regex: `${userContext.registerInfo.password}` }
+                        ])}
                 </div>
 
-                
+
 
 
                 <label>Contact Number</label>
