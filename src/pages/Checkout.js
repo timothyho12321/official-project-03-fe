@@ -19,7 +19,7 @@ export default function CheckOut() {
                 let publishableKey = null
                 const stripeResponse = await cartContext.checkoutCart()
                 if (!stripeResponse) {
-                    navigateTo("/about")
+                    navigateTo("/products")
                     return;
                 } else {
                     publishableKey = stripeResponse.publishableKey

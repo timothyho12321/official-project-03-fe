@@ -30,6 +30,7 @@ export default function CartProvider(props) {
         progress: undefined,
         theme: "colored",
     });
+
     const failCartCheckMsg = () => toast.warning('Please add items to checkout cart.', {
         position: "top-right",
         autoClose: 5000,
@@ -205,6 +206,9 @@ export default function CartProvider(props) {
 
 
                     // alert("Unable to checkout as cart is empty. Please add some item to cart.")
+                    console.log("ran the route for nothing in checkout cart.")
+                    
+                    //QUESTION why does it run twice?
                     failCartCheckMsg();
                 } else {
 

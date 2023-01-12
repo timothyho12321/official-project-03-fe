@@ -13,11 +13,17 @@ import Product from "../pages/Products";
 import UsersProvider from "../providers/UsersProvider";
 import Login from "../pages/Login";
 import '../css/nav_and_off.css';
-import { Button, ListGroup } from "react-bootstrap";
+
 import CartContext from "../contexts/CartContext";
 import ProductContext from "../contexts/ProductContext";
 import EachCartProduct from "./EachCartProduct";
 import UserContext from "../contexts/UserContext";
+
+import { Button, ListGroup } from "react-bootstrap";
+import { Cart2 } from 'react-bootstrap-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
 export default function NavAndOff() {
 
@@ -209,21 +215,20 @@ export default function NavAndOff() {
 
                                             }
                                             }
-                                            className="me-2 btn-sm">
-                                            Cart Checkout (
-                                            {cartButtonNum}
-                                            )
+                                            className="btn-sm">
+
+                                            <Cart2 className="mb-1"></Cart2> ({cartButtonNum})
                                         </Button>
 
                                         <Button id="logout-button"
-                                            variant="info"
-                                            className="btn-sm"
+                                            variant="warning"
+                                            className="ms-2 btn-sm"
                                             onClick={() => {
-                                                handleShow();
+                                                // handleShow();
                                                 logoutInProvider();
                                             }}
                                         >
-                                            Logout account
+                                            <FontAwesomeIcon icon={faRightFromBracket} />
                                         </Button>
 
                                     </div>

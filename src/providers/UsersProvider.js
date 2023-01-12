@@ -44,6 +44,17 @@ export default function UsersProvider(props) {
         theme: "colored",
     });
 
+    const successLogoutMsg = () => toast.success('Logged out. See you again!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+    });
+
     useEffect(() => {
         console.log("useEffect happen")
         // if (!interval) {
@@ -296,6 +307,8 @@ export default function UsersProvider(props) {
 
                 localStorage.removeItem("currentUserTokens");
                 localStorage.removeItem("accountData");
+
+                successLogoutMsg();
 
             } catch (e) {
                 console.log(e)
