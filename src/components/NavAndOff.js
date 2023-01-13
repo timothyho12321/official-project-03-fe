@@ -200,7 +200,8 @@ export default function NavAndOff() {
                 <Navbar bg="light" expand="lg">
                     <Container>
                         
-                            <Navbar.Brand href="#home">Soap Paradies</Navbar.Brand>
+                            <Navbar.Brand href="#home">
+                                <img src="/soap-icon-192x192.png" id="soap-icon-style" alt="soap-icon"/> Soap Paradies</Navbar.Brand>
 
                             <span id="nav-brand-at-front" >
                                 <div>
