@@ -1,3 +1,13 @@
+#nav-style{
+    background-color: #d2bbb133;
+}
+
+#nav-title-style{
+    color: #c34421;
+    font-family: 'EB Garamond', serif;
+    font-weight: 600;
+}
+
 #nav-bar-text-home {
     text-decoration: none;
 }
@@ -16,6 +26,13 @@
 
 #checkout-button {
     margin-left: 8px;
+    background-color:#87726c;
+    color:white
+}
+
+#logout-button {
+   
+    background-color:#d2bbb18d;
 }
 
 #nav-brand-at-back {

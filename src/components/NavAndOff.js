@@ -197,61 +197,22 @@ export default function NavAndOff() {
 
             <div id="overall-position-nav">
 
-                <Navbar bg="light" expand="lg">
+                {/* <Navbar bg="light" expand="lg"> */}
+                <Navbar id="nav-style" expand="lg">
                     <Container>
-                        
-                            <Navbar.Brand href="#home">
-                                <img src="/soap-icon-192x192.png" id="soap-icon-style" alt="soap-icon"/> Soap Paradies</Navbar.Brand>
 
-                            <span id="nav-brand-at-front" >
-                                <div>
-                                    <Navbar.Text>
-                                        Hi, {firstName} {lastName}!
+                        <Navbar.Brand href="/" id="nav-title-style">
+                            <img src="/soap-icon-192x192.png" id="soap-icon-style" alt="soap-icon" /> Soap Paradies
+                        </Navbar.Brand>
 
-                                        <div className="mt-2">
-                                            <Button id="checkout-button"
-                                                variant="info"
-                                                onClick={() => {
-                                                    handleShow();
-                                                    prepareCartOffCanvas()
+                        <span id="nav-brand-at-front" >
+                            <div>
+                                <Navbar.Text>
+                                    Hi, {firstName} {lastName}!
 
-                                                }
-                                                }
-                                                className="btn-sm">
-
-                                                <Cart2 className="mb-1"></Cart2> ({cartButtonNum})
-                                            </Button>
-
-                                            <Button id="logout-button"
-                                                variant="warning"
-                                                className="ms-2 btn-sm"
-                                                onClick={() => {
-                                                    // handleShow();
-                                                    logoutInProvider();
-                                                }}
-                                            >
-                                                <FontAwesomeIcon icon={faRightFromBracket} />
-                                            </Button>
-
-                                        </div>
-
-
-
-                                    </Navbar.Text>
-                                </div>
-                            </span>
-
-                            {/* QUESTION When nav is collapsed the user login will fall 25% as well how to keep it in nav */}
-                            <span id="nav-brand-at-front-2"
-                                className="d-flex-end"
-                            >
-                                <div>
-                                    <Navbar.Text>
-                                        Hi2, {firstName} {lastName}!
-
-
+                                    <div className="mt-2">
                                         <Button id="checkout-button"
-                                            variant="info"
+                                            variant="light"
                                             onClick={() => {
                                                 handleShow();
                                                 prepareCartOffCanvas()
@@ -264,7 +225,7 @@ export default function NavAndOff() {
                                         </Button>
 
                                         <Button id="logout-button"
-                                            variant="warning"
+                                            variant="light"
                                             className="ms-2 btn-sm"
                                             onClick={() => {
                                                 // handleShow();
@@ -274,14 +235,55 @@ export default function NavAndOff() {
                                             <FontAwesomeIcon icon={faRightFromBracket} />
                                         </Button>
 
+                                    </div>
+
+
+
+                                </Navbar.Text>
+                            </div>
+                        </span>
+
+                        {/* QUESTION When nav is collapsed the user login will fall 25% as well how to keep it in nav */}
+                        <span id="nav-brand-at-front-2"
+                            className="d-flex-end"
+                        >
+                            <div>
+                                <Navbar.Text>
+                                    Hi2, {firstName} {lastName}!
+
+
+                                    <Button id="checkout-button"
+                                        variant="light"
+                                        onClick={() => {
+                                            handleShow();
+                                            prepareCartOffCanvas()
+
+                                        }
+                                        }
+                                        className="btn-sm">
+
+                                        <Cart2 className="mb-1"></Cart2> ({cartButtonNum})
+                                    </Button>
+
+                                    <Button id="logout-button"
+                                        variant="light"
+                                        className="ms-2 btn-sm"
+                                        onClick={() => {
+                                            // handleShow();
+                                            logoutInProvider();
+                                        }}
+                                    >
+                                        <FontAwesomeIcon icon={faRightFromBracket} />
+                                    </Button>
 
 
 
 
-                                    </Navbar.Text>
-                                </div>
-                            </span>
-                        
+
+                                </Navbar.Text>
+                            </div>
+                        </span>
+
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
 
@@ -293,10 +295,10 @@ export default function NavAndOff() {
                                 {/* <Nav.Link href="/about">About New</Nav.Link> */}
 
                                 <Nav.Link eventKey="link-1" as={Link} to='/'>
-                                    Home New
+                                    Home
                                 </Nav.Link>
                                 <Nav.Link eventKey="link-2" as={Link} to='/about'>
-                                    About New
+                                    About
                                 </Nav.Link>
                                 <Nav.Link eventKey="link-2" as={Link} to='/products'>
                                     Product
@@ -315,7 +317,7 @@ export default function NavAndOff() {
 
 
                                             <Button id="checkout-button"
-                                                variant="info"
+                                                variant="light"
                                                 onClick={() => {
                                                     handleShow();
                                                     prepareCartOffCanvas()
@@ -325,7 +327,7 @@ export default function NavAndOff() {
                                                 className="me-2 btn-sm">
                                                 <Cart2 className="mb-1"></Cart2> ({cartButtonNum})                                       </Button>
                                             <Button id="logout-button"
-                                                variant="warning"
+                                                variant="light"
                                                 className="btn-sm"
                                                 onClick={() => {
                                                     handleShow();

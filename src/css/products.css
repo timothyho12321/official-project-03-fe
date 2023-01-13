@@ -3,7 +3,11 @@
 
     color: black
 } */
+#product-header-style{
 
+    font-family: 'EB Garamond', serif;
+    font-weight: 600;
+}
 
 #soap-card {
     border: 0px !important;
@@ -15,7 +19,21 @@
 
 #div-for-search-buttons{
     margin-top: 10px;
+
 }
+
+
+#enter-search-btn-style{
+    background-color:#d2bbb18d;
+
+}
+
+#reset-search-btn-style{
+    background-color:#87726c;
+    color:white
+
+}
+
 
 .products-error-message-style{
     color: red;

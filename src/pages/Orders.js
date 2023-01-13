@@ -5,6 +5,8 @@ import axios from 'axios'
 import { Button, Table } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 
+import '../css/orders.css'
+
 export default function Orders() {
 
     // const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us81.gitpod.io/api/orders/"
@@ -44,9 +46,9 @@ export default function Orders() {
     return (
 
         <React.Fragment>
-            <h2 className='ms-2 mt-2'>Orders page</h2>
+            <h1 className='ms-2 mt-2' id="orders-header-style">Orders</h1>
 
-            <Table bordered responsive variant='danger' striped>
+            <Table id="table-style" bordered responsive  striped>
                 <thead>
                     <tr>
                         <th>
