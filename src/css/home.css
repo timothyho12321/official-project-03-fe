@@ -1,0 +1,28 @@
+#set-background-img-main {
+
+    background-image: url("https://images.pexels.com/photos/6187525/pexels-photo-6187525.jpeg?auto=compress&cs=tinysrgb&w=800");
+    background-size: cover;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    /* border: 3px solid black; */
+    height: 100vh;
+    width: 100vw
+}
+
+
+
+@media only screen and (min-width: 620px) {
+
+    #set-background-img-main {
+
+        /* background-color: orange; */
+        background-image: url("https://images.pexels.com/photos/7814880/pexels-photo-7814880.jpeg?auto=compress&cs=tinysrgb&w=800");
+        background-size: cover;
+        background-repeat: no-repeat;
+        object-fit: cover;
+        /* border: 3px solid black; */
+        height: 100vh;
+        width: 100vw;
+    }
+
+}

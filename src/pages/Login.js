@@ -4,12 +4,14 @@ import React, { useState, useEffect, useRef, useContext } from 'react'
 import axios from 'axios'
 import UserContext from '../contexts/UserContext'
 import { Button } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 
 export default function Login() {
 
     const userContext = useContext(UserContext)
     const updateUserLayerLogin = userContext.setLoginInfo
     const sendLogin = userContext.login;
+    const navigateTo = useNavigate();
 
     const updateFormField = (event) => {
         updateUserLayerLogin(
@@ -32,6 +34,10 @@ export default function Login() {
         // else{
         //     navigate("/register")
         // }
+    }
+
+    const registerUser = () => {
+        navigateTo("/register")
     }
 
 
@@ -60,6 +66,13 @@ export default function Login() {
                     onClick={loginUser}
                 >
                     Login</Button>
+
+
+                <Button variant="warning"
+                    className='ms-2'
+                    onClick={registerUser}
+                >
+                    New? Register</Button>
 
             </div>
 

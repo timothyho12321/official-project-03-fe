@@ -7,14 +7,21 @@ import CartProvider from "./providers/CartProvider";
 import UsersProvider from "./providers/UsersProvider";
 import NavAndOff from "./components/NavAndOff";
 import Login from "./pages/Login";
+import ProductsProvider from "./providers/ProductsProvider";
+import CheckOut from "./pages/Checkout";
+import Success from "./pages/Success";
+import Cancel from "./pages/Cancel";
 
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import ProductsProvider from "./providers/ProductsProvider";
+import Register from "./pages/Register";
+import Orders from "./pages/Orders";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 // import './App.css';
@@ -26,8 +33,12 @@ function App() {
 
     <div className="App">
 
+
+
       <Router>
 
+
+        {/* Navbar and Offcanvas Checkout Cart */}
         <UsersProvider>
           <CartProvider>
             <NavAndOff />
@@ -51,6 +62,8 @@ function App() {
         </Navbar> */}
 
         <Routes>
+
+
           {/* Home route */}
           <Route path="/" element={<Home />
           } />
@@ -84,20 +97,60 @@ function App() {
 
             <UsersProvider>
               <Login />
-
             </UsersProvider>
-
           }
           />
+
+          {/* Register page */}
+          <Route path="/register" element={
+
+            <UsersProvider>
+              <Register />
+            </UsersProvider>
+          }
+          />
+
+
+          {/* Checkout Cart page */}
+          <Route path="/checkout" element={
+            <UsersProvider>
+              <CartProvider>
+                <CheckOut />
+              </CartProvider>
+            </UsersProvider>
+          }
+          />
+
+          {/* Success URL route*/}
+          <Route path="/checkout/success" element={
+            <UsersProvider>
+              <Success />
+            </UsersProvider>
+
+          } />
+
+          {/* Cancel URL route */}
+          <Route path="/checkout/cancel" element={
+            <Cancel />}
+          />
+
+          {/* Orders page */}
+          <Route path="/orders" element={
+
+            <UsersProvider>
+              <Orders />
+            </UsersProvider>
+          }
+          />
+
+
+
 
 
         </Routes>
       </Router>
 
-
-
-
-
+      <ToastContainer />
 
     </div>
   );

@@ -2,9 +2,12 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import CartContext from '../contexts/CartContext';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us81.gitpod.io/api/"
-// const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us80.gitpod.io/api/"
+
+// const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us81.gitpod.io/api/"
+const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us82.gitpod.io/api/"
 
 
 
@@ -17,6 +20,27 @@ export default function CartProvider(props) {
         'variantId': ""
     })
 
+    const successLoginMsg = () => toast.success('Yay! Your item is added to cart.', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+    });
+
+    const failCartCheckMsg = () => toast.warning('Please add items to checkout cart.', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+    });
 
     const shopCartContext = {
         cartInfo,
@@ -49,8 +73,8 @@ export default function CartProvider(props) {
                     //     'quantity': 1,
                     // })
 
-                    alert("Your variant item has been added to shopping cart successfully.")
-
+                    // alert("Your variant item has been added to shopping cart successfully.")
+                    successLoginMsg();
                     return response;
 
                 } else {
@@ -164,6 +188,46 @@ export default function CartProvider(props) {
             } catch (e) {
                 console.log(e)
             }
+
+        },
+        checkoutCart: async () => {
+            console.log("entered route of check out function")
+
+            // const haveToken = JSON.parse(localStorage.getItem("currentUserTokens"))
+            // console.log("have Token", haveToken);
+
+            try {
+                const haveToken = JSON.parse(localStorage.getItem("currentUserTokens"))
+
+                const checkCartItems = await shopCartContext.getCart();
+                console.log("checkCartItems", checkCartItems)
+
+                if (!checkCartItems || !checkCartItems.length) {
+
+
+                    // alert("Unable to checkout as cart is empty. Please add some item to cart.")
+                    console.log("ran the route for nothing in checkout cart.")
+                    
+                    //QUESTION why does it run twice?
+                    failCartCheckMsg();
+                } else {
+
+                    const response = await axios.get(BASE_API_URL + "cartcheckoutreact/", {
+                        headers: {
+                            Authorization: `Bearer ${haveToken.accessToken}`
+                        }
+                    })
+                    console.log("response", response)
+
+                    return response.data
+                }
+
+
+
+            } catch (e) {
+                console.log(e)
+            }
+
 
         }
 

@@ -1,40 +1,115 @@
-#nav-bar-text-home{
+#nav-bar-text-home {
     text-decoration: none;
 }
 
-#nav-bar-text-about{
+#nav-bar-text-about {
     text-decoration: none;
 }
 
-#nav-bar-text-products{
+#nav-bar-text-products {
     text-decoration: none;
 }
 
-#nav-bar-text-login{
+#nav-bar-text-login {
     text-decoration: none;
 }
 
-#checkout-button{
+#checkout-button {
     margin-left: 8px;
+}
+
+#nav-brand-at-back {
+    display: none;
+}
+
+#nav-brand-at-front-2 {
+    display: none;
+}
+
+#overall-position-nav {
+    position: relative;
+
+}
+
+
+
+/* @media only screen and (min-width: 795px) {
+
+    #nav-brand-at-front {
+        position: absolute;
+
+        right: 21%;
+        height: 100%;
+        top: 12%
+    }
+
+
+} */
+
+
+/*  For navbar login details */
+@media only screen and (min-width: 455px) {
+
+    #nav-brand-at-front {
+        display: none
+    }
+
+
+    #nav-brand-at-front-2 {
+        display: inline;
+        position: absolute;
+
+        right: 23%;
+        height: 100%;
+        top: 10%
+        
+    }
+
+
 }
 
 
 @media only screen and (min-width: 990px) {
-    #nav-bar-text-home{
-        margin-left: 20px;
-    }
-    
-    #nav-bar-text-about{
-        margin-left: 20px;
-    }
 
-    #nav-bar-text-products{
-        margin-left: 20px;
+    #nav-brand-at-front-2 {
+        display: none;
+        
+        
     }
-    
-    #nav-bar-text-login{
-        margin-left: 20px;
+    #nav-brand-at-back {
+        display: inline;
+        position: absolute;
+        
+        right: 5%;
+        top: 25%
     }
 
 
-  }
+
+}
+
+
+
+
+/* For navbar text */
+
+@media only screen and (min-width: 990px) {
+    #nav-bar-text-home {
+        margin-left: 20px;
+    }
+
+    #nav-bar-text-about {
+        margin-left: 20px;
+    }
+
+    #nav-bar-text-products {
+        margin-left: 20px;
+    }
+
+    #nav-bar-text-login {
+        margin-left: 20px;
+    }
+
+
+
+}
