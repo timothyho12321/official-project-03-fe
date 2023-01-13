@@ -7,6 +7,8 @@ import SimpleReactValidator from 'simple-react-validator';
 import '../css/products.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFlask, faHandsBubbles, faOilCan, faPumpSoap, faRuler, faScroll, faSprayCanSparkles, faTag, faTape } from '@fortawesome/free-solid-svg-icons';
 
 export default function Product() {
 
@@ -436,17 +438,16 @@ export default function Product() {
                                 style={{ "height": "50vh", justifyContent: "center" }}
                             />
                             <Card.Body>
-                                <Card.Title>Title: {allSoapsUse[index].name}</Card.Title>
+                                <Card.Title><FontAwesomeIcon icon={faPumpSoap} className="fa-2xl"/> {allSoapsUse[index].name}</Card.Title>
                                 <Card.Text>
-                                    <div>Base: {allSoapsUse[index].base.base}</div>
-                                    <div>Oil: {allSoapsUse[index].oil.oil}</div>
-                                    <div>Purposes to put tab: {allSoapsUse[index].purposes?.map(p => p.purpose)}</div>
-                                    <div>Smells to put tab: {allSoapsUse[index].smells?.map(s => s.smell)}</div>
-                                    <div>Type: {allSoapsUse[index].type?.type}</div>
-
-                                    <div>Width: {allSoapsUse[index].width}</div>
-                                    <div>Height: {allSoapsUse[index].height}</div>
-                                    <div>Cost: {allSoapsUse[index].cost}</div>
+                                    <div><FontAwesomeIcon icon={faFlask}/> -{allSoapsUse[index].base.base}</div>
+                                    <div><FontAwesomeIcon icon={faOilCan}/> -{allSoapsUse[index].oil.oil}</div>
+                                    <div><FontAwesomeIcon icon={faHandsBubbles}/> -{allSoapsUse[index].purposes?.map(p => p.purpose)}</div>
+                                    <div><FontAwesomeIcon icon={faSprayCanSparkles}/> -{allSoapsUse[index].smells?.map(s => s.smell)}</div>
+                                    <div><FontAwesomeIcon icon={faScroll}/> -{allSoapsUse[index].type?.type}</div>
+                                    <div><FontAwesomeIcon icon={faRuler}/> Width: -{allSoapsUse[index].width}</div>
+                                    <div><FontAwesomeIcon icon={faTape}/> Height: -{allSoapsUse[index].height}</div>
+                                    <div><FontAwesomeIcon icon={faTag}/> -${allSoapsUse[index].cost}</div>
 
 
                                 </Card.Text>

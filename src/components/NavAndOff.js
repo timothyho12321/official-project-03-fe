@@ -199,14 +199,56 @@ export default function NavAndOff() {
 
                 <Navbar bg="light" expand="lg">
                     <Container>
-                        <Navbar.Brand href="#home">Soap Paradies</Navbar.Brand>
+                        
+                            <Navbar.Brand href="#home">Soap Paradies</Navbar.Brand>
 
-                        <span id="nav-brand-at-front" className="d-lg-none">
-                            <div>
-                                <Navbar.Text>
-                                    Hi, {firstName} {lastName}!
+                            <span id="nav-brand-at-front" >
+                                <div>
+                                    <Navbar.Text>
+                                        Hi, {firstName} {lastName}!
 
-                                    <div className="mt-2">
+                                        <div className="mt-2">
+                                            <Button id="checkout-button"
+                                                variant="info"
+                                                onClick={() => {
+                                                    handleShow();
+                                                    prepareCartOffCanvas()
+
+                                                }
+                                                }
+                                                className="btn-sm">
+
+                                                <Cart2 className="mb-1"></Cart2> ({cartButtonNum})
+                                            </Button>
+
+                                            <Button id="logout-button"
+                                                variant="warning"
+                                                className="ms-2 btn-sm"
+                                                onClick={() => {
+                                                    // handleShow();
+                                                    logoutInProvider();
+                                                }}
+                                            >
+                                                <FontAwesomeIcon icon={faRightFromBracket} />
+                                            </Button>
+
+                                        </div>
+
+
+
+                                    </Navbar.Text>
+                                </div>
+                            </span>
+
+                            {/* QUESTION When nav is collapsed the user login will fall 25% as well how to keep it in nav */}
+                            <span id="nav-brand-at-front-2"
+                                className="d-flex-end"
+                            >
+                                <div>
+                                    <Navbar.Text>
+                                        Hi2, {firstName} {lastName}!
+
+
                                         <Button id="checkout-button"
                                             variant="info"
                                             onClick={() => {
@@ -231,14 +273,14 @@ export default function NavAndOff() {
                                             <FontAwesomeIcon icon={faRightFromBracket} />
                                         </Button>
 
-                                    </div>
 
 
 
-                                </Navbar.Text>
-                            </div>
-                        </span>
 
+                                    </Navbar.Text>
+                                </div>
+                            </span>
+                        
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
 
@@ -267,9 +309,10 @@ export default function NavAndOff() {
 
 
                                 <span id="nav-brand-at-back">
-                                    <Navbar.Text >Hi, {firstName} {lastName}!
+                                    <div>
+                                        <Navbar.Text >Hi3, {firstName} {lastName}!
 
-                                        <div>
+
                                             <Button id="checkout-button"
                                                 variant="info"
                                                 onClick={() => {
@@ -279,25 +322,21 @@ export default function NavAndOff() {
                                                 }
                                                 }
                                                 className="me-2 btn-sm">
-                                                Cart Checkout (
-                                                {cartButtonNum}
-                                                )
-                                            </Button>
-
+                                                <Cart2 className="mb-1"></Cart2> ({cartButtonNum})                                       </Button>
                                             <Button id="logout-button"
-                                                variant="info"
+                                                variant="warning"
                                                 className="btn-sm"
                                                 onClick={() => {
                                                     handleShow();
                                                     logoutInProvider();
                                                 }}
                                             >
-                                                Logout account
+                                                <FontAwesomeIcon icon={faRightFromBracket} />
                                             </Button>
-                                        </div>
 
-                                    </Navbar.Text>
 
+                                        </Navbar.Text>
+                                    </div>
                                 </span>
 
                                 <>

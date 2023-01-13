@@ -11,6 +11,8 @@ import Slider from "react-slick";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBagShopping, faMoneyBill, faPumpSoap, faSoap } from '@fortawesome/free-solid-svg-icons';
 
 
 export default function Variant() {
@@ -61,7 +63,11 @@ export default function Variant() {
 
         //setVariants(emptyArray);
         setVariants(response.data);
-        setVarId(variants[0]?.id);
+
+        console.log("setting var id default DEBUG")
+        
+        setVarId(response.data[0]?.id);
+        // setVarId(variants[0]?.id);
 
         // setVarId(0);
         // console.log("see variant [0]",variants[0].image_url)
@@ -139,11 +145,11 @@ export default function Variant() {
 
         let cardBodyToReturn =
             <React.Fragment>
-                <Card.Title>{filterForVariantDetail?.name}</Card.Title>
+                <Card.Title><FontAwesomeIcon icon={faSoap} className="fa-xl"/> {filterForVariantDetail?.name}</Card.Title>
 
                 <Card.Text>
-                    <div>Overall soap: {filterForVariantDetail?.soap.name}</div>
-                    <div>${parseFloat(filterForVariantDetail?.soap.cost) / 100}</div>
+                    <div><FontAwesomeIcon icon={faPumpSoap}/> -Main: {filterForVariantDetail?.soap.name}</div>
+                    <div><FontAwesomeIcon icon={faMoneyBill}/> -${parseFloat(filterForVariantDetail?.soap.cost) / 100}</div>
 
                     {/* <Button variant="primary"
                             onClick={addVariantToCart2}
@@ -219,15 +225,13 @@ export default function Variant() {
         <React.Fragment>
             <h1>Variant Detail Page</h1>
 
-            <Button onClick={retrieveVariant}>Click for get variant</Button>
-
             {/* {variants?.length > 0 ? variants.map(v => (<React.Fragment>
                 <h3>{v.name} </h3>
 
             </React.Fragment>)) : ""} */}
 
             <div id="variant-card">
-                <Card style={{ width: '100%' }} >
+                <Card  style={{ width: '70vw' }} >
 
                     <Card.Img variant="top" src={returnUrlWithVariantId()} />
 
@@ -253,10 +257,12 @@ export default function Variant() {
                             onChange={updateFormField}
                         /> */}
 
-                        <Button variant="primary"
+                        <Button variant="success"
+                        
                             onClick={addVariantToCart}
                         >
-                            Add to cart</Button>
+                            <FontAwesomeIcon icon={faBagShopping}/>
+                            </Button>
                     </Card.Body>
                 </Card>
 
