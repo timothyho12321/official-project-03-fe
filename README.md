@@ -1,70 +1,242 @@
-# Getting Started with Create React App
+# CARousel
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Access live demo site [Soap Paradies](https://)
 
-## Available Scripts
+![Carousel Demo](./src/images/websitemockup.jpg)
 
-In the project directory, you can run:
+## Background
 
-### `npm start`
+Soap is an important aspect of daily hygiene. However, there are few websites allowing the sale of artisanal, customised soap catering to each and every user's need.  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Project Overview
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Soap users are interested in the ingredients, smells and purposes of their soaps. They care about the skin product they use on themselves.
 
-### `npm test`
+Looking at the range of soaps can help customers understand about the origins and functionalities of the soap. 
+They are able to search certain soaps based on criteria of cost, ingredients. They can view further details of the variant of each soap differing in strength, colors to customise to their individual wants. 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## The Five Planes of UI/UX
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Strategy
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### Organization's Goals
+I usually see soap advertisments online of generic commercial soap products. Handmade artisanal soap lack the publicity and the channels to promote their benefits and craft to public audience. 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Users' Goals
+ The users of this site are usually aged 25 -40, use the internet for looking up soap products, conducting research into the skin products they utilise. They would like to know the benefits of a soap, compare with other types of soap, and see the cost and presentation of a handmade crafted soap.
 
-### `npm run eject`
+1. **Organisation**
+   - Objective: To display a range of soaps with its purpose and product details to soap customers
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. **Users: Skincare enthusiast**
+   - Objective: To find a soap best suited for their skin characteristics at a reasonable price 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   - Needs:
+      - Search about the soap based on ingredients, smells and presentation
+      - Understand description and properties of soap
+      - Checkout and buy desired soap
+   
+   - Demographics and Characteristics:
+       - Understand skin conditions 
+       - Interest in research
+       - Enjoys aesthetic looking soaps
+   
+   - Pain point:
+       - Want to know the specific details of a soap 
+       - Want to see the look of a soap
+       - Want to know the price of a soap
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+User Stories | Acceptance Criteria(s)
+------------ | -------------
+As a soap enthusiast, I want to see a selection of soap for my interest. | Website must allow display variety of soaps.
+As a soap enthusiast, I want to research abouts the uses and benefits of a soap.| Website must allow display of purpose of soap.
+As a soap enthusiast, I would like to understand the ingredients used in my soap. | Website must reveal the base and oil used in the soap.
+As a soap enthusiast, I require to know the cost of the soap and be able to buy it. | Website show the cost of the soap and allow user to add the soap to a checkout.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Scope
 
-### Code Splitting
+### Database
+![Entity Relationship Diagram](./src/images/ERD_diagram.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+ERD presents an overview of relationship between the entities, in order to base the SQL upon.
 
-### Analyzing the Bundle Size
+![Logical Schema](./src/images/Logical_Schema.jpg)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Logical Schema Diagram portrays the relationship between tables and the data type within each table. 
 
-### Making a Progressive Web App
+In order to allow the website to draw upon a database, a backend server is used. This is the Express backend which is deployed on [Render](https://render.com/). API route URL is set as https://tgc-20-project-03-timothy-ho.onrender.com/api/.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+#### Content
+EDIT As this is an eCommerce platform, shop owner will have to provide the content and products. Products, customers and orders will need to be managed. Express servers also serves as an admin panel for management of data, and it will be accessed after registering at https://wall-style.herokuapp.com/accounts/signup. Only the owner can register an account for admin users.
 
-### Advanced Configuration
+#### eCommerce
+- Allow search of soap products by name, cost, width, height, oils, smells.
+- Create a new customer account. 
+- Login with customer account and add items to cart for checkout. 
+- Submit payment and view paid orders as a customer. 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+#### Staff
+- Allow search of soap products by name, cost, width, height, oils, smells.
+- Review soap products and see its respective variants, to know the name, stock, last update, color. 
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+EDIT
+#### Owner
+- Create new employee accounts.
+- Create, update, delete and read all available products and variants
+- Able to view orders and update its status
 
-### `npm run build` fails to minify
+#### Non-functional
+- Mobile responsiveness: user-friendly layout on the mobile phone. 
+- Accessibility: Large, clear text with readable font colors. 
+- Performance: Ensure data storage of each entry use reasonable amount of space to store column data (length of varchar is limited).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#### Branding
+
+The name Soap Paradies is a straightforward and catchy name for soap customers. They inform the users of the purpose of the site. It also lets user know that this site is a go-to place to understand customised hand made soaps as it is the paradise for soap enthusiasts. 
+
+EB Garamond is a Serif font used to display a more elaborate design for the headers and brand name on the website. This is to create a more sophisticated and artistic feel to assure users that the soaps are of a certain aesthetic quality. Barlow is another font used as it is readable and portrays a clean, modern look - in line with the messaging of soap products. 
+
+#### Color Scheme
+
+EDIT
+![Colour Scheme](./src/images/project3_colour_scheme.jpg)
+
+- Maroon Red is a vibrant and refreshing color for viewers.
+- Light Brown is a contrasting color that complements maroon red and is used to highlight the contrast of the red.
+- White is used to give a modern and clean look.
+- Black is used to display font clearly.
+- Beige is used to create soothing and welcoming look for the site.
+
+## Testing
+EDIT
+
+---
+
+
+## Limitations and Future Implementations
+
+| Limitations | Future Implementations |
+| -------- | ----------- |
+| The validation will sometimes show when a new user account is created. | Consider switching out of Simple React Validator to manual validation to address issue. |
+| To improve the aesthetics, multi-select dropdown list could be enhanced. | Use UIUX like Dribble Multi-select dropdown list. | 
+
+## Dependencies and Sources
+
+### Backend
+1. [Express](https://expressjs.com/) as providing access to the API endpoints. 
+2. [db-migrate](https://db-migrate.readthedocs.io/en/latest/) allows creation of data migration.
+3. [Axios](https://axios-http.com/) client that consumes endpoints
+4. [Bookshelf.js](https://bookshelfjs.org/api.html) for creating model of SQL database. 
+5. [caolan forms](https://github.com/caolan/forms) to generate and validate BE forms on administrator page. 
+7. [cors](https://www.npmjs.com/package/cors) enable CORS
+8. [dotenv](https://www.npmjs.com/package/dotenv)  to store away information 
+9. [express-session](https://www.npmjs.com/package/express-session) as the session management middleware
+10. [express-flash](https://github.com/RGBboy/express-flash) to display messages on BE
+11. [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) to authenticate FE requests to the BE
+12. [handlebars](https://handlebarsjs.com/) as the HTML language for BE site. 
+15. [Cloudinary](https://cloudinary.com/documentation) to upload and store image of soap products. 
+
+### Frontend
+1. [React](https://reactjs.org/) interface to display FE
+2. [React Router DOM](https://reactrouter.com/docs/en/v6/getting-started/overview) to provide the path to different FE routes
+3. [Axios](https://axios-http.com/) client that goes to API endpoints
+5. [React Bootstrap](https://react-bootstrap.github.io/)to style the site, forms and provide interactive features
+6. [stripe](https://stripe.com/en-gb-sg) to provide online payment
+7. [react-icons](https://react-icons.github.io/react-icons/) to provide tag icons 
+8. [Google Fonts](https://fonts.google.com/) To customise fonts for FE. 
+
+### Platforms and Software
+1. [Git](https://git-scm.com/) to commit and push branches
+2. [GitHub](http://github.com) for the repository
+3. [Gitpod](https://gitpod.io/workspaces) IDE
+4. [Render](https://render.com/) to deploy BE server
+5. [Netlify](https://www.netlify.com/) to deploy FE React app
+
+
+### Images and Logos
+1. Product images is obtained from [Mira](https://mirasingapore.com/collections/artisan-soaps)
+
+### Other Attributions
+1. [Paul Chor](https://github.com/kunxin-chor) tutorial in providing guidance on creating app
+2. Wesley and Yong Sheng (Teaching Assistants) for their guidance and support.
+3. [Jun Hao](https://github.com/JunHao-k/wanderlust_fe) reference for ReadMe file and backend deployment advice
+---
+
+
+## Deployment
+
+### Build
+Build using Node.js and Express on the Backend. React Frontend is built through the create-react-app.
+
+### Backend Deployment
+Express server is deployed using [Render](https://render.com/).
+
+Prerequisites:
+- Github account is authorised on Render deployment.
+- Backend Github folder is synced with Render deployment.
+- Auto updates to Render is triggered when changes are pushed to 
+Github repository. 
+
+Steps to publish:
+1. Push changes to Github to ensure latest version is deployed on Render.
+2. Render will update changes with new pushses.
+
+### Frontend Deployment
+
+The React app is hosted using [Netlify](https://www.netlify.com/).
+
+Prerequisites:
+-  Github account is authorised on Render deployment.
+- Frontend Github folder is synced with Netlify deployment.
+- Auto updates to Netlify is triggered when changes are pushed to 
+Github frontend repository. 
+
+Steps to publish:
+1. Push changes to Github to ensure latest version is deployed on Netlify.
+2. Netlify will update changes with new pushses.
+
+
+### Database migrations
+Database can be recreated to any SQL base template using this command:
+```
+node database/db-migrate-up.js
+```
+
+The command will reproduce existing tables and default data, excluding details such as system accounts, customer accounts, cart items, orders, payments and products.
+
+
+EDIT
+The Express server makes use of the following environment variables:
+
+```
+SESSION_SECRET=
+
+DB_DRIVER=
+DB_USER=
+DB_PASSWORD=
+DB_DATABASE=
+DB_HOST=
+
+CLOUDINARY_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+CLOUDINARY_UPLOAD_PRESET=
+
+TOKEN_SECRET=
+REFRESH_TOKEN_SECRET=
+
+STRIPE_PUBLISHABLE_KEY=
+STRIPE_SECRET_KEY=
+
+STRIPE_SUCCESS_URL=
+STRIPE_CANCEL_URL=
+STRIPE_ENDPOINT_SECRET=
+```
+
+---
