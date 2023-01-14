@@ -346,15 +346,10 @@ export default function NavAndOff() {
 
                                     <Offcanvas show={show} onHide={handleClose} placement="end">
                                         <Offcanvas.Header closeButton>
-                                            <Offcanvas.Title>Your Cart Checkout</Offcanvas.Title>
+                                            <Offcanvas.Title>Cart Checkout</Offcanvas.Title>
                                         </Offcanvas.Header>
                                         <Offcanvas.Body>
 
-                                            <Button variant="danger"
-                                                onClick=""
-                                            >
-                                                Button to test
-                                            </Button>
 
                                             {cartFilled ? displayCartItems() : <div>Loading cart</div>}
 
