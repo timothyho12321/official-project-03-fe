@@ -24,6 +24,11 @@
     text-decoration: none;
 }
 
+#checkout-title-style{
+    font-family: 'EB Garamond', serif;
+    font-weight: 600;
+}
+
 #checkout-button {
     margin-left: 8px;
     background-color:#87726c;
