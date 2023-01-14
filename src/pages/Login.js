@@ -6,6 +6,8 @@ import UserContext from '../contexts/UserContext'
 import { Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 
+import '../css/login.css'
+
 export default function Login() {
 
     const userContext = useContext(UserContext)
@@ -45,7 +47,7 @@ export default function Login() {
     return (
 
         <React.Fragment>
-
+            <h1 id="login-header-style" className='mt-2 ms-2'>Login</h1>
             <div className='mt-3 ms-3 me-3'>
                 <label>Email</label>
 
@@ -62,17 +64,19 @@ export default function Login() {
                     name="password"
                     onChange={updateFormField}
                 />
-                <Button variant="primary"
+                <Button variant="light"
                     onClick={loginUser}
+                    id="login-button-style"
                 >
                     Login</Button>
 
 
-                <Button variant="warning"
+                <Button variant="light"
                     className='ms-2'
                     onClick={registerUser}
+                    id="register-button-style"
                 >
-                    New? Register</Button>
+                    New User</Button>
 
             </div>
 

@@ -20,8 +20,8 @@ export default function Variant() {
     const productContext = useContext(ProductContext)
     const cartContext = useContext(CartContext)
     // const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us81.gitpod.io/api/"
-    const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us82.gitpod.io/api/"
-    
+    // const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us82.gitpod.io/api/"
+    const BASE_API_URL = "https://tgc-20-project-03-timothy-ho.onrender.com/api/"
 
 
     const [variants, setVariants] = useState([])
@@ -114,7 +114,7 @@ export default function Variant() {
             <Card.Img key={v.id}
                 id="variant-thumbnail"
                 variant="top" src={v.image_url}
-                className="me-2"
+                className="me-2 mt-1"
                 onClick={() => {
                     // console.log("v.id",v.id);
                     setVarId(v.id);
@@ -231,7 +231,7 @@ export default function Variant() {
             </React.Fragment>)) : ""} */}
 
             <div id="variant-card">
-                <Card  style={{ width: '70vw' }} >
+                <Card  style={{ width: '80vw' }} >
 
                     <Card.Img variant="top" src={returnUrlWithVariantId()} />
 

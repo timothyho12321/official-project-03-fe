@@ -7,8 +7,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 // const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us81.gitpod.io/api/"
-const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us82.gitpod.io/api/"
-
+// const BASE_API_URL = "https://3000-timothyho12-officialpro-nd3lexqwq5u.ws-us82.gitpod.io/api/"
+const BASE_API_URL = "https://tgc-20-project-03-timothy-ho.onrender.com/api/"
 
 
 export default function CartProvider(props) {

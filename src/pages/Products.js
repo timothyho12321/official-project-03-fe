@@ -148,13 +148,6 @@ export default function Product() {
     }
 
 
-    const printSoap = () => {
-        console.log("entered printsoap route")
-
-        console.log("allSoaps", allSoaps)
-        console.log("allSoapsUse", allSoapsUse)
-    }
-
     const allowValidator = useRef(new SimpleReactValidator());
 
 
@@ -206,7 +199,7 @@ export default function Product() {
 
     return (
         <React.Fragment>
-            <h1>Products Page</h1>
+            <h1 className='mt-2 ms-2' id="product-header-style">Products</h1>
 
             <Accordion defaultActiveKey="0">
                 <Accordion.Item eventKey="0">
@@ -404,13 +397,17 @@ export default function Product() {
                             theme="colored"
                         /> */}
                         <div id="div-for-search-buttons">
-                            <button className='btn btn-success btn-sm'
+                            <button id="enter-search-btn-style"
+                                variant="light"
+                                className='btn btn-sm'
                                 onClick={() => {
                                     validateAndSendSearch()
                                 }}
                             >Enter Search</button>
 
-                            <button className='btn btn-warning btn-sm ms-2'
+                            <button id="reset-search-btn-style"
+                                className='btn  btn-sm ms-2'
+                                variant="light"
                                 onClick={() => { productContext.showClearSearch() }}
                             >Reset Search</button>
 
@@ -421,8 +418,6 @@ export default function Product() {
                     </Accordion.Body>
                 </Accordion.Item>
             </Accordion >
-
-            <Button onClick={printSoap}>Click for soap</Button>
 
             {/* {allSoapsUse?.length > 0 && allSoapsUse.map(s => (<React.Fragment>
            <h3>{s.name}</h3> 
@@ -438,16 +433,16 @@ export default function Product() {
                                 style={{ "height": "50vh", justifyContent: "center" }}
                             />
                             <Card.Body>
-                                <Card.Title><FontAwesomeIcon icon={faPumpSoap} className="fa-2xl"/> {allSoapsUse[index].name}</Card.Title>
+                                <Card.Title><FontAwesomeIcon icon={faPumpSoap} className="fa-2xl" /> {allSoapsUse[index].name}</Card.Title>
                                 <Card.Text>
-                                    <div><FontAwesomeIcon icon={faFlask}/> -{allSoapsUse[index].base.base}</div>
-                                    <div><FontAwesomeIcon icon={faOilCan}/> -{allSoapsUse[index].oil.oil}</div>
-                                    <div><FontAwesomeIcon icon={faHandsBubbles}/> -{allSoapsUse[index].purposes?.map(p => p.purpose)}</div>
-                                    <div><FontAwesomeIcon icon={faSprayCanSparkles}/> -{allSoapsUse[index].smells?.map(s => s.smell)}</div>
-                                    <div><FontAwesomeIcon icon={faScroll}/> -{allSoapsUse[index].type?.type}</div>
-                                    <div><FontAwesomeIcon icon={faRuler}/> Width: -{allSoapsUse[index].width}</div>
-                                    <div><FontAwesomeIcon icon={faTape}/> Height: -{allSoapsUse[index].height}</div>
-                                    <div><FontAwesomeIcon icon={faTag}/> -${allSoapsUse[index].cost}</div>
+                                    <div><FontAwesomeIcon icon={faFlask} /> -{allSoapsUse[index].base.base}</div>
+                                    <div><FontAwesomeIcon icon={faOilCan} /> -{allSoapsUse[index].oil.oil}</div>
+                                    <div><FontAwesomeIcon icon={faHandsBubbles} /> -{allSoapsUse[index].purposes?.map(p => p.purpose)}</div>
+                                    <div><FontAwesomeIcon icon={faSprayCanSparkles} /> -{allSoapsUse[index].smells?.map(s => s.smell)}</div>
+                                    <div><FontAwesomeIcon icon={faScroll} /> -{allSoapsUse[index].type?.type}</div>
+                                    <div><FontAwesomeIcon icon={faRuler} /> Width: -{allSoapsUse[index].width}</div>
+                                    <div><FontAwesomeIcon icon={faTape} /> Height: -{allSoapsUse[index].height}</div>
+                                    <div><FontAwesomeIcon icon={faTag} /> -${allSoapsUse[index].cost}</div>
 
 
                                 </Card.Text>
