@@ -223,7 +223,8 @@ export default function Variant() {
 
     return (
         <React.Fragment>
-            <h1>Variant Detail Page</h1>
+            <h1 className='mt-2 ms-3' id='variant-title-style'>
+                Variants</h1>
 
             {/* {variants?.length > 0 ? variants.map(v => (<React.Fragment>
                 <h3>{v.name} </h3>

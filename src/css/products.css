@@ -34,9 +34,16 @@
 
 }
 
+#product-title-style{
+    color:rgb(160, 15, 15);
+    font-family: 'EB Garamond', serif;
+    font-weight: 600;
+}
+
+
 
 .products-error-message-style{
-    color: red;
+    color: #c34421;
     margin-top: 5px;
     margin-bottom: 5px
 }

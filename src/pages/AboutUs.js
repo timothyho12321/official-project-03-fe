@@ -9,7 +9,7 @@ export default function AboutUs() {
                 {/* <div id='picture-about-us'>
 
                 </div> */}
-                <h1 id="about-header-style" className='mt-2 ms-2'>Our Story</h1>
+                <h1 id="about-header-style" className='mt-2 ms-3'>Our Story</h1>
                 <img src='/about-us-soap-image-crop.jpeg' id="image-about-us" alt="soap" />
 
                 <div className='mt-2 ms-2 write-up'>

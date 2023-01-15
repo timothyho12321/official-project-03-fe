@@ -46,7 +46,7 @@ export default function Orders() {
     return (
 
         <React.Fragment>
-            <h1 className='ms-2 mt-2' id="orders-header-style">Orders</h1>
+            <h1 className='ms-3 mt-2' id="orders-header-style">Orders</h1>
 
             <Table id="table-style" bordered responsive  striped>
                 <thead>

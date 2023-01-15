@@ -1,5 +1,5 @@
 import React, { useContext, useRef } from 'react'
-import { Accordion, Button, Card, Col, Row } from 'react-bootstrap'
+import { Accordion, Badge, Button, Card, Col, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import ProductContext from '../contexts/ProductContext'
 import SimpleReactValidator from 'simple-react-validator';
@@ -199,7 +199,7 @@ export default function Product() {
 
     return (
         <React.Fragment>
-            <h1 className='mt-2 ms-2' id="product-header-style">Products</h1>
+            <h1 className='mt-2 ms-3' id="product-header-style">Products</h1>
 
             <Accordion defaultActiveKey="0">
                 <Accordion.Item eventKey="0">
@@ -427,21 +427,22 @@ export default function Product() {
             <Row xs={1} md={2} lg={3} className="g-4">
                 {Array.from({ length: allSoapsUse?.length }).map((_, index) => (
                     <Col className="d-flex justify-content-center card-holder ">
-                        <Card key={allSoapsUse[index].id} id="soap-card" as={Link} to={`/products/${allSoapsUse[index].id}/variants`}>
+                        <Card className='mt-3' 
+                        key={allSoapsUse[index].id} id="soap-card" as={Link} to={`/products/${allSoapsUse[index].id}/variants`}>
                             <Card.Img variant="top"
                                 src={allSoapsUse[index].image_url}
                                 style={{ "height": "50vh", justifyContent: "center" }}
                             />
                             <Card.Body>
-                                <Card.Title><FontAwesomeIcon icon={faPumpSoap} className="fa-2xl" /> {allSoapsUse[index].name}</Card.Title>
+                                <Card.Title ><FontAwesomeIcon icon={faPumpSoap} className="fa-2xl" /><span id='product-title-style'>{allSoapsUse[index].name}</span> </Card.Title>
                                 <Card.Text>
                                     <div><FontAwesomeIcon icon={faFlask} /> -{allSoapsUse[index].base.base}</div>
                                     <div><FontAwesomeIcon icon={faOilCan} /> -{allSoapsUse[index].oil.oil}</div>
-                                    <div><FontAwesomeIcon icon={faHandsBubbles} /> -{allSoapsUse[index].purposes?.map(p => p.purpose)}</div>
-                                    <div><FontAwesomeIcon icon={faSprayCanSparkles} /> -{allSoapsUse[index].smells?.map(s => s.smell)}</div>
+                                    <div><FontAwesomeIcon icon={faHandsBubbles} />  {allSoapsUse[index].purposes?.map(p => <Badge bg="warning" className='ms-1'>{p.purpose}</Badge>)}</div>
+                                    <div><FontAwesomeIcon icon={faSprayCanSparkles} /> {allSoapsUse[index].smells?.map(s => <Badge bg="info" className='ms-1'>{s.smell}</Badge>)}</div>
                                     <div><FontAwesomeIcon icon={faScroll} /> -{allSoapsUse[index].type?.type}</div>
-                                    <div><FontAwesomeIcon icon={faRuler} /> Width: -{allSoapsUse[index].width}</div>
-                                    <div><FontAwesomeIcon icon={faTape} /> Height: -{allSoapsUse[index].height}</div>
+                                    <div><FontAwesomeIcon icon={faRuler} /> -Width: {allSoapsUse[index].width}</div>
+                                    <div><FontAwesomeIcon icon={faTape} /> -Height: {allSoapsUse[index].height}</div>
                                     <div><FontAwesomeIcon icon={faTag} /> -${allSoapsUse[index].cost}</div>
 
 

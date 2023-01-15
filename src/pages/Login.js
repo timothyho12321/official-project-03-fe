@@ -46,7 +46,7 @@ console.log("after login response",response)
     return (
 
         <React.Fragment>
-            <h1 id="login-header-style" className='mt-2 ms-2'>Login</h1>
+            <h1 id="login-header-style" className='mt-2 ms-3'>Login</h1>
             <div className='mt-3 ms-3 me-3'>
                 <label>Email</label>
 
