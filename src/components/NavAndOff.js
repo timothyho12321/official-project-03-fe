@@ -284,7 +284,7 @@ export default function NavAndOff() {
                                             onClick={() => {
                                                 handleShow();
                                                 prepareCartOffCanvas();
-                                                setCheckForRefresh(!checkForRefresh)
+                                                // setCheckForRefresh(!checkForRefresh)
                                             }
                                             }
                                             className="btn-sm">
@@ -298,7 +298,7 @@ export default function NavAndOff() {
                                             onClick={() => {
                                                 // handleShow();
                                                 logoutInProvider();
-                                                setCheckForRefresh(!checkForRefresh)
+                                                // setCheckForRefresh(!checkForRefresh)
                                             }}
                                         >
                                             <FontAwesomeIcon icon={faRightFromBracket} />
@@ -318,7 +318,7 @@ export default function NavAndOff() {
                         >
                             <div>
                                 <Navbar.Text>
-                                    Hi2, {firstName} {lastName}!
+                                    Hi, {firstName} {lastName}!
 
 
                                     <Button id="checkout-button"
@@ -326,7 +326,7 @@ export default function NavAndOff() {
                                         onClick={() => {
                                             handleShow();
                                             prepareCartOffCanvas();
-                                            setCheckForRefresh(!checkForRefresh)
+                                            // setCheckForRefresh(!checkForRefresh)
                                         }
                                         }
                                         className="btn-sm">
@@ -340,7 +340,7 @@ export default function NavAndOff() {
                                         onClick={() => {
                                             // handleShow();
                                             logoutInProvider();
-                                            setCheckForRefresh(!checkForRefresh)
+                                            // setCheckForRefresh(!checkForRefresh)
                                         }}
                                     >
                                         <FontAwesomeIcon icon={faRightFromBracket} />
@@ -383,7 +383,7 @@ export default function NavAndOff() {
 
                                 <span id="nav-brand-at-back">
                                     <div>
-                                        <Navbar.Text >Hi3, {firstName} {lastName}!
+                                        <Navbar.Text >Hi, {firstName} {lastName}!
 
 
                                             <Button id="checkout-button"
@@ -391,7 +391,7 @@ export default function NavAndOff() {
                                                 onClick={() => {
                                                     handleShow();
                                                     prepareCartOffCanvas();
-                                                    setCheckForRefresh(!checkForRefresh)
+                                                    // setCheckForRefresh(!checkForRefresh)
                                                 }
                                                 }
                                                 className="me-2 btn-sm">
@@ -402,7 +402,7 @@ export default function NavAndOff() {
                                                 onClick={() => {
                                                     handleShow();
                                                     logoutInProvider();
-                                                    setCheckForRefresh(!checkForRefresh)
+                                                    // setCheckForRefresh(!checkForRefresh)
                                                 }}
                                             >
                                                 <FontAwesomeIcon icon={faRightFromBracket} />

@@ -1,8 +1,22 @@
-# CARousel
+# Soap Paradies
 
 Access live demo site [Soap Paradies](https://)
 
-![Carousel Demo](./src/images/websitemockup.jpg)
+![Soap Paradies display](./src/images/websitemockup.jpg)
+
+Test Account:
+1. Staff interface at https://tgc-20-project-03-timothy-ho.onrender.com/
+ - Owner account (can do all functions)
+    - email: owner@gmail.com
+    - password: Password@123
+
+ - Admin account (Able to edit variants only. Cannot post/edit products only, cannot edit orders, cannot create new accounts)
+    - email: staff@gmail.com
+    - password: Password@123
+
+2. Customer at https://project-03-soap-paradies.netlify.app/
+ - email: user@gmail.com
+ - password: Password@123
 
 ## Background
 
