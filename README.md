@@ -123,7 +123,7 @@ EB Garamond is a Serif font used to display a more elaborate design for the head
 #### Color Scheme
 
 EDIT
-![Colour Scheme](./src/images/colour_scheme.png)
+![Colour Scheme](./src/images/color_scheme.png)
 
 - Maroon Red is a vibrant and refreshing color for viewers.
 - Light Brown is a contrasting color that complements maroon red and is used to highlight the contrast of the red.
