@@ -111,63 +111,64 @@ export default function NavAndOff() {
 
     )
 
-    useEffect(
-        () => {
-            console.log("detected a change in checkForRefresh.")
+    // Removed to reverse bug on reflecting updated numbers in cart offcanvas
+    // useEffect(
+    //     () => {
+    //         console.log("detected a change in checkForRefresh.")
 
-            let numberForCartBox = 0;
-            setCartButtonNum(numberForCartBox);
+    //         let numberForCartBox = 0;
+    //         setCartButtonNum(numberForCartBox);
 
-            async function fillInCartBox() {
+    //         async function fillInCartBox() {
 
-                const haveToken = JSON.parse(localStorage.getItem("currentUserTokens"))
+    //             const haveToken = JSON.parse(localStorage.getItem("currentUserTokens"))
 
-                if (haveToken) {
-                    console.log("entered the fillInCartBox route.")
+    //             if (haveToken) {
+    //                 console.log("entered the fillInCartBox route.")
 
-                    console.log("numberForCartBox1", numberForCartBox)
-                    let responseCartNum = await getCartFromProvider();
-                    console.log("get cart for cartBox", responseCartNum);
-
-
-
-                    // responseCartNum = JSON.parse(responseCartNum)
-                    numberForCartBox = responseCartNum?.length
-                    console.log("numberForCartBox2", numberForCartBox)
-                    setCartButtonNum(numberForCartBox);
-
-                }
+    //                 console.log("numberForCartBox1", numberForCartBox)
+    //                 let responseCartNum = await getCartFromProvider();
+    //                 console.log("get cart for cartBox", responseCartNum);
 
 
 
-            }
-            fillInCartBox();
+    //                 // responseCartNum = JSON.parse(responseCartNum)
+    //                 numberForCartBox = responseCartNum?.length
+    //                 console.log("numberForCartBox2", numberForCartBox)
+    //                 setCartButtonNum(numberForCartBox);
+
+    //             }
 
 
-            // Setting firstname and lastname in state
 
-            let accountData = (localStorage.getItem("accountData"))
-
-            accountData = JSON.parse(accountData)
-
-            setFirstName("New")
-            setLastName("Guest")
-
-            const takeFirstName = accountData?.loggedInAccount?.first_name
-            // const firstName =accountData["loggedInAccount"]
-
-            const takeLastName = accountData?.loggedInAccount?.last_name
-            if (takeFirstName) {
-                setFirstName(takeFirstName);
-            }
-            if (takeLastName) {
-                setLastName(takeLastName);
-            }
+    //         }
+    //         fillInCartBox();
 
 
-        }, [checkForRefresh]
+    //         // Setting firstname and lastname in state
 
-    )
+    //         let accountData = (localStorage.getItem("accountData"))
+
+    //         accountData = JSON.parse(accountData)
+
+    //         setFirstName("New")
+    //         setLastName("Guest")
+
+    //         const takeFirstName = accountData?.loggedInAccount?.first_name
+    //         // const firstName =accountData["loggedInAccount"]
+
+    //         const takeLastName = accountData?.loggedInAccount?.last_name
+    //         if (takeFirstName) {
+    //             setFirstName(takeFirstName);
+    //         }
+    //         if (takeLastName) {
+    //             setLastName(takeLastName);
+    //         }
+
+
+    //     }, [checkForRefresh]
+
+    // )
 
 
 

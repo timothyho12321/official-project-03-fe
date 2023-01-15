@@ -1,8 +1,8 @@
 # Soap Paradies
 
-Access live demo site [Soap Paradies](https://)
+Access live demo site [Soap Paradies](https://project-03-soap-paradies.netlify.app/)
 
-![Soap Paradies display](./src/images/websitemockup.jpg)
+![Soap Paradies display](./src/images/mockup.jpg)
 
 Test Account:
 1. Staff interface at https://tgc-20-project-03-timothy-ho.onrender.com/
@@ -75,18 +75,18 @@ As a soap enthusiast, I require to know the cost of the soap and be able to buy 
 ### Scope
 
 ### Database
-![Entity Relationship Diagram](./src/images/ERD_diagram.png)
+![Entity Relationship Diagram](./src/images/erd.png)
 
 ERD presents an overview of relationship between the entities, in order to base the SQL upon.
 
-![Logical Schema](./src/images/Logical_Schema.jpg)
+![Logical Schema](./src/images/logical_schema.jpg)
 
 Logical Schema Diagram portrays the relationship between tables and the data type within each table. 
 
 In order to allow the website to draw upon a database, a backend server is used. This is the Express backend which is deployed on [Render](https://render.com/). API route URL is set as https://tgc-20-project-03-timothy-ho.onrender.com/api/.
 
 #### Content
-EDIT As this is an eCommerce platform, shop owner will have to provide the content and products. Products, customers and orders will need to be managed. Express servers also serves as an admin panel for management of data, and it will be accessed after registering at https://wall-style.herokuapp.com/accounts/signup. Only the owner can register an account for admin users.
+The shop owner will populate the details and products for their ecommerce shop. They can oversee and manage their products, variants and orders. The creation of new staff accounts can only be done by the shop owner using the link https://tgc-20-project-03-timothy-ho.onrender.com/accounts/register
 
 #### eCommerce
 - Allow search of soap products by name, cost, width, height, oils, smells.
@@ -99,11 +99,15 @@ EDIT As this is an eCommerce platform, shop owner will have to provide the conte
 - Review soap products and see its respective variants, to know the name, stock, last update, color. 
 
 
-EDIT
+
 #### Owner
-- Create new employee accounts.
+- Create new staff accounts.
 - Create, update, delete and read all available products and variants
 - Able to view orders and update its status
+
+#### Staff
+- View only products.
+- Able to add and edit new variants to existing products.
 
 #### Non-functional
 - Mobile responsiveness: user-friendly layout on the mobile phone. 
@@ -112,14 +116,14 @@ EDIT
 
 #### Branding
 
-The name Soap Paradies is a straightforward and catchy name for soap customers. They inform the users of the purpose of the site. It also lets user know that this site is a go-to place to understand customised hand made soaps as it is the paradise for soap enthusiasts. 
+The name Soap Paradies is a direct and catchy name for soap customers. They inform the users of the purpose of the site. It also lets user know that this site is a go-to place to understand customised hand made soaps as it is the paradise for soap enthusiasts. 
 
 EB Garamond is a Serif font used to display a more elaborate design for the headers and brand name on the website. This is to create a more sophisticated and artistic feel to assure users that the soaps are of a certain aesthetic quality. Barlow is another font used as it is readable and portrays a clean, modern look - in line with the messaging of soap products. 
 
 #### Color Scheme
 
 EDIT
-![Colour Scheme](./src/images/project3_colour_scheme.jpg)
+![Colour Scheme](./src/images/colour_scheme.png)
 
 - Maroon Red is a vibrant and refreshing color for viewers.
 - Light Brown is a contrasting color that complements maroon red and is used to highlight the contrast of the red.
@@ -128,7 +132,7 @@ EDIT
 - Beige is used to create soothing and welcoming look for the site.
 
 ## Testing
-EDIT
+TO ATTACH
 
 ---
 
@@ -163,7 +167,9 @@ EDIT
 5. [React Bootstrap](https://react-bootstrap.github.io/)to style the site, forms and provide interactive features
 6. [stripe](https://stripe.com/en-gb-sg) to provide online payment
 7. [react-icons](https://react-icons.github.io/react-icons/) to provide tag icons 
-8. [Google Fonts](https://fonts.google.com/) To customise fonts for FE. 
+8. [FontAwesome](https://fontawesome.com/) for product icons. 
+9. [Google Fonts](https://fonts.google.com/) To customise fonts for FE. 
+10. [Simple React Validator](https://www.npmjs.com/package/simple-react-validator) to validate forms on FE.
 
 ### Platforms and Software
 1. [Git](https://git-scm.com/) to commit and push branches
@@ -175,6 +181,8 @@ EDIT
 
 ### Images and Logos
 1. Product images is obtained from [Mira](https://mirasingapore.com/collections/artisan-soaps)
+2. Site photos are from [Pexels](https://www.pexels.com/search/soap/)
+3. Brand icon is from [Favicon](https://favicon.io/favicon-generator/)
 
 ### Other Attributions
 1. [Paul Chor](https://github.com/kunxin-chor) tutorial in providing guidance on creating app
@@ -222,14 +230,19 @@ Database can be recreated to any SQL base template using this command:
 node database/db-migrate-up.js
 ```
 
-The command will reproduce existing tables and default data, excluding details such as system accounts, customer accounts, cart items, orders, payments and products.
+The command will reproduce existing tables and default data, excluding details such as staff accounts, customer accounts, cart items, orders, payments, products and variant.
 
 
 EDIT
 The Express server makes use of the following environment variables:
 
 ```
-SESSION_SECRET=
+SESSION_SECRET_KEY=
+
+CLOUDINARY_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+CLOUDINARY_UPLOAD_PRESET=
 
 DB_DRIVER=
 DB_USER=
@@ -237,15 +250,10 @@ DB_PASSWORD=
 DB_DATABASE=
 DB_HOST=
 
-CLOUDINARY_NAME=
-CLOUDINARY_API_KEY=
-CLOUDINARY_API_SECRET=
-CLOUDINARY_UPLOAD_PRESET=
-
 TOKEN_SECRET=
 REFRESH_TOKEN_SECRET=
 
-STRIPE_PUBLISHABLE_KEY=
+STRIPE_PUBLISHABLE_KEYS=
 STRIPE_SECRET_KEY=
 
 STRIPE_SUCCESS_URL=
