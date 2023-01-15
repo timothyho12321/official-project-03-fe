@@ -28,14 +28,13 @@ export default function Login() {
     const loginUser = async () => {
         const response = await sendLogin(userContext.loginInfo)
 
-
-
-        // if(res){
-        //     navigate("/products")
-        // }
-        // else{
-        //     navigate("/register")
-        // }
+console.log("after login response",response)
+        if(response){
+            navigateTo("/products")
+        }
+        else{
+            navigateTo("/register")
+        }
     }
 
     const registerUser = () => {

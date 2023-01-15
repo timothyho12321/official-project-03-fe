@@ -116,7 +116,7 @@ export default function EachCartProduct(props) {
                 {ableEdit ?
                     <React.Fragment>
                         <div>
-                            <label>Update cart item quantity</label>
+                            <label className='mt-2'>Update cart item quantity</label>
                             <div id="box-update-and-button">
                                 <input type="text"
                                     className='quantity-box-style form-control mb-1 mt-1'
@@ -142,7 +142,7 @@ export default function EachCartProduct(props) {
                     :
 
                     <React.Fragment>
-                        <h5>{props.cart.variant.name}</h5>
+                        <h5 className='mt-2'>{props.cart.variant.name}</h5>
                         <p>Color: {props.cart.variant.color.color}</p>
                         <p>Cost: $ {props.cart.variant.soap.cost / 100}</p>
                         {/* <p>QuantityProp: {props.cart.quantity}</p> */}

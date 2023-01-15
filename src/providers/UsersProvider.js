@@ -29,6 +29,7 @@ export default function UsersProvider(props) {
 
     })
 
+    const [userLoggedIn, setUserLoggedIn] = useState(false)
     const [interval, setStateInterval] = useState(false)
 
     const [tokens, saveTokens] = useState(null)
@@ -149,6 +150,9 @@ export default function UsersProvider(props) {
         setLoginInfo,
         registerInfo,
         setRegisterInfo,
+        // userLoggedIn,
+        // setUserLoggedIn,
+
 
         login: async (loginInfo) => {
 
@@ -158,6 +162,11 @@ export default function UsersProvider(props) {
 
                 response = await axios.post(BASE_API_URL + "login",
                     loginInfo)
+
+
+                // set state of logged in user provider layer to update offcanvas cart
+                // setUserLoggedIn(!userLoggedIn)
+                // console.log("checkState UserloggedIn", userLoggedIn)
 
             }
             catch (e) {
@@ -262,7 +271,7 @@ export default function UsersProvider(props) {
             }
 
             // timerIntervalForRefresh()
-
+            return response
         },
 
         refreshToken: async () => {

@@ -41,10 +41,16 @@ export default function NavAndOff() {
 
     const [reload, setReload] = useState(false);
     const [cartButtonNum, setCartButtonNum] = useState(0);
-    const [firstName, setFirstName] = useState("Guest");
-    const [lastName, setLastName] = useState("New");
+    const [firstName, setFirstName] = useState("New");
+    const [lastName, setLastName] = useState("Guest");
+
+    const [checkForRefresh, setCheckForRefresh] = useState(false);
+
     const getCartFromProvider = cartContext.getCart
     const logoutInProvider = usersContext.logout
+
+    const checkUserLayerLoginInfo = usersContext.loginInfo
+    const checkUserLoggedIn = usersContext.userLoggedIn
 
 
     useEffect(
@@ -86,8 +92,8 @@ export default function NavAndOff() {
 
             accountData = JSON.parse(accountData)
 
-            //DEBUG WHY CANNOT READ INTO ARRAY 
-
+            setFirstName("New")
+            setLastName("Guest")
             const takeFirstName = accountData?.loggedInAccount?.first_name
             // const firstName =accountData["loggedInAccount"]
 
@@ -104,6 +110,68 @@ export default function NavAndOff() {
         }, []
 
     )
+
+    useEffect(
+        () => {
+            console.log("detected a change in checkForRefresh.")
+
+            let numberForCartBox = 0;
+            setCartButtonNum(numberForCartBox);
+
+            async function fillInCartBox() {
+
+                const haveToken = JSON.parse(localStorage.getItem("currentUserTokens"))
+
+                if (haveToken) {
+                    console.log("entered the fillInCartBox route.")
+
+                    console.log("numberForCartBox1", numberForCartBox)
+                    let responseCartNum = await getCartFromProvider();
+                    console.log("get cart for cartBox", responseCartNum);
+
+
+
+                    // responseCartNum = JSON.parse(responseCartNum)
+                    numberForCartBox = responseCartNum?.length
+                    console.log("numberForCartBox2", numberForCartBox)
+                    setCartButtonNum(numberForCartBox);
+
+                }
+
+
+
+            }
+            fillInCartBox();
+
+
+            // Setting firstname and lastname in state
+
+            let accountData = (localStorage.getItem("accountData"))
+
+            accountData = JSON.parse(accountData)
+
+            setFirstName("New")
+            setLastName("Guest")
+
+            const takeFirstName = accountData?.loggedInAccount?.first_name
+            // const firstName =accountData["loggedInAccount"]
+
+            const takeLastName = accountData?.loggedInAccount?.last_name
+            if (takeFirstName) {
+                setFirstName(takeFirstName);
+            }
+            if (takeLastName) {
+                setLastName(takeLastName);
+            }
+
+
+        }, [checkForRefresh]
+
+    )
+
+
+
+
 
 
     // const getCartItemNumber = async () => {
@@ -215,8 +283,8 @@ export default function NavAndOff() {
                                             variant="light"
                                             onClick={() => {
                                                 handleShow();
-                                                prepareCartOffCanvas()
-
+                                                prepareCartOffCanvas();
+                                                setCheckForRefresh(!checkForRefresh)
                                             }
                                             }
                                             className="btn-sm">
@@ -230,6 +298,7 @@ export default function NavAndOff() {
                                             onClick={() => {
                                                 // handleShow();
                                                 logoutInProvider();
+                                                setCheckForRefresh(!checkForRefresh)
                                             }}
                                         >
                                             <FontAwesomeIcon icon={faRightFromBracket} />
@@ -256,8 +325,8 @@ export default function NavAndOff() {
                                         variant="light"
                                         onClick={() => {
                                             handleShow();
-                                            prepareCartOffCanvas()
-
+                                            prepareCartOffCanvas();
+                                            setCheckForRefresh(!checkForRefresh)
                                         }
                                         }
                                         className="btn-sm">
@@ -271,6 +340,7 @@ export default function NavAndOff() {
                                         onClick={() => {
                                             // handleShow();
                                             logoutInProvider();
+                                            setCheckForRefresh(!checkForRefresh)
                                         }}
                                     >
                                         <FontAwesomeIcon icon={faRightFromBracket} />
@@ -320,8 +390,8 @@ export default function NavAndOff() {
                                                 variant="light"
                                                 onClick={() => {
                                                     handleShow();
-                                                    prepareCartOffCanvas()
-
+                                                    prepareCartOffCanvas();
+                                                    setCheckForRefresh(!checkForRefresh)
                                                 }
                                                 }
                                                 className="me-2 btn-sm">
@@ -332,6 +402,7 @@ export default function NavAndOff() {
                                                 onClick={() => {
                                                     handleShow();
                                                     logoutInProvider();
+                                                    setCheckForRefresh(!checkForRefresh)
                                                 }}
                                             >
                                                 <FontAwesomeIcon icon={faRightFromBracket} />

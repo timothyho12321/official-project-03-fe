@@ -60,11 +60,14 @@ export default function Orders() {
                         <th>
                             Email
                         </th>
-                        <th>
+                        {/* <th>
                             Payment Type
+                        </th> */}
+                         <th>
+                            Postal Code
                         </th>
                         <th>
-                            Total Cost
+                            Total Cost ($)
                         </th>
                         <th>
                             Order Status
@@ -94,11 +97,14 @@ export default function Orders() {
                             <td>
                                 {o.account.email}
                             </td>
-                            <td>
+                            {/* <td>
                                 {o.payment_type}
+                            </td> */}
+                            <td>
+                                {o.shipping_postal_code}
                             </td>
                             <td>
-                                {o.total_cost}
+                                {o.total_cost/100}
                             </td>
                             <td>
                                 {o.order_status.status}
