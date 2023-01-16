@@ -9,6 +9,9 @@ import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import SimpleReactValidator from 'simple-react-validator';
+
+
 
 import '../css/login.css'
 
@@ -18,6 +21,9 @@ export default function Login() {
     const updateUserLayerLogin = userContext.setLoginInfo
     const sendLogin = userContext.login;
     const navigateTo = useNavigate();
+
+    const allowValidator = useRef(new SimpleReactValidator());
+
 
     const updateFormField = (event) => {
         updateUserLayerLogin(
@@ -41,16 +47,29 @@ export default function Login() {
     });
 
     const loginUser = async () => {
-        const response = await sendLogin(userContext.loginInfo)
 
-console.log("after login response",response)
-        if(response){
-            navigateTo("/products")
+        if (allowValidator.current.allValid()) {
+
+            const response = await sendLogin(userContext.loginInfo)
+
+            console.log("after login response", response)
+            if (response) {
+                navigateTo("/products")
+            }
+            else {
+                notifyWrongLogin()
+                navigateTo("/register")
+            }
+
+        } else {
+            // alert("Failed to login account as failed validation.")
+            console.log("entered validator show message route for login.")
+            
+            allowValidator.current.showMessages();
+            
         }
-        else{
-            notifyWrongLogin()
-            navigateTo("/register")
-        }
+
+
     }
 
     const registerUser = () => {
@@ -72,14 +91,28 @@ console.log("after login response",response)
                     name="email"
                     onChange={updateFormField}
                 />
-                <label>Password</label>
+                <div className='register-error-message-style'>
+                    {allowValidator.current.message('Email', userContext.loginInfo.email,
+                        'required|email')}
+
+                </div>
+
+                <label className='mt-2'>Password</label>
                 <input type="text"
                     className='form-control mb-3 mt-1'
                     value={userContext.loginInfo.password}
                     name="password"
                     onChange={updateFormField}
                 />
+
+                <div className='register-error-message-style'>
+                    {allowValidator.current.message('Email', userContext.loginInfo.password,
+                        'required')}
+
+                </div>
+
                 <Button variant="light"
+                className='mt-2'
                     onClick={loginUser}
                     id="login-button-style"
                 >
@@ -87,7 +120,7 @@ console.log("after login response",response)
 
 
                 <Button variant="light"
-                    className='ms-2'
+                    className='ms-2 mt-2'
                     onClick={registerUser}
                     id="register-button-style"
                 >

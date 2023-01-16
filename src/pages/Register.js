@@ -148,7 +148,7 @@ export default function Register() {
     return (
 
         <React.Fragment>
-            <h2>Register as a New User</h2>
+            <h2 className='mt-3 ms-3 me-3'>Register as a New User</h2>
             <div className='mt-3 ms-3 me-3'>
                 <label>First Name</label>
 
@@ -287,6 +287,7 @@ export default function Register() {
                         Go to 'Login' page</Button>
                     :
                     <Button variant="primary"
+                        className='mt-2'
                         onClick={createUser}
                     >
                         Create Account</Button>

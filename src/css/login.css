@@ -12,3 +12,18 @@
 
     background-color:#d2bbb18d;
 }
+
+.register-error-message-style {
+    color: red;
+    margin-top: -4%;
+    margin-bottom: 5px
+}
+
+@media only screen and (min-width: 600px) {
+
+    .register-error-message-style {
+        margin-top: 0%;
+        
+    }
+
+}
