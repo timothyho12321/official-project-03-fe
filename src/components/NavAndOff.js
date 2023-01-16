@@ -13,6 +13,7 @@ import Product from "../pages/Products";
 import UsersProvider from "../providers/UsersProvider";
 import Login from "../pages/Login";
 import '../css/nav_and_off.css';
+import { Player } from '@lottiefiles/react-lottie-player';
 
 import CartContext from "../contexts/CartContext";
 import ProductContext from "../contexts/ProductContext";
@@ -23,7 +24,7 @@ import { Button, ListGroup } from "react-bootstrap";
 import { Cart2 } from 'react-bootstrap-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { faCreditCard, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
 export default function NavAndOff() {
 
@@ -423,9 +424,26 @@ export default function NavAndOff() {
                                         <Offcanvas.Body>
 
 
-                                            {cartFilled ? displayCartItems() : <div>Loading cart</div>}
+                                            {cartFilled ? displayCartItems() :
+                                                <React.Fragment>
+                                                    <div>Loading soaps...</div>
+                                                    <Player
+                                                        src='https://assets3.lottiefiles.com/packages/lf20_eHMDJF.json'
+                                                        id='soap-loading-animation-style'
+                                                        loop
+                                                        autoplay
+                                                    />
 
-                                            {cartFilled ? <a href="/checkout" className="btn btn-success btn-lg mt-3">Checkout Cart!</a>
+
+                                                </React.Fragment>
+
+                                            }
+
+                                            {cartFilled ?
+                                                <a href="/checkout"
+                                                    id="checkout-off-canvas-button-style"
+                                                    className="btn btn-lg mt-3">
+                                                    <FontAwesomeIcon icon={faCreditCard} /> Checkout </a>
                                                 : <a href="/login" className="btn btn-warning mt-3">Login to allow 'checkout'.</a>}
 
                                         </Offcanvas.Body>

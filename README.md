@@ -184,6 +184,9 @@ Test Cases can be found [here](./src/images/project-03-test-cases.pdf)
 1. Product images is obtained from [Mira](https://mirasingapore.com/collections/artisan-soaps)
 2. Site photos are from [Pexels](https://www.pexels.com/search/soap/)
 3. Brand icon is from [Favicon](https://favicon.io/favicon-generator/)
+4. Loading animation is from [Lottiefiles](https://lottiefiles.com/)
+
+
 
 ### Other Attributions
 1. [Paul Chor](https://github.com/kunxin-chor) tutorial in providing guidance on creating app

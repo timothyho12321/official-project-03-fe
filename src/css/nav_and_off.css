@@ -1,8 +1,8 @@
-#nav-style{
+#nav-style {
     background-color: #d2bbb133;
 }
 
-#nav-title-style{
+#nav-title-style {
     color: #c34421;
     font-family: 'EB Garamond', serif;
     font-weight: 600;
@@ -24,20 +24,20 @@
     text-decoration: none;
 }
 
-#checkout-title-style{
+#checkout-title-style {
     font-family: 'EB Garamond', serif;
     font-weight: 600;
 }
 
 #checkout-button {
     margin-left: 8px;
-    background-color:#87726c;
-    color:white
+    background-color: #87726c;
+    color: white
 }
 
 #logout-button {
-   
-    background-color:#d2bbb18d;
+
+    background-color: #d2bbb18d;
 }
 
 #nav-brand-at-back {
@@ -53,8 +53,17 @@
 
 }
 
-#soap-icon-style{
+#soap-icon-style {
     width: 35px
+}
+
+#soap-loading-animation-style{
+    width: 30%
+}
+
+#checkout-off-canvas-button-style {
+    background-color: #87726c;
+    color: white
 }
 
 
@@ -87,7 +96,6 @@
         right: 23%;
         height: 100%;
         top: 10%
-        
     }
 
 
@@ -98,13 +106,14 @@
 
     #nav-brand-at-front-2 {
         display: none;
-        
-        
+
+
     }
+
     #nav-brand-at-back {
         display: inline;
         position: absolute;
-        
+
         right: 5%;
         top: 25%
     }
