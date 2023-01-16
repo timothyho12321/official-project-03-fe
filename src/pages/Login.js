@@ -106,7 +106,7 @@ export default function Login() {
                 />
 
                 <div className='register-error-message-style'>
-                    {allowValidator.current.message('Email', userContext.loginInfo.password,
+                    {allowValidator.current.message('Password', userContext.loginInfo.password,
                         'required')}
 
                 </div>
