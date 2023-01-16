@@ -16,3 +16,12 @@
 #error-message {
     color: red
 }
+
+#edit-button-style{
+    background-color: #d2bbb18d;
+    
+}
+
+#confirm-edit-button-style{
+    background-color: #d2bbb18d;
+}

@@ -1,4 +1,5 @@
 import React from 'react'
+import '../css/cancel.css'
 
 export default function Cancel() {
     return (
@@ -7,9 +8,17 @@ export default function Cancel() {
                 Unfortunately, your payment did not proceed successfully.
                 Would you like to try again?
             </h3>
-            <a href='/checkout' className='btn btn-success btn-lg ms-2'>Back to checkout</a>
-            <a href='/products' className='btn btn-warning btn-sm ms-2'>Continue shopping</a>
-        
+            <a href='/checkout'
+                className='btn btn-lg ms-2'
+                id='checkout-button-style'
+            >Back to checkout</a>
+
+            <a href='/products'
+                className='btn btn-sm ms-2'
+                id='shopping-button-style'
+            >
+                Continue shopping</a>
+
         </React.Fragment>
 
     )

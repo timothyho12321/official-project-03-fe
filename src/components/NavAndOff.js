@@ -419,7 +419,7 @@ export default function NavAndOff() {
 
                                     <Offcanvas show={show} onHide={handleClose} placement="end">
                                         <Offcanvas.Header closeButton>
-                                            <Offcanvas.Title id="checkout-title-style">Cart Checkout</Offcanvas.Title>
+                                            <Offcanvas.Title ><h1 id="checkout-title-style">Cart Checkout</h1></Offcanvas.Title>
                                         </Offcanvas.Header>
                                         <Offcanvas.Body>
 

@@ -3,9 +3,11 @@ import { Button, ListGroupItem } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import ListGroup from 'react-bootstrap/ListGroup';
 import CartContext from '../contexts/CartContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 import '../css/each_cart_product.css';
+import { faPenToSquare, faSquareCheck } from '@fortawesome/free-solid-svg-icons';
 
 export default function EachCartProduct(props) {
 
@@ -123,9 +125,14 @@ export default function EachCartProduct(props) {
                                     value={cartQuantity}
                                     onChange={updateFormField}
                                 />
-                                <Button className='btn-sm btn-success ms-1'
+                                <Button className='btn-sm ms-1'
+                                    variant='light'
+                                    id="confirm-edit-button-style"
                                     onClick={sendUpdate}
-                                >Confirm update</Button>
+                                >
+                                    <FontAwesomeIcon icon={faSquareCheck} /> Confirm
+
+                                </Button>
 
                             </div>
                             {error ? <div id="error-message">Correct stock amount is inputted.</div> : ""}
@@ -149,12 +156,18 @@ export default function EachCartProduct(props) {
                         <p>Quantity: {cartQuantity}</p>
 
                         <Button className='btn-sm btn-success'
+                            id='edit-button-style'
+                            variant='light'
                             onClick={() => {
                                 setEdit(true)
                                 startEditForVar(props.cart.variant.id)
                             }}
 
-                        >Edit</Button>
+                        >
+                            <FontAwesomeIcon icon={faPenToSquare} /> Edit
+
+
+                        </Button>
 
 
                     </React.Fragment>
