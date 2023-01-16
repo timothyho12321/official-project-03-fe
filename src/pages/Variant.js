@@ -149,7 +149,7 @@ export default function Variant() {
 
                 <Card.Text>
                     <div><FontAwesomeIcon icon={faPumpSoap}/> -Main: {filterForVariantDetail?.soap.name}</div>
-                    <div><FontAwesomeIcon icon={faMoneyBill}/> -${parseFloat(filterForVariantDetail?.soap.cost) / 100}</div>
+                    <div><FontAwesomeIcon icon={faMoneyBill}/> ${parseFloat(filterForVariantDetail?.soap.cost) / 100}</div>
 
                     {/* <Button variant="primary"
                             onClick={addVariantToCart2}
