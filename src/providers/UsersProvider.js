@@ -173,7 +173,7 @@ export default function UsersProvider(props) {
                 console.log(e)
             }
 
-            if (response.data) {
+            if (response?.data) {
 
                 // console.log("this is success response", response.data)
 
@@ -271,7 +271,7 @@ export default function UsersProvider(props) {
             }
 
             // timerIntervalForRefresh()
-            return response
+            return response.data
         },
 
         refreshToken: async () => {
