@@ -132,7 +132,7 @@ EDIT
 - Beige is used to create soothing and welcoming look for the site.
 
 ## Testing
-TO ATTACH
+Test Cases can be found [here](./src/images/project-03-test-cases.pdf)
 
 ---
 
