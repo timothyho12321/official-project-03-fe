@@ -98,7 +98,7 @@ export default function Login() {
                 </div>
 
                 <label className='mt-2'>Password</label>
-                <input type="text"
+                <input type="password"
                     className='form-control mb-3 mt-1'
                     value={userContext.loginInfo.password}
                     name="password"

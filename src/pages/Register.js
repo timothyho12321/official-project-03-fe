@@ -197,7 +197,7 @@ export default function Register() {
                 </div>
                 <label>Password</label>
 
-                <input type="text"
+                <input type="password"
                     className='form-control mb-3 mt-1'
                     value={userContext.registerInfo.password}
                     name="password"
@@ -242,7 +242,7 @@ export default function Register() {
 
                 <label>Confirm Password</label>
 
-                <input type="text"
+                <input type="password"
                     className='form-control mb-3 mt-1'
                     value={userContext.registerInfo.password_confirm}
                     name="password_confirm"
