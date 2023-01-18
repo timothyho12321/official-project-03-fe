@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Accordion, Badge, Button, Card, Col, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import ProductContext from '../contexts/ProductContext'
@@ -10,7 +10,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFlask, faHandsBubbles, faOilCan, faPumpSoap, faRuler, faScroll, faSprayCanSparkles, faTag, faTape } from '@fortawesome/free-solid-svg-icons';
 
+import { Player } from '@lottiefiles/react-lottie-player';
+
 export default function Product() {
+
+
+
 
     const productContext = useContext(ProductContext)
 
@@ -20,6 +25,7 @@ export default function Product() {
     const currentProductLayerSearch = productContext.searchCall
     const changeProductLayerSearch = productContext.setSearchCall
 
+    const [loadedProducts, setLoadedProducts] = useState(false)
     const updateFormField = (event) => {
         changeProductLayerSearch({
             ...currentProductLayerSearch,
@@ -35,6 +41,21 @@ export default function Product() {
         })
 
     }
+
+
+    useEffect(
+
+        () => {
+            console.log("useEffect in Products Component ran.")
+            // allSoaps();
+            productContext.getAllSoaps()
+            setLoadedProducts(true);
+
+        }, []
+    )
+
+
+
 
     // const updateFormFieldArray = (event) => {
 
@@ -215,7 +236,7 @@ export default function Product() {
                         />
                         <div className='products-error-message-style'>
                             {allowValidator.current.message('Name', currentProductLayerSearch.name,
-                                'alpha')}
+                                'alpha_space')}
 
                         </div>
 
@@ -424,34 +445,51 @@ export default function Product() {
 
            </React.Fragment>)) */}
 
-            <Row xs={1} md={2} lg={3} className="g-4">
-                {Array.from({ length: allSoapsUse?.length }).map((_, index) => (
-                    <Col className="d-flex justify-content-center card-holder ">
-                        <Card className='mt-3' 
-                        key={allSoapsUse[index].id} id="soap-card" as={Link} to={`/products/${allSoapsUse[index].id}/variants`}>
-                            <Card.Img variant="top"
-                                src={allSoapsUse[index].image_url}
-                                style={{ "height": "50vh", justifyContent: "center" }}
-                            />
-                            <Card.Body>
-                                <Card.Title ><FontAwesomeIcon icon={faPumpSoap} className="fa-2xl" /><span id='product-title-style'>{allSoapsUse[index].name}</span> </Card.Title>
-                                <Card.Text>
-                                    <div><FontAwesomeIcon icon={faFlask} /> -{allSoapsUse[index].base.base}</div>
-                                    <div><FontAwesomeIcon icon={faOilCan} /> -{allSoapsUse[index].oil.oil}</div>
-                                    <div><FontAwesomeIcon icon={faHandsBubbles} />  {allSoapsUse[index].purposes?.map(p => <Badge bg="warning" className='ms-1'>{p.purpose}</Badge>)}</div>
-                                    <div><FontAwesomeIcon icon={faSprayCanSparkles} /> {allSoapsUse[index].smells?.map(s => <Badge bg="info" className='ms-1'>{s.smell}</Badge>)}</div>
-                                    <div><FontAwesomeIcon icon={faScroll} /> -{allSoapsUse[index].type?.type}</div>
-                                    <div><FontAwesomeIcon icon={faRuler} /> -Width: {allSoapsUse[index].width}</div>
-                                    <div><FontAwesomeIcon icon={faTape} /> -Height: {allSoapsUse[index].height}</div>
-                                    <div><FontAwesomeIcon icon={faTag} /> -${allSoapsUse[index].cost}</div>
+            {loadedProducts ?
+
+                <Row xs={1} md={2} lg={3} className="g-4">
+                    {Array.from({ length: allSoapsUse?.length }).map((_, index) => (
+                        <Col className="d-flex justify-content-center card-holder ">
+                            <Card className='mt-3'
+                                key={allSoapsUse[index].id} id="soap-card" as={Link} to={`/products/${allSoapsUse[index].id}/variants`}>
+                                <Card.Img variant="top"
+                                    src={allSoapsUse[index].image_url}
+                                    style={{ "height": "50vh", justifyContent: "center" }}
+                                />
+                                <Card.Body>
+                                    <Card.Title ><FontAwesomeIcon icon={faPumpSoap} className="fa-2xl" /><span id='product-title-style'>{allSoapsUse[index].name}</span> </Card.Title>
+                                    <Card.Text>
+                                        <div><FontAwesomeIcon icon={faFlask} /> -{allSoapsUse[index].base.base}</div>
+                                        <div><FontAwesomeIcon icon={faOilCan} /> -{allSoapsUse[index].oil.oil}</div>
+                                        <div><FontAwesomeIcon icon={faHandsBubbles} />  {allSoapsUse[index].purposes?.map(p => <Badge bg="warning" className='ms-1'>{p.purpose}</Badge>)}</div>
+                                        <div><FontAwesomeIcon icon={faSprayCanSparkles} /> {allSoapsUse[index].smells?.map(s => <Badge bg="info" className='ms-1'>{s.smell}</Badge>)}</div>
+                                        <div><FontAwesomeIcon icon={faScroll} /> -{allSoapsUse[index].type?.type}</div>
+                                        <div><FontAwesomeIcon icon={faRuler} /> -Width: {allSoapsUse[index].width}</div>
+                                        <div><FontAwesomeIcon icon={faTape} /> -Height: {allSoapsUse[index].height}</div>
+                                        <div><FontAwesomeIcon icon={faTag} /> -${allSoapsUse[index].cost}</div>
 
 
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                ))}
-            </Row>
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    ))}
+                </Row>
+
+                :
+                <React.Fragment>
+                    <div className='mt-2 ms-2' >Loading products...</div>
+                    <Player
+                        src='https://assets3.lottiefiles.com/packages/lf20_eHMDJF.json'
+                        id='soap-loading-animation-style'
+                        loop
+                        autoplay
+                    />
+
+                </React.Fragment>
+
+            }
+
         </React.Fragment>
 
     )

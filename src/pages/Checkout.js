@@ -51,7 +51,7 @@ export default function CheckOut() {
     return (
         <React.Fragment>
 
-            <h1>Check Out Is running. Please hold...</h1>
+            <h1 className='mt-3 ms-3 me-3'>Check Out Is running. Please hold...</h1>
         </React.Fragment>
 
     )

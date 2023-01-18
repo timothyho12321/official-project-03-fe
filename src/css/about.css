@@ -1,11 +1,23 @@
-#about-header-style{
-    
+#about-header-style {
+
     font-family: 'EB Garamond', serif;
     font-weight: 600;
 }
 
-#image-about-us{
+#image-about-us {
     height: 60vw;
-    width:100vw;
+    width: 100vw;
     object-fit: cover;
+}
+
+#description-first-para-style {
+    font-family: 'EB Garamond', serif;
+    font-weight: 600;
+    color: #c34421;
+
+}
+
+#description-second-para-style, #description-third-para-style{
+
+    line-height: 220%;
 }
