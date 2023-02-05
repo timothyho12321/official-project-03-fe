@@ -466,7 +466,7 @@ export default function Product() {
                                         <div><FontAwesomeIcon icon={faScroll} /> -{allSoapsUse[index].type?.type}</div>
                                         <div><FontAwesomeIcon icon={faRuler} /> -Width: {allSoapsUse[index].width}</div>
                                         <div><FontAwesomeIcon icon={faTape} /> -Height: {allSoapsUse[index].height}</div>
-                                        <div><FontAwesomeIcon icon={faTag} /> -${allSoapsUse[index].cost}</div>
+                                        <div><FontAwesomeIcon icon={faTag} /> -${allSoapsUse[index].cost/100}</div>
 
 
                                     </Card.Text>
