@@ -134,7 +134,6 @@ EB Garamond is a Serif font used to display a more elaborate design for the head
 
 #### Color Scheme
 
-EDIT
 ![Colour Scheme](./src/images/color_scheme.png)
 
 - Maroon Red is a vibrant and refreshing color for viewers.
