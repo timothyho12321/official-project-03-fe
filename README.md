@@ -74,6 +74,7 @@ As a soap enthusiast, I require to know the cost of the soap and be able to buy 
 
 ### Scope
 
+
 ### Database
 ![Entity Relationship Diagram](./src/images/erd.png)
 
@@ -99,7 +100,6 @@ The shop owner will populate the details and products for their ecommerce shop. 
 - Review soap products and see its respective variants, to know the name, stock, last update, color. 
 
 
-
 #### Owner
 - Create new staff accounts.
 - Create, update, delete and read all available products and variants
@@ -113,6 +113,18 @@ The shop owner will populate the details and products for their ecommerce shop. 
 - Mobile responsiveness: user-friendly layout on the mobile phone. 
 - Accessibility: Large, clear text with readable font colors. 
 - Performance: Ensure data storage of each entry use reasonable amount of space to store column data (length of varchar is limited).
+
+### Structure
+
+![Site Overview](./src/images/website_layout.jpg)
+
+
+### Skeleton
+The initial design draftscan be found. As they are a draft version, subsequent changes could be made to them before deployment. 
+
+These are the initial figma mock up designs:
+![Design1](./src/images/1figma.jpg)![Design2](./src/images/2figma.jpg)![Design3](./src/images/3figma.jpg)![Design4](./src/images/4figma.jpg)![Design5](./src/images/5figma.jpg)
+
 
 #### Branding
 
@@ -185,7 +197,7 @@ Test Cases can be found [here](./src/images/project-03-test-cases.pdf)
 2. Site photos are from [Pexels](https://www.pexels.com/search/soap/)
 3. Brand icon is from [Favicon](https://favicon.io/favicon-generator/)
 4. Loading animation is from [Lottiefiles](https://lottiefiles.com/)
-
+5. Figma mock up diagram is from [Figma](https://www.figma.com/)
 
 
 ### Other Attributions
